@@ -8,6 +8,7 @@ const cmykValue = document.querySelector(".cmykValue");
 const recBox = document.querySelectorAll(".recBox");
 
 const hexData = "1234567890ABCDEF";
+
 const colorData = [
   "#000000",
   "#222222",

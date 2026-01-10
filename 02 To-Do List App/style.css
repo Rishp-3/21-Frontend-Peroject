@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.outer{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inner{
+    border: solid black 2px;
+    padding: 10px;
+}

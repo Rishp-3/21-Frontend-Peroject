@@ -1,0 +1,31 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.outr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.mid{
+    border: 5px solid black;
+    border-radius: 10px;
+}
+.ans{
+    border: 2px solid black;
+    width: 345px;
+    height: 100px;
+    margin: 5px;
+    border-radius: 5px;
+    font-size: xx-large;
+}
+.num{
+    flex: 1;
+    height: 50px;
+    margin: 5px;
+    font-size: xx-large;
+}
+.gri{
+    display: flex;
+}

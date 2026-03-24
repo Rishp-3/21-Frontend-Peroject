@@ -225,8 +225,8 @@ This project is [MIT](LICENSE) licensed.
 ## 👤 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+- GitHub: [@yourusername](https://github.com/rishp-3)
+- LinkedIn: [Your Name](https://linkedin.com/in/rishp3)
 
 ## 🙏 Acknowledgments
 

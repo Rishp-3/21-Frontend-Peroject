@@ -221,7 +221,7 @@ Contributions, issues, and feature requests are welcome!
 
 ## 👤 Author
 
-**Your Name**
+**Rishabh**
 - GitHub: [@rishp-3](https://github.com/rishp-3)
 - LinkedIn: [Rishabh](https://linkedin.com/in/rishp3)
 

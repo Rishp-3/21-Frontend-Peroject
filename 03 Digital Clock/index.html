@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Digital Clock</title>
+  </head>
+  <body>
+    <div class="cont">
+      <div class="head">
+        <h3>Digital Clock</h3>
+      </div>
+      <div class="time-con">
+        <h1 class="time"></h1>
+      </div>
+      <div class="time-con">
+        <p class="am-pm"></p>
+      </div>
+      <div class="date-day">
+        <div class="box">
+          <p>Day</p>
+          <h2 class="day"></h2>
+        </div>
+        <div class="box">
+          <p>Date</p>
+          <h2 class="date"></h2>
+        </div>
+        <div class="box">
+          <p>Year</p>
+          <h2 class="year"></h2>
+        </div>
+      </div>
+      <div class="setting">
+        <div class="timezone-con">
+          <select name="timezone" title="timezone" id="timezone">
+            <option value="1">IST</option>
+            <option value="2">UTC</option>
+            <option value="3">PST</option>
+            <option value="4">CST</option>
+            <option value="5">JST</option>
+          </select>
+        </div>
+        <div class="format-con">
+          <select name="format" title="format" id="format">
+            <option value="1">12</option>
+            <option value="2">24</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

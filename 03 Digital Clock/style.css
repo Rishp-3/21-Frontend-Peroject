@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5;
+}
+
+.cont {
+  background-color: #ffffff;
+  width: 75vw;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 50px;
+}
+.head {
+  display: flex;
+  justify-content: center;
+  font-size: 4vw;
+}
+h3 {
+  background: linear-gradient(to right, #7b7cf8, #a55af5);
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+}
+.time-con {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.time {
+  font-size: 15vw;
+  color: #6d8ff5;
+}
+.am-pm {
+  color: #6d8ff5;
+  font-size: 3vw;
+}
+.date-day {
+  display: flex;
+  justify-content: space-around;
+  font-size: 2vw;
+  margin: 10px;
+}
+.box {
+  background-color: #f0f2f5;
+  padding: 1vw 3vw 1vw 3vw;
+  border-radius: 2vw;
+}
+.setting {
+  display: flex;
+  justify-content: center;
+}
+
+select {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #999;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  appearance: none;
+  margin: 5px;
+}
+
+#timezone {
+  background-color: #f1f3f7;
+}
+#format {
+  background-color: #eeeafe;
+}

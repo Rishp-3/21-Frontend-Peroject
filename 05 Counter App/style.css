@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0px;
+  color: #000;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+.contener {
+  background-color: #fff;
+  padding: 10px;
+}
+.con-text {
+  display: flex;
+  justify-content: center;
+  font-size: 4vw;
+}
+.count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7c3aed;
+  height: 10vh;
+  width: 30vw;
+  margin-bottom: 1vh;
+  border-radius: 10px;
+}
+.ans {
+  color: white;
+}
+.btn {
+  display: flex;
+  justify-content: space-around;
+}
+.butt {
+  height: 5vh;
+  width: 5vw;
+  border: none;
+  border-radius: 1vw;
+}
+.increment {
+  background-color: #10b981;
+}
+.reset {
+}
+.decrement {
+  background-color: #ef4444;
+}
+.incres10 {
+  width: 10vw;
+  border: none;
+  border-radius: 1vw;
+  height: 25px;
+}
+.decres10 {
+  width: 10vw;
+  border: none;
+  border-radius: 1vw;
+}
+.data {
+  display: flex;
+  justify-content: space-between;
+}

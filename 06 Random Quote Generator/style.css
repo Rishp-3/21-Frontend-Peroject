@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #eef0f8;
+}
+.box {
+  width: 50vw;
+  height: 50vh;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+.inbox {
+  padding: 15vh;
+}
+.quote {
+  text-align: center;
+  color: #111827;
+}
+.author {
+  text-align: end;
+  color: #6b7280;
+}
+.button-box {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  background-color: #5b5bf0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}

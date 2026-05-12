@@ -4,6 +4,7 @@ A comprehensive collection of **21 interactive frontend projects** built using *
 
 This repository is created to practice frontend development concepts by building practical projects from beginner to intermediate level.
 
+
 ---
 
 ## 📚 Projects Overview

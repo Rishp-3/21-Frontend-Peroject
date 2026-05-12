@@ -1,248 +1,138 @@
-# 🚀 21 Frontend Projects Collection
+# 🚀 21 Frontend Projects
 
-A comprehensive collection of **21 interactive frontend projects** built using **vanilla HTML, CSS, and JavaScript**.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![No Frameworks](https://img.shields.io/badge/Frameworks-None-success?style=flat)
+![Projects](https://img.shields.io/badge/Projects-21-blue?style=flat)
 
-This repository is created to practice frontend development concepts by building practical projects from beginner to intermediate level.
+A collection of **21 interactive frontend projects** built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no libraries. Each project is built from scratch to practice one or more core frontend concepts, going from beginner to intermediate level.
 
----
-
-## 📚 Projects Overview
-
-| #  | Project                    | Description                            |
-| -- | -------------------------- | -------------------------------------- |
-| 01 | 🧮 Calculator              | Basic arithmetic calculator            |
-| 02 | 📝 To-Do List App          | Simple task management application     |
-| 03 | 🕐 Digital Clock           | Real-time digital clock                |
-| 04 | 🎯 Number Guessing Game    | Random number guessing game            |
-| 05 | 🔢 Counter App             | Increment, decrement and reset counter |
-| 06 | 💬 Random Quote Generator  | Displays random quotes                 |
-| 07 | 🎨 Color Generator         | Generates random colors                |
-| 08 | 🌦️ Weather App            | Displays weather information           |
-| 09 | ⏱️ Stopwatch Timer         | Stopwatch with timing controls         |
-| 10 | 📋 Form Validation         | Client-side form validation            |
-| 11 | 🖼️ Image Slider           | Responsive image carousel              |
-| 12 | 🧠 Quiz App                | Interactive quiz with scoring          |
-| 13 | 🔐 Password Generator      | Generates random passwords             |
-| 14 | 📝 Notes App               | Create and manage notes                |
-| 15 | 💰 Expense Tracker         | Track income and expenses              |
-| 16 | 🎬 Movie Search App        | Search for movie information           |
-| 17 | 💬 Chat UI                 | Frontend-only chat interface           |
-| 18 | 🎵 Music Player            | Audio player with custom controls      |
-| 19 | 🛒 E-commerce Product Page | Interactive product page               |
-| 20 | ⌨️ Typing Speed Test       | Test typing speed and accuracy         |
-| 21 | ✊ Rock Paper Scissors      | Classic player vs computer game        |
+> **Build → Practice → Improve → Repeat.**
 
 ---
 
-## 🛠️ Technologies Used
+## 📚 Projects
 
-### Frontend
+| #  | Project | Description | Key Concepts | Status |
+| -- | ------- | ----------- | ------------ | ------ |
+| 01 | [🧮 Calculator](./01%20Calculator) | Basic arithmetic calculator | DOM, events, grid layout | 🟢 Completed |
+| 02 | [📝 To-Do List App](./02%20To-Do%20List%20App) | Simple task management app | Arrays, dynamic rendering | 🟢 Completed |
+| 03 | [🕐 Digital Clock](./03%20Digital%20Clock) | Real-time digital clock | `Date`, `setInterval` | 🟢 Completed |
+| 04 | [🎯 Number Guessing Game](./04%20Number%20Guessing%20Game) | Guess the random number | `Math.random`, conditionals | ⚪ Planned |
+| 05 | [🔢 Counter App](./05%20Counter%20App) | Increment, decrement and reset | State, events | 🟢 Completed |
+| 06 | [💬 Random Quote Generator](./06%20Random%20Quote%20Generator) | Displays random quotes | Arrays, objects | ⚪ Planned |
+| 07 | [🎨 Color Generator](./07%20Color%20Generator) | Generates random colors | Hex/RGB, DOM styling | ⚪ Planned |
+| 08 | [🌦️ Weather App](./08%20Weather%20App) | Shows weather information | Fetch API, async/await | ⚪ Planned |
+| 09 | [⏱️ Stopwatch Timer](./09%20Stopwatch%20Timer) | Stopwatch with controls | Timers, state | ⚪ Planned |
+| 10 | [📋 Form Validation](./10%20Form%20Validation) | Client-side form validation | Regex, events | ⚪ Planned |
+| 11 | [🖼️ Image Slider](./11%20Image%20Slider) | Responsive image carousel | Indexing, CSS transitions | ⚪ Planned |
+| 12 | [🧠 Quiz App](./12%20Quiz%20App) | Interactive quiz with scoring | Objects, logic | ⚪ Planned |
+| 13 | [🔐 Password Generator](./13%20Password%20Generator) | Generates random passwords | Strings, Clipboard API | ⚪ Planned |
+| 14 | [📝 Notes App](./14%20Notes%20App) | Create and manage notes | Local Storage, CRUD | ⚪ Planned |
+| 15 | [💰 Expense Tracker](./15%20Expense%20Tracker) | Track income and expenses | Local Storage, calculations | ⚪ Planned |
+| 16 | [🎬 Movie Search App](./16%20Movie%20Search%20App) | Search movie information | API integration, JSON | ⚪ Planned |
+| 17 | [💬 Chat UI](./17%20Chat%20UI%20Frontend%20Only) | Frontend-only chat interface | Layout, dynamic DOM | ⚪ Planned |
+| 18 | [🎵 Music Player](./18%20Music%20Player) | Audio player with custom controls | Audio API | ⚪ Planned |
+| 19 | [🛒 E-commerce Product Page](./19%20E-commerce%20Product%20Page) | Interactive product page | Components, UI state | ⚪ Planned |
+| 20 | [⌨️ Typing Speed Test](./20%20Typing%20Speed%20Test) | Test typing speed and accuracy | Timers, string comparison | ⚪ Planned |
+| 21 | [✊ Rock Paper Scissors](./21%20Rock%20Paper%20Scissors%20Game) | Player vs computer game | Game logic, randomness | ⚪ Planned |
 
-* **HTML5** — Structure and semantic markup
-* **CSS3** — Styling, Flexbox, Grid and responsive layouts
-* **JavaScript (ES6+)** — Logic, DOM manipulation and event handling
+**Legend:** 🟢 Completed · 🟡 In Progress · ⚪ Planned
 
-### Browser APIs
+---
 
-Depending on the project, browser APIs may be used for:
+## 🛠️ Tech Stack
 
-* Local Storage
-* Fetch API
-* Audio API
-* Clipboard API
-* Date and Time
-* Browser events
+- **HTML5** — semantic structure
+- **CSS3** — Flexbox, Grid, responsive layouts
+- **JavaScript (ES6+)** — logic, DOM manipulation, event handling
+
+**Browser APIs used across projects:** Local Storage · Fetch API · Audio API · Clipboard API · Date & Time
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-21-frontend-projects/
+21-Frontend-Peroject/
 │
-├── 01-calculator/
+├── 01 Calculator/
 │   ├── index.html
 │   ├── style.css
 │   ├── main.js
 │   └── README.md
 │
-├── 02-to-do-list/
-│   ├── index.html
-│   ├── style.css
-│   ├── main.js
-│   └── README.md
-│
-├── 03-digital-clock/
-│   ├── index.html
-│   ├── style.css
-│   ├── main.js
-│   └── README.md
-│
-├── 04-number-guessing-game/
-│   ├── index.html
-│   ├── style.css
-│   ├── main.js
-│   └── README.md
-│
+├── 02 To-Do List App/
+├── 03 Digital Clock/
 ├── ...
-│
-├── 21-rock-paper-scissors/
-│   ├── index.html
-│   ├── style.css
-│   ├── main.js
-│   └── README.md
+├── 21 Rock Paper Scissors Game/
 │
 └── README.md
 ```
 
----
-
-## 🎯 Learning Objectives
-
-The main goal of this collection is to practice frontend development through hands-on projects.
-
-### Core Concepts
-
-* HTML structure
-* CSS styling
-* CSS Flexbox
-* CSS Grid
-* Responsive design
-* JavaScript fundamentals
-* Variables and data types
-* Conditional statements
-* Functions
-* Arrays and objects
-* DOM manipulation
-* Event handling
-* Dynamic content rendering
-
-### Advanced Practice
-
-* Browser APIs
-* Local Storage
-* Fetch API
-* Async/Await
-* JSON handling
-* API integration
-* State management
-* Interactive UI development
-
----
-
-## 📊 Project Progress
-
-| #  | Project                 | Status         |
-| -- | ----------------------- | -------------- |
-| 01 | Calculator              | 🟢 Completed   |
-| 02 | To-Do List App          | 🟢 Completed |
-| 03 | Digital Clock           | 🟢 Completed |
-| 04 | Number Guessing Game    | ⚪ Planned      |
-| 05 | Counter App             | 🟢 Completed      |
-| 06 | Random Quote Generator  | ⚪ Planned      |
-| 07 | Color Generator         | ⚪ Planned      |
-| 08 | Weather App             | ⚪ Planned      |
-| 09 | Stopwatch Timer         | ⚪ Planned      |
-| 10 | Form Validation         | ⚪ Planned      |
-| 11 | Image Slider            | ⚪ Planned      |
-| 12 | Quiz App                | ⚪ Planned      |
-| 13 | Password Generator      | ⚪ Planned      |
-| 14 | Notes App               | ⚪ Planned      |
-| 15 | Expense Tracker         | ⚪ Planned      |
-| 16 | Movie Search App        | ⚪ Planned      |
-| 17 | Chat UI                 | ⚪ Planned      |
-| 18 | Music Player            | ⚪ Planned      |
-| 19 | E-commerce Product Page | ⚪ Planned      |
-| 20 | Typing Speed Test       | ⚪ Planned      |
-| 21 | Rock Paper Scissors     | ⚪ Planned      |
-
-> **Status:** Update this table as each project is completed.
+Every project folder is self-contained: just open its `index.html`.
 
 ---
 
 ## 🚦 Getting Started
 
-### 1. Clone the Repository
+**1. Clone the repository**
 
 ```bash
-git clone https://github.com/rishp-3/21-frontend-projects.git
+git clone https://github.com/Rishp-3/21-Frontend-Peroject.git
 ```
 
-### 2. Navigate to the Project
+**2. Go into the folder**
 
 ```bash
-cd 21-frontend-projects
+cd 21-Frontend-Peroject
 ```
 
-### 3. Open a Project
+**3. Open any project**
 
-Go to any project folder and open:
+Open `index.html` of any project folder in your browser.
 
-```text
-index.html
-```
-
-in your browser.
-
-### 4. Using VS Code Live Server
-
-For a better development experience:
-
-1. Open the repository in VS Code.
-2. Install the **Live Server** extension.
-3. Open the required project's `index.html`.
-4. Right-click the file.
-5. Select **Open with Live Server**.
+**Recommended:** use the **Live Server** extension in VS Code — right-click `index.html` → **Open with Live Server**.
 
 ---
 
-## ✨ Project Highlights
+## 🎯 What I'm Learning
 
-This collection focuses on building projects without frontend frameworks.
+**Core**
+- HTML structure and semantics
+- CSS styling, Flexbox, Grid, responsive design
+- JavaScript fundamentals: variables, data types, conditionals, functions, arrays, objects
+- DOM manipulation and event handling
+- Dynamic content rendering
 
-* ✅ Vanilla HTML
-* ✅ Vanilla CSS
-* ✅ Vanilla JavaScript
-* ✅ No frontend frameworks
-* ✅ Practical project-based learning
-* ✅ Individual README for projects
-* ✅ Organized project structure
-* ✅ Beginner-friendly progression
+**Advanced**
+- Local Storage
+- Fetch API and async/await
+- JSON handling and API integration
+- State management
+- Building interactive UIs
 
 ---
 
 ## 📱 Responsive Design
 
-Projects are intended to be developed with responsive layouts for:
-
-* 📱 Mobile devices
-* 📱 Tablets
-* 💻 Desktops
-* 🖥️ Large screens
-
-Responsive behavior may vary between individual projects.
+Projects aim to work on mobile, tablet, desktop, and large screens. Responsiveness may vary between individual projects, and it improves as the collection progresses.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions, suggestions, issues, and feature requests are welcome.
-
-### Contribution Steps
+Suggestions, issues, and pull requests are welcome.
 
 ```bash
 git checkout -b feature/AmazingFeature
-```
-
-Make your changes, then:
-
-```bash
 git add .
 git commit -m "Add AmazingFeature"
 git push origin feature/AmazingFeature
 ```
 
-Finally, open a Pull Request.
+Then open a Pull Request.
 
 ---
 
@@ -250,31 +140,20 @@ Finally, open a Pull Request.
 
 **Rishabh Pal**
 
-* GitHub: [@rishp-3](https://github.com/rishp-3)
-* LinkedIn: [Rishabh](https://linkedin.com/in/rishp3)
+- GitHub: [@Rishp-3](https://github.com/Rishp-3)
+- LinkedIn: [Rishabh](https://linkedin.com/in/rishp3)
 
 ---
 
 ## ⭐ Support
 
-If you find this repository useful:
+If this repo helps you, consider to:
 
-* ⭐ Star the repository
-* 🍴 Fork the repository
-* 💡 Suggest improvements
-* 🐛 Report issues
-
----
-
-## 📌 Note
-
-This repository is a **project-based frontend learning collection**. Each project is developed separately to practice specific HTML, CSS, and JavaScript concepts.
-
-
-More projects and improvements will be added as the collection progresses.
+- ⭐ Star the repository
+- 🍴 Fork it
+- 💡 Suggest improvements
+- 🐛 Report issues
 
 ---
 
-# 🚀 Happy Coding!
-
-**Build → Practice → Improve → Repeat.**
+<p align="center"><b>Happy Coding! 🚀</b></p>

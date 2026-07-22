@@ -240,4 +240,3 @@ For questions or support, please open an issue in the repository.
 ---
 
 **Happy Coding! 🚀**
-..;

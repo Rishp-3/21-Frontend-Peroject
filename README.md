@@ -106,6 +106,7 @@ Chat interface design without backend.
 - **Tech Stack**: HTML, CSS, JavaScript
 - **Key Concepts**: CSS flexbox/grid, scrollable containers, UI/UX design
 
+
 ### 18. Music Player
 Audio player with playback controls.
 - **Features**: Play, pause, skip, volume control, progress bar

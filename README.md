@@ -10,6 +10,7 @@ A fully functional calculator application with basic arithmetic operations.
 - **Tech Stack**: HTML, CSS, JavaScript
 - **Key Concepts**: Event handling, mathematical operations, DOM manipulation
 
+
 ### 02. To-Do List App
 Task management application to organize your daily activities.
 - **Features**: Add, delete, mark complete, filter tasks
@@ -233,7 +234,6 @@ Contributions, issues, and feature requests are welcome!
 - Open source resources and tutorials
 
 ## 📞 Support
-
 
 Give a ⭐️ if you like this project!
 

@@ -1,5 +1,5 @@
 # 21 Frontend Projects Collection
-
+----
 A comprehensive collection of 21 interactive web applications built using vanilla HTML, CSS, and JavaScript. These projects demonstrate fundamental frontend development concepts and practical implementations of common web features.
 
 ## 🚀 Projects Overview
@@ -240,4 +240,5 @@ Give a ⭐️ if you like this project!
 For questions or support, please open an issue in the repository.
 
 ---
+
 **Happy Coding! 🚀**

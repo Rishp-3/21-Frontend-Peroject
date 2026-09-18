@@ -1,10 +1,10 @@
 let quot = document.querySelector(".quote");
-let autho = document.querySelector(".author");
+let author = document.querySelector(".author");
 let button = document.querySelector(".button");
 
 button.addEventListener("click", () => {
   quot.innerText = "Loading...";
-  autho.innerText = "";
+  author.innerText = "";
 
   fetch("https://dummyjson.com/quotes/random")
     .then((res) => {
@@ -15,10 +15,12 @@ button.addEventListener("click", () => {
     })
     .then((data) => {
       quot.innerText = data.quote;
-      autho.innerText = "- " + data.author;
+      author.innerText = "- " + data.author;
     })
     .catch((err) => {
       quot.innerText = "Failed to load quote 😢";
       console.log(err);
+
     });
+
 });

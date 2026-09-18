@@ -135,10 +135,10 @@ The main goal of this collection is to practice frontend development through han
 | #  | Project                 | Status         |
 | -- | ----------------------- | -------------- |
 | 01 | Calculator              | 🟢 Completed   |
-| 02 | To-Do List App          | 🟡 In Progress |
-| 03 | Digital Clock           | 🟡 In Progress |
+| 02 | To-Do List App          | 🟢 Completed |
+| 03 | Digital Clock           | 🟢 Completed |
 | 04 | Number Guessing Game    | ⚪ Planned      |
-| 05 | Counter App             | ⚪ Planned      |
+| 05 | Counter App             | 🟢 Completed      |
 | 06 | Random Quote Generator  | ⚪ Planned      |
 | 07 | Color Generator         | ⚪ Planned      |
 | 08 | Weather App             | ⚪ Planned      |

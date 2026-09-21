@@ -1,5 +1,35 @@
-*{
-    padding: 0;
-    margin: 0;
-    
+* {
+  padding: 2px;
+  margin: 0;
+  border: 1px solid black;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+}
+header div {
+  display: flex;
+}
+.mainText{
+    text-align: center;
+}
+.genBut{
+    text-align: center;
+}
+.genData{
+    display:grid;
+    grid-template-rows: repeat(2 ,1fr);
+    grid-template-columns: repeat(2 ,1fr);
+    justify-items: center;
+}
+.recText{
+    text-align: center;
+}
+.recData{
+    display: flex;
+    justify-content: space-between;
+}
+footer{
+    display: flex;
+    justify-content: space-between;
 }

@@ -6,32 +6,66 @@
     <title>Document</title>
   </head>
   <body>
-    <header class="">
-      <div class=""><span class=""></span><span class=""></span></div>
-      <div class=""></div>
+    <header class="header">
+      <div class="iconText">
+        <span class="headicon"></span
+        ><span class="headText">Stopwatch Timer</span>
+      </div>
+      <div class="status"><p>Active</p></div>
     </header>
     <main>
-      <section id="">
-        <div class="">
-          <span class=""></span><span class=""></span><span class=""></span
-          ><span class=""></span><span class=""></span>
+      //Current Data & All Buttons
+      <section id="currData">
+        //Current Time display
+        <div class="currTime">
+          <span class="hours"></span>
+          <span class="dot">:</span>
+          <span class="min"></span>
+          <span class="dot">:</span>
+          <span class="sec"></span>
         </div>
-        <div class="">
-          <button class=""><span class=""></span><span class=""></span></button
-          ><button class=""><span class=""></span><span class=""></span></button
-          ><button class="">
-            <span class=""></span><span class=""></span>
+        //All button
+        <div class="allButton">
+          <button class="startBut">
+            <span class="startIcon"></span>
+            <span class="startText">Start</span>
+          </button>
+          <button class="addLapBut">
+            <span class="lapIcon"></span>
+            <span class="lapText">Lap</span>
+          </button>
+          <button class="resetBut">
+            <span class="resIcon"></span>
+            <span class="resText">Reset</span>
           </button>
         </div>
       </section>
-      <section id="">
-        <div class=""><span class=""></span><span class=""></span></div>
-        <div class=""></div>
+      // Lap details
+      <section id="lapData">
+        <div class="lapHead">
+          <span class="Text">
+            <h2>Lap Timer</h2>
+          </span>
+          <span class="lapCount">Laps</span>
+        </div>
+        <div class="lapDataDisplay">
+          <table></table>
+        </div>
       </section>
-      <section id="">
-        <div class=""><span class=""></span><span class=""></span></div>
-        <div class=""><span class=""></span><span class=""></span></div>
-        <div class=""><span class=""></span><span class=""></span></div>
+      //Best , Worst & Average Laps
+      <section id="exteraInfo">
+        <div class="best">
+          <span class="bestData"></span>
+          <span class="bestYext">Best Lap</span>
+        </div>
+        <div class="worst">
+          <span class="worstData"></span>
+          <span class="worstText">Worst Lap</span>
+        </div>
+        <div class="average">
+          <span class="averageData"></span
+          ><span class="averageText">Average Lap</span>
+        </div>
       </section>
     </main>
     <footer></footer>

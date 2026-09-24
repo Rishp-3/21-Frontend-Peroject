@@ -270,6 +270,7 @@ If you find this repository useful:
 
 This repository is a **project-based frontend learning collection**. Each project is developed separately to practice specific HTML, CSS, and JavaScript concepts.
 
+
 More projects and improvements will be added as the collection progresses.
 
 ---

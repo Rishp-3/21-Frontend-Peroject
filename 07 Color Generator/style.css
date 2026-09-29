@@ -33,6 +33,7 @@ header div {
   height: 50px;
   width: 100vw;
 }
+
 footer {
   display: flex;
   justify-content: space-between;

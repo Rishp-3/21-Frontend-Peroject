@@ -1,5 +1,80 @@
-*{
-    padding: 2px;
-    margin: 2px;
-    border: 2px solid black;
+:root {
+  /* Background */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1a2235;
+  --bg-card-dark: #0e1629;
+
+  /* Border */
+  --border: #263346;
+
+  /* Hero */
+  --hero-start: #7356f0;
+  --hero-mid: #7a4dee;
+  --hero-end: #8740eb;
+
+  /* Text */
+  --text-primary: #f9fafe;
+  --text-secondary: #9aa1b6;
+  --text-muted: #6f7890;
+
+  /* Icons */
+  --accent-blue: #818cf8;
+  --sun: #fde047;
+  --moon: #a5b4fc;
+  --cloud: #94a3b8;
+  --rain: #22d3ee;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #0f172a;
+  color: #f9fafe;
+}
+header {
+  padding: 10px;
+  background-color: #1a2235;
+  color: #fff;
+  text-align: center;
+}
+.search {
+  display: flex;
+  justify-content: space-evenly;
+}
+.cityInp {
+  background-color: transparent;
+  border: 1px solid #263346;
+}
+.cityInp::placeholder {
+  color: #9aa1b6;
+}
+main {
+  display: flex;
+  justify-content: center;
+}
+.mainBox {
+  width: 80%;
+}
+.sumInfo {
+  background: linear-gradient(135deg, #7356f0 0%, #8740eb 100%);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+.main {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sumBox {
+  border: 1px solid #263346;
+}
+.hfData {
+  display: flex;
+}
+.rp {
+  display: inline;
+  border: 1px solid #263346;
 }

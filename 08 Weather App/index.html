@@ -8,101 +8,70 @@
   </head>
   <body>
     <header>
-      <div class="headText">Weather</div>
+      <h1 class="headText">Weather</h1>
       <div class="search">
-        <input type="text" placeholder="Search Weather" name="" />
-        <input type="submit" value="" />
+        <input
+          class="cityInp"
+          type="text"
+          placeholder="Search Weather"
+          name=""
+        />
+        <input class="submit" type="submit" value="Search" />
       </div>
     </header>
     <main>
-      <section class="sumInfo">
-        <div class="">
-          <div class=""></div>
-          <div class=""></div>
-          <div class=""></div>
-          <div class=""></div>
-        </div>
-        <div class="">
-          <div class=""></div>
-          <div class=""></div>
-        </div>
-      </section>
-      <section class="">
-        <div class="">
+      <div class="mainBox">
+        <section class="sumInfo">
           <div class="">
-            <div class=""></div>
-            <div class=""></div>
+            <div class="city"></div>
+            <div class="dayTime"></div>
+            <div class="temp"></div>
+            <div class="description"></div>
           </div>
-          <div class=""></div>
-        </div>
-        <div class="">
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
+          <div class="icon">
+            <img id="weatherIcon" alt="Weather icon" />
+            <div class="feels"></div>
           </div>
-          <div class=""></div>
-        </div>
-        <div class="">
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
+        </section>
+        <section class="main">
+          <div class="sumBox">
+            <div class="">
+              <span class="">Humidity</span>
+              <span class=""></span>
+            </div>
+            <div class="humidity"></div>
           </div>
-          <div class=""></div>
-        </div>
-        <div class="">
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
+          <div class="sumBox">
+            <div class="">
+              <span class="">Wind Speed</span>
+              <span class=""></span>
+            </div>
+            <div class="windSpeed"></div>
           </div>
-          <div class=""></div>
-        </div>
-      </section>
-      <section class="">
-        <div class=""></div>
-        <div class="">
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
+          <div class="sumBox">
+            <div class="">
+              <span class="">Pressure</span>
+              <span class=""></span>
+            </div>
+            <div class="pressure"></div>
           </div>
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
+          <div class="sumBox">
+            <div class="">
+              <span class="">Visibility</span>
+              <span class=""></span>
+            </div>
+            <div class="visiblity"></div>
           </div>
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
-          </div>
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
-          </div>
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
-          </div>
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
-          </div>
-          <div class="">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
-          </div>
-        </div>
-      </section>
-      <section class="">
-        <div class=""></div>
-        <div class="">
-          <table></table>
-        </div>
-      </section>
+        </section>
+        <section class="hourlyForecast">
+          <div class="hfText">Hourly Forecast</div>
+          <div class="hfData"></div>
+        </section>
+        <section class="weaklyForecast">
+          <div class="wfText">7-Day Forecast</div>
+          <div class="wfData"></div>
+        </section>
+      </div>
     </main>
     <script src="main.js"></script>
   </body>

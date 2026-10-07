@@ -14,7 +14,19 @@ function loadNotes() {
 }
 
 function saveNotes() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+  // Storage can fail (quota exceeded / private mode) — surface it instead of crashing.
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+    return true;
+  } catch {
+    setStatus("Could not save: browser storage is full or unavailable.");
+    return false;
+  }
+}
+
+function setStatus(msg) {
+  const el = document.getElementById("statusMsg");
+  if (el) el.textContent = msg;
 }
 
 /* ------------------------------------------------------------------ */
@@ -127,6 +139,7 @@ function startEdit(note) {
     s.setAttribute("aria-checked", String(s.dataset.color === note.color));
   });
   addBtn.textContent = "💾 Save Changes";
+  cancelEditBtn.hidden = false; // Cancel only makes sense while editing
   window.scrollTo({ top: 0, behavior: "smooth" });
   titleInput.focus();
 }
@@ -134,7 +147,17 @@ function startEdit(note) {
 function cancelEdit() {
   editingId = null;
   addBtn.textContent = "➕ Add Note";
+  cancelEditBtn.hidden = true;
+  titleInput.value = "";
+  bodyInput.value = "";
+  charCount.textContent = "0 / 2000";
 }
+
+cancelEditBtn.addEventListener("click", cancelEdit);
+// Escape also exits edit mode.
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && editingId !== null) cancelEdit();
+});
 
 /* ------------------------------------------------------------------ */
 /*  Delete                                                             */

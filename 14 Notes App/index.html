@@ -11,7 +11,7 @@
     <title>Notes App</title>
   </head>
   <body>
-    <div class="app">
+    <main class="app">
       <header class="topbar">
         <h1>🗒️ Notes App</h1>
         <p class="subtitle">Your quick sticky notes — saved automatically in this browser.</p>
@@ -31,20 +31,22 @@
           </div>
           <span id="charCount" class="char-count">0 / 2000</span>
           <button id="addBtn" class="btn primary" type="button">➕ Add Note</button>
+          <button id="cancelEditBtn" class="btn ghost" type="button" hidden>Cancel</button>
         </div>
       </section>
 
       <!-- Search + count -->
       <section class="toolbar">
         <input type="search" id="searchInput" class="search" placeholder="🔍 Search notes…" aria-label="Search notes" />
-        <span id="notesCount" class="count-badge">0 notes</span>
+        <span id="notesCount" class="count-badge" aria-live="polite">0 notes</span>
+        <span id="statusMsg" class="status-msg" role="status"></span>
       </section>
 
       <!-- Notes grid -->
-      <main id="notesGrid" class="grid" aria-live="polite"></main>
+      <div id="notesGrid" class="grid"></div>
 
       <p id="emptyState" class="empty-state">📭 No notes yet — add your first one above!</p>
-    </div>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>

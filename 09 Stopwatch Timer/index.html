@@ -3,72 +3,90 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Stopwatch and timer combo with lap tracking, best/worst/average lap stats."
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Stopwatch Timer</title>
   </head>
   <body>
-    //Header
+    <!-- Header -->
     <header class="header">
       <div class="iconText">
-        <span class="headicon"></span
-        ><span class="headText">Stopwatch Timer</span>
+        <span class="headicon" aria-hidden="true">⏱️</span>
+        <span class="headText">Stopwatch Timer</span>
       </div>
-      <div class="status"><p>Active</p></div>
+      <div class="status"><p id="statusText">Idle</p></div>
     </header>
+
     <main>
-      //Current Data & All Buttons
+      <!-- Current Time & Controls -->
       <section id="currData">
-        //Current Time display
         <div class="currTime">
-          <span class="hours"></span>
+          <span class="hours" id="hours">00</span>
           <span class="dot">:</span>
-          <span class="min"></span>
+          <span class="min" id="minutes">00</span>
           <span class="dot">:</span>
-          <span class="sec"></span>
+          <span class="sec" id="seconds">00</span>
+          <span class="ms" id="mseconds">.00</span>
         </div>
-        //All button
+
         <div class="allButton">
-          <button class="startBut">
-            <span class="startIcon"></span>
+          <button class="startBut" id="startBtn" type="button">
+            <span class="startIcon" aria-hidden="true">▶</span>
             <span class="startText">Start</span>
           </button>
-          <button class="addLapBut">
-            <span class="lapIcon"></span>
+          <button class="addLapBut" id="lapBtn" type="button" disabled>
+            <span class="lapIcon" aria-hidden="true">🏁</span>
             <span class="lapText">Lap</span>
           </button>
-          <button class="resetBut">
-            <span class="resIcon"></span>
+          <button class="resetBut" id="resetBtn" type="button">
+            <span class="resIcon" aria-hidden="true">⟲</span>
             <span class="resText">Reset</span>
           </button>
         </div>
       </section>
-      // Lap details
+
+      <!-- Lap details -->
       <section id="lapData">
         <div class="lapHead">
-          <span class="Text">
-            <h2>Lap Timer</h2>
-          </span>
-          <span class="lapCount">Laps</span>
+          <span class="Text"><h2>Lap Timer</h2></span>
+          <span class="lapCount" id="lapCount">Laps: 0</span>
         </div>
         <div class="lapDataDisplay">
-          <table></table>
+          <table id="lapTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Lap Time</th>
+                <th>Total Time</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <p class="empty-note" id="emptyNote">No laps recorded yet.</p>
         </div>
       </section>
-      //Best , Worst & Average Laps
+
+      <!-- Best, Worst & Average Laps -->
       <section id="exteraInfo">
         <div class="best">
-          <span class="bestData"></span>
-          <span class="bestYext">Best Lap</span>
+          <span class="bestData" id="bestData">--:--.--</span>
+          <span class="bestText">Best Lap</span>
         </div>
         <div class="worst">
-          <span class="worstData"></span>
+          <span class="worstData" id="worstData">--:--.--</span>
           <span class="worstText">Worst Lap</span>
         </div>
         <div class="average">
-          <span class="averageData"></span
-          ><span class="averageText">Average Lap</span>
+          <span class="averageData" id="averageData">--:--.--</span>
+          <span class="averageText">Average Lap</span>
         </div>
       </section>
     </main>
-    <footer></footer>
+
+    <footer class="foot">Built with HTML, CSS &amp; vanilla JavaScript</footer>
+    <script src="main.js"></script>
   </body>
 </html>

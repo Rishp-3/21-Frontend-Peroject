@@ -20,7 +20,14 @@ function randomSecret() {
 }
 
 function loadStats() {
-  const stats = JSON.parse(localStorage.getItem("ngg-stats") || "{}");
+  // Guard against corrupted localStorage JSON (would throw on load before).
+  let raw;
+  try {
+    raw = JSON.parse(localStorage.getItem("ngg-stats") || "{}");
+  } catch {
+    raw = {};
+  }
+  const stats = raw;
   bestScoreEl.textContent = stats.best ?? "\u2013";
   gamesWonEl.textContent = stats.wins ?? 0;
   return { best: stats.best ?? null, wins: stats.wins ?? 0 };
@@ -82,12 +89,17 @@ guessForm.addEventListener("submit", function (event) {
     setMessage(`🎉 Correct! You won in ${attempts} ${attempts === 1 ? "attempt" : "attempts"}.`, "win");
     addHistory(value, "win");
     saveWin(attempts);
-  } else if (value < secret) {
-    setMessage(`${value} is TOO LOW ⬆️ — try a bigger number.`);
-    addHistory(value, "low");
   } else {
-    setMessage(`${value} is TOO HIGH ⬇️ — try a smaller number.`);
-    addHistory(value, "high");
+    const tooLow = value < secret;
+    // Hot/cold hint promised in the meta description, based on distance.
+    // Also passes low/high classes so the .message.low/.high CSS actually applies.
+    const dist = Math.abs(value - secret);
+    const heat = dist <= 2 ? "🔥 Very hot!" : dist <= 5 ? "♨️ Warm" : dist <= 15 ? "🌤️ Cool" : "🧊 Cold";
+    setMessage(
+      `${value} is TOO ${tooLow ? "LOW ⬆️" : "HIGH ⬇️"} — ${heat}`,
+      tooLow ? "low" : "high"
+    );
+    addHistory(value, tooLow ? "low" : "high");
   }
 
   guessInput.value = "";

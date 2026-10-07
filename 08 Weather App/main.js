@@ -5,7 +5,7 @@
 // message if no key is configured.
 const API_KEY = (typeof WEATHER_CONFIG !== "undefined" && WEATHER_CONFIG.API_KEY) || "";
 const cityInp = document.querySelector(".cityInp");
-const submit = document.querySelector(".submit");
+const submitBtn = document.querySelector(".submit");
 const city = document.querySelector(".city");
 const dayTime = document.querySelector(".dayTime");
 const temp = document.querySelector(".temp");
@@ -42,12 +42,10 @@ function submitSearch() {
   cityV = v;
   get();
 }
-submit.addEventListener("click", submitSearch);
-cityInp.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    submitSearch();
-  }
+// The search is a real <form>, so Enter and the button both fire "submit".
+document.getElementById("searchForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  submitSearch();
 });
 const days = [
   "Sunday",
@@ -79,7 +77,7 @@ async function get2() {
 }
 async function get() {
   if (!API_KEY) {
-    showError("No API key configured. Add your free OpenWeather API key to API_KEY in main.js.");
+    showError("No API key configured. Copy config.example.js to config.js and paste your OpenWeather key there.");
     return;
   }
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(cityV)}&appid=${API_KEY}&units=metric`;
@@ -120,40 +118,55 @@ function setAll(a) {
   const visEl = document.querySelector(".visibility");
   if (visEl) visEl.innerText = `${((data.visibility || 10000) / 1000).toFixed(1)} km`;
 
-  // dayTime was never set before
+  // dayTime: use the CITY's local hour (UTC offset from API), not browser time.
   if (dayTime) {
-    const localH = new Date().getHours();
-    dayTime.innerText = localH < 12 ? "Morning" : localH < 17 ? "Afternoon" : localH < 20 ? "Evening" : "Night";
+    const cityHour = new Date((Date.now() / 1000 + (data.timezone || 0)) * 1000)
+      .getUTCHours();
+    dayTime.innerText = cityHour < 12 ? "Morning" : cityHour < 17 ? "Afternoon" : cityHour < 20 ? "Evening" : "Night";
   }
 
 }
+
+// Format a UTC timestamp into HH:MM in the CITY's timezone (offset seconds).
+function cityTime(dtSeconds, tzOffset) {
+  const d = new Date((dtSeconds + tzOffset) * 1000);
+  return String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
+}
+
 function setAll2() {
   hfData.innerHTML = "";
   wfData.innerHTML = "";
+  const tz = data && data.timezone ? data.timezone : 0;
 
-  for (let i = 0; i < 8; i++) {
-    const date = new Date(data2.list[i].dt * 1000);
+  // "Next 24 Hours" = first 8 entries of the 3-hourly list.
+  for (let i = 0; i < 8 && i < data2.list.length; i++) {
+    const it = data2.list[i];
     const span = document.createElement("div");
-    span.className="rp"
-    const hh = String(date.getHours()).padStart(2, "0");
-    const mm = String(date.getMinutes()).padStart(2, "0");
-    span.innerHTML = `<div>${hh}:${mm}</div>
-    <div> <img src="https://openweathermap.org/img/wn/${data2.list[i].weather[0].icon}@2x.png"></div>
-    <div>${Math.round(data2.list[i].main.temp)}\u00B0C</div>`;
+    span.className = "rp";
+    span.innerHTML = `<div>${cityTime(it.dt, tz)}</div>
+    <div><img src="https://openweathermap.org/img/wn/${it.weather[0].icon}@2x.png" alt="${it.weather[0].description}" width="50" height="50"></div>
+    <div>${Math.round(it.main.temp)}\u00B0C</div>`;
     hfData.appendChild(span);
   }
 
-  for (let i = 0; i < 40; i = i + 8) {
-    const date = new Date(data2.list[i].dt * 1000);
-    const table = document.createElement("table");
-    table.innerHTML = `<tr>
-    <td>${days[date.getDay()]}</td>
-    <td>
-    <img src="https://openweathermap.org/img/wn/${data2.list[i].weather[0].icon}@2x.png">
-    <p>${data2.list[i].weather[0].description}</p>
-    </td>
-    <td>${Math.round(data2.list[i].main.temp)}\u00B0C</td>
-    </tr>`;
-    wfData.appendChild(table);
+  // "5-Day Forecast": pick one entry per calendar day closest to 12:00 city time.
+  const byDay = {};
+  for (const it of data2.list) {
+    const dayKey = new Date((it.dt + tz) * 1000).toISOString().slice(0, 10);
+    const hour = new Date((it.dt + tz) * 1000).getUTCHours();
+    if (!byDay[dayKey] || Math.abs(hour - 12) < Math.abs(byDay[dayKey].hour - 12)) {
+      byDay[dayKey] = { it, hour };
+    }
   }
+  Object.keys(byDay).sort().forEach((dayKey) => {
+    const it = byDay[dayKey].it;
+    const weekday = days[new Date((it.dt + tz) * 1000).getUTCDay()];
+    const card = document.createElement("div");
+    card.className = "forecast-card";
+    card.innerHTML = `<span class="fc-day">${weekday}</span>
+      <img src="https://openweathermap.org/img/wn/${it.weather[0].icon}@2x.png" alt="${it.weather[0].description}" width="50" height="50">
+      <p>${it.weather[0].description}</p>
+      <strong>${Math.round(it.main.temp)}\u00B0C</strong>`;
+    wfData.appendChild(card);
+  });
 }

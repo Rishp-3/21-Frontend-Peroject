@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Weather dashboard: current conditions, next 24 hours and 5-day forecast via OpenWeather." />
     <link rel="stylesheet" href="style.css" />
     <title>Weather</title>
   </head>
@@ -10,66 +11,57 @@
     <header>
       <h1 class="headText">Weather</h1>
       <div class="error-box" role="alert" style="display:none"></div>
-      <div class="search">
+      <form class="search" id="searchForm">
+        <label class="sr-only" for="cityInput">City name</label>
         <input
+          id="cityInput"
           class="cityInp"
           type="text"
           placeholder="Search Weather"
-          name=""
+          name="city"
+          autocomplete="off"
         />
-        <input class="submit" type="submit" value="Search" />
-      </div>
+        <button class="submit" type="submit">Search</button>
+      </form>
     </header>
     <main>
       <div class="mainBox">
         <section class="sumInfo">
-          <div class="">
+          <div class="summary-head">
             <div class="city"></div>
             <div class="dayTime"></div>
             <div class="temp"></div>
             <div class="description"></div>
           </div>
           <div class="icon">
-            <img id="weatherIcon" alt="Weather icon" />
+            <img id="weatherIcon" alt="Weather icon" width="64" height="64" />
             <div class="feels"></div>
           </div>
         </section>
-        <section class="main">
+        <section class="details" aria-label="Weather details">
           <div class="sumBox">
-            <div class="">
-              <span class="">Humidity</span>
-              <span class=""></span>
-            </div>
+            <span class="sumLabel">Humidity</span>
             <div class="humidity"></div>
           </div>
           <div class="sumBox">
-            <div class="">
-              <span class="">Wind Speed</span>
-              <span class=""></span>
-            </div>
+            <span class="sumLabel">Wind Speed</span>
             <div class="windSpeed"></div>
           </div>
           <div class="sumBox">
-            <div class="">
-              <span class="">Pressure</span>
-              <span class=""></span>
-            </div>
+            <span class="sumLabel">Pressure</span>
             <div class="pressure"></div>
           </div>
           <div class="sumBox">
-            <div class="">
-              <span class="">Visibility</span>
-              <span class=""></span>
-            </div>
+            <span class="sumLabel">Visibility</span>
             <div class="visibility"></div>
           </div>
         </section>
         <section class="hourlyForecast">
-          <div class="hfText">Hourly Forecast</div>
+          <h2 class="hfText">Next 24 Hours (3-hour steps)</h2>
           <div class="hfData"></div>
         </section>
-        <section class="weaklyForecast">
-          <div class="wfText">5-Day Forecast</div>
+        <section class="dailyForecast">
+          <h2 class="wfText">5-Day Forecast</h2>
           <div class="wfData"></div>
         </section>
       </div>

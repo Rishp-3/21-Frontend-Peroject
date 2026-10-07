@@ -5,6 +5,7 @@ const button = document.querySelector(".button");
 async function fetchQuote() {
   quote.innerText = "Loading…";
   author.innerText = "";
+  button.disabled = true; // loading state: disable while fetching
   try {
     const response = await fetch("https://dummyjson.com/quotes/random");
     if (!response.ok) throw new Error("HTTP " + response.status);
@@ -16,6 +17,8 @@ async function fetchQuote() {
     // which ran the assignment immediately on every click).
     quote.innerText = "Could not load a quote. Please try again.";
     author.innerText = "";
+  } finally {
+    button.disabled = false;
   }
 }
 

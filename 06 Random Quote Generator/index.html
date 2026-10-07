@@ -7,19 +7,15 @@
     <title>Random Quote Generator</title>
   </head>
   <body>
-    <div class="box">
-      <div class="inbox">
-        <div class="box-quote">
-          <h1 class="quote"></h1>
-        </div>
-        <div class="author-bos">
-          <h4 class="author"></h4>
-        </div>
+    <main class="box">
+      <section class="inbox" aria-live="polite">
+        <blockquote class="quote">Loading…</blockquote>
+        <p class="author"></p>
         <div class="button-box">
-          <button class="button">Generate Quote</button>
+          <button type="button" class="button" aria-label="Generate a new quote">Generate Quote</button>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>

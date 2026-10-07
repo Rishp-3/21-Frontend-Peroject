@@ -171,13 +171,23 @@ function escapeHtml(str) {
 }
 
 function highlight(text, query) {
-  const safe = escapeHtml(text);
-  if (!query) return safe;
-  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return safe.replace(
-    new RegExp(`(${escapedQuery})`, "gi"),
-    "<mark>$1</mark>"
-  );
+  // FIX: previously we regex-replaced on the FULLY escaped string, so searching
+  // for "amp"/"lt"/"gt" injected <mark> inside &amp;/&lt;/&gt; entities and broke
+  // rendering. Correct approach: split the RAW text around matches (case-insensitive),
+  // escape each piece individually, then wrap only the escaped match in <mark>.
+  if (!query) return escapeHtml(text);
+  const lower = text.toLowerCase();
+  const q = query.toLowerCase();
+  let out = "";
+  let i = 0;
+  while (true) {
+    const idx = lower.indexOf(q, i);
+    if (idx === -1) { out += escapeHtml(text.slice(i)); break; }
+    out += escapeHtml(text.slice(i, idx));
+    out += "<mark>" + escapeHtml(text.slice(idx, idx + q.length)) + "</mark>";
+    i = idx + q.length;
+  }
+  return out;
 }
 
 function formatDate(ts) {

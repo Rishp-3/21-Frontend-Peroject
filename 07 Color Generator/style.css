@@ -31,10 +31,16 @@ header div {
 }
 .recBox {
   height: 50px;
-  width: 100vw;
+  width: min(100%, 640px);
 }
 
 footer {
   display: flex;
   justify-content: space-between;
 }
+
+/* Copy feedback + recent swatch affordance */
+.copyBtn { cursor: pointer; transition: transform 0.15s ease, background-color 0.15s ease; }
+.copyBtn:hover { transform: scale(1.12); }
+.copyBtn.copied, .recBox.copied { outline: 2px solid #2ecc71; outline-offset: 2px; }
+.recBox { cursor: pointer; }

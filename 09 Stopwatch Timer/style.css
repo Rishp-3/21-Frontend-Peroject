@@ -201,14 +201,14 @@ tbody tr.worst-lap td {
 }
 
 /* Extra info */
-#exteraInfo {
+#extraInfo {
   margin-top: 24px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
-#exteraInfo > div {
+#extraInfo > div {
   background: #1e293b;
   border: 1px solid #334155;
   border-radius: 16px;
@@ -219,7 +219,7 @@ tbody tr.worst-lap td {
   gap: 6px;
 }
 
-#exteraInfo span:first-child {
+#extraInfo span:first-child {
   font-size: 1.05rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
@@ -237,7 +237,7 @@ tbody tr.worst-lap td {
   color: #38bdf8;
 }
 
-#exteraInfo span:last-child {
+#extraInfo span:last-child {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -265,7 +265,7 @@ tbody tr.worst-lap td {
 
 /* Mobile */
 @media (max-width: 420px) {
-  #exteraInfo {
+  #extraInfo {
     grid-template-columns: 1fr;
   }
 

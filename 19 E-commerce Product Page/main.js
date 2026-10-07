@@ -14,6 +14,8 @@ let reviews = load('aurora-reviews', [
   { who: 'Priya S.', stars: 5, text: 'Noise cancellation is superb and the battery really lasts a full week of commutes.', when: 'Sep 28, 2026' },
   { who: 'Daniel K.', stars: 4, text: 'Great sound. Slightly heavy for long sessions but very comfortable pads.', when: 'Oct 02, 2026' },
 ]);
+// The marketing page advertises 128 store reviews; user-added reviews count on top.
+const baseReviewCount = 128;
 
 function load(k, fb) { try { return JSON.parse(localStorage.getItem(k)) ?? fb; } catch { return fb; } }
 function save(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
@@ -183,7 +185,12 @@ function renderReviews() {
   });
   const avg = reviews.reduce((s, r) => s + r.stars, 0) / (reviews.length || 1);
   document.querySelector('.rating-text strong').textContent = avg.toFixed(1);
-  document.querySelector('.rating-text').childNodes[3].textContent = ` ${reviews.length} review${reviews.length === 1 ? '' : 's'}`;
+  // FIX: previously used childNodes[3], which was undefined (the <span> only has
+  // 3 child nodes) and threw on page load AND after every review submit.
+  const countLink = document.querySelector('.rating-text a');
+  if (countLink) {
+    countLink.textContent = `${baseReviewCount + reviews.length} reviews`;
+  }
 }
 function escapeHtml(s) { return String(s).replace(/[&<>"']/g, (ch) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[ch])); }
 

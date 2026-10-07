@@ -1,5 +1,8 @@
 // 16 - Movie Search App (OMDb API)
-const API_KEY = '4a3b711b'; // free demo key — replace with your own for production
+// SECURITY NOTE: the previous OMDb key committed here was a PERSONAL key (OMDb
+// has no public demo keys) and must be ROTATED. Get your own free key at
+// https://www.omdbapi.com/apikey.aspx and paste it below.
+const API_KEY = ''; // <- put your OMDb API key here
 const BASE = 'https://www.omdbapi.com/';
 
 const searchForm = document.getElementById('searchForm');
@@ -59,22 +62,39 @@ function updatePager() {
   pager.style.visibility = state.query ? 'visible' : 'hidden';
 }
 
+let reqCounter = 0;
 async function search(page = 1) {
   const q = state.query.trim();
   if (!q) return;
+  if (!API_KEY) {
+    resultsGrid.innerHTML = '';
+    state.totalResults = 0;
+    updatePager();
+    setStatus('No API key configured. Add your free OMDb API key to API_KEY in main.js.', true);
+    return;
+  }
+  const reqId = ++reqCounter;
+  state.reqId = reqId;
   state.page = page;
   showSkeletons();
   setStatus(`Searching “${q}”…`);
   try {
-    const params = new URLSearchParams({ apikey: API_KEY, t: 'movie', page: String(page) });
+    const params = new URLSearchParams({ apikey: API_KEY, type: 'movie', page: String(page) });
     if (q.length) params.set('s', q);
     const y = yearFilter.value;
     if (y) params.set('y', y);
     const res = await fetch(`${BASE}?${params}`);
     const data = await res.json();
+    if (reqId !== state.reqId) return; // stale
+    if (reqId !== state.reqId) return; // stale response – newer search already in flight
     if (data.Response === 'False') {
       resultsGrid.innerHTML = '';
-      setStatus(data.Search || 'No results found.', true);
+      const msg = data.Error && /invalid api key/i.test(data.Error)
+        ? 'Invalid API key – add your own OMDb key to API_KEY in main.js.'
+        : data.Error && /limit/i.test(data.Error)
+          ? 'OMDb daily request limit reached – try again tomorrow.'
+          : `No movies found for “${q}”.`;
+      setStatus(msg, true);
       state.totalResults = 0;
       updatePager();
       return;
@@ -84,6 +104,7 @@ async function search(page = 1) {
     setStatus(`Found ${state.totalResults} result${state.totalResults === 1 ? '' : 's'} for “${q}”.`);
     updatePager();
   } catch (err) {
+    if (reqId !== state.reqId) return;
     resultsGrid.innerHTML = '';
     setStatus('Network error — please check your connection and try again.', true);
   }

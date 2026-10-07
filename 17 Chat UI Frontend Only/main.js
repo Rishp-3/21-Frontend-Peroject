@@ -1,4 +1,12 @@
 // 17 - Chat UI (frontend only, simulated bot replies)
+
+// Escape untrusted text before it is interpolated into innerHTML (XSS fix).
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+}
+
 const conversations = [
   { id: 'alex', name: 'Alex', color: '#4f6df5', status: 'online', unread: 0, messages: [
     { from: 'peer', text: 'Hey! Are we still on for tomorrow?', ts: Date.now() - 3600e3 },
@@ -56,7 +64,7 @@ function renderConvList(filter = '') {
         <div class="avatar" style="background:${c.color}">${c.name[0]}</div>
         <div class="conv-meta">
           <div class="conv-name">${c.name}</div>
-          <div class="conv-preview">${last ? (last.from === 'me' ? 'You: ' : '') + last.text : 'No messages yet'}</div>
+          <div class="conv-preview">${last ? esc((last.from === 'me' ? 'You: ' : '') + last.text) : 'No messages yet'}</div>
         </div>
         ${c.unread ? `<span class="unread-badge">${c.unread}</span>` : ''}`;
       els.convList.appendChild(li);

@@ -9,6 +9,7 @@ const BASE = 'https://www.omdbapi.com/';
 const searchForm = document.getElementById('searchForm');
 const searchInput = document.getElementById('searchInput');
 const yearFilter = document.getElementById('yearFilter');
+const typeFilter = document.getElementById('typeFilter');
 const statusLine = document.getElementById('statusLine');
 const resultsGrid = document.getElementById('resultsGrid');
 const pager = document.getElementById('pager');
@@ -64,6 +65,7 @@ function updatePager() {
 }
 
 let reqCounter = 0;
+let activeCtrl = null; // AbortController for the in-flight search
 async function search(page = 1) {
   const q = state.query.trim();
   if (!q) return;
@@ -71,30 +73,36 @@ async function search(page = 1) {
     resultsGrid.innerHTML = '';
     state.totalResults = 0;
     updatePager();
-    setStatus('No API key configured. Add your free OMDb API key to API_KEY in main.js.', true);
+    setStatus('No API key configured. Copy config.example.js to config.js and add your free OMDb API key.', true);
     return;
   }
   const reqId = ++reqCounter;
   state.reqId = reqId;
   state.page = page;
+  if (activeCtrl) activeCtrl.abort(); // drop any older in-flight request
+  activeCtrl = new AbortController();
   showSkeletons();
   setStatus(`Searching “${q}”…`);
   try {
-    const params = new URLSearchParams({ apikey: API_KEY, type: 'movie', page: String(page) });
+    const params = new URLSearchParams({ apikey: API_KEY, page: String(page) });
+    // "Movies / Series / Everything" filter — omit `type` for everything.
+    // (Previously the code sent t:'movie'; t is the TITLE param and was wrong.)
+    if (typeFilter.value !== 'all') params.set('type', typeFilter.value);
     if (q.length) params.set('s', q);
     const y = yearFilter.value;
     if (y) params.set('y', y);
-    const res = await fetch(`${BASE}?${params}`);
+    const res = await fetch(`${BASE}?${params}`, { signal: activeCtrl.signal });
     const data = await res.json();
     if (reqId !== state.reqId) return; // stale
     if (reqId !== state.reqId) return; // stale response – newer search already in flight
     if (data.Response === 'False') {
       resultsGrid.innerHTML = '';
-      const msg = data.Error && /invalid api key/i.test(data.Error)
-        ? 'Invalid API key – add your own OMDb key to API_KEY in main.js.'
-        : data.Error && /limit/i.test(data.Error)
-          ? 'OMDb daily request limit reached – try again tomorrow.'
-          : `No movies found for “${q}”.`;
+      // Show the ACTUAL OMDb Error field so messages like "Invalid API key!",
+      // "Request limit reached!" and "Too many results." are visible to the user.
+      let msg = data.Error || `No titles found for “${q}”.`;
+      if (/invalid api key/i.test(msg)) msg = 'Invalid API key – copy config.example.js to config.js and add your own OMDb key.';
+      else if (/limit/i.test(msg)) msg = 'OMDb daily request limit reached – try again tomorrow.';
+      else if (/too many results/i.test(msg)) msg = 'Too many results – refine your search (add a year or longer title).';
       setStatus(msg, true);
       state.totalResults = 0;
       updatePager();
@@ -105,9 +113,12 @@ async function search(page = 1) {
     setStatus(`Found ${state.totalResults} result${state.totalResults === 1 ? '' : 's'} for “${q}”.`);
     updatePager();
   } catch (err) {
+    if (err && err.name === 'AbortError') return; // superseded by a newer search
     if (reqId !== state.reqId) return;
     resultsGrid.innerHTML = '';
     setStatus('Network error — please check your connection and try again.', true);
+  } finally {
+    if (reqId === state.reqId) activeCtrl = null;
   }
 
   // Replace broken poster URLs with a placeholder after render
@@ -121,10 +132,14 @@ async function search(page = 1) {
   });
 }
 
-async function openDetail(imdbID) {
+let lastFocusedCard = null; // element to restore focus to when modal closes
+
+async function openDetail(imdbID, sourceCard) {
+  lastFocusedCard = sourceCard || null;
   modalContent.innerHTML = '<p>Loading details…</p>';
   modal.classList.remove('hidden');
   document.body.style.overflow = 'hidden';
+  modalClose.focus(); // move focus into the dialog
   try {
     const res = await fetch(`${BASE}?apikey=${API_KEY}&i=${imdbID}&plot=full`);
     const m = await res.json();
@@ -154,9 +169,24 @@ async function openDetail(imdbID) {
 }
 
 function closeModal() {
+  if (modal.classList.contains('hidden')) return;
   modal.classList.add('hidden');
   document.body.style.overflow = '';
+  if (lastFocusedCard && document.contains(lastFocusedCard)) lastFocusedCard.focus();
+  lastFocusedCard = null;
 }
+
+/* Keep Tab focus inside the dialog while it is open (simple focus trap). */
+modal.addEventListener('keydown', (e) => {
+  if (e.key !== 'Tab') return;
+  const focusables = [...modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+    .filter((el) => !el.disabled && el.offsetParent !== null);
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
 
 // Events
 searchForm.addEventListener('submit', (e) => {
@@ -170,6 +200,7 @@ searchInput.addEventListener('input', () => {
   debounceTimer = setTimeout(() => {
     const q = searchInput.value.trim();
     if (q.length >= 2) {
+      if (q === state.query) return; // no change -> don't waste an API request
       state.query = q;
       search(1);
     } else if (q === '') {
@@ -185,15 +216,18 @@ searchInput.addEventListener('input', () => {
 yearFilter.addEventListener('change', () => {
   if (state.query) search(1);
 });
+typeFilter.addEventListener('change', () => {
+  if (state.query) search(1);
+});
 
 resultsGrid.addEventListener('click', (e) => {
   const card = e.target.closest('.movie-card');
-  if (card) openDetail(card.dataset.id);
+  if (card) openDetail(card.dataset.id, card);
 });
 resultsGrid.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
     const card = e.target.closest('.movie-card');
-    if (card) { e.preventDefault(); openDetail(card.dataset.id); }
+    if (card) { e.preventDefault(); openDetail(card.dataset.id, card); }
   }
 });
 

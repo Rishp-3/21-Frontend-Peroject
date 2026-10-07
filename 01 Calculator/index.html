@@ -7,33 +7,35 @@
     <title>Calculator</title>
   </head>
   <body>
-    <div class="container">
+  <main class="container" aria-label="Calculator">
+    <div class="container-inner">
       <div class="con-ans">
       <div class="que"></div>
       <div class="ans"></div>
       </div>
       <div class="but">
-        <button class="data c1" value="C">AC</button>
-        <button class="data c1" value="⌫">⌫</button>
-        <button class="data c1" value="%">%</button>
-        <button class="data c2" value="/">/</button>
+        <button type="button" class="data c1" value="C">AC</button>
+        <button type="button" class="data c1" value="⌫">⌫</button>
+        <button type="button" class="data c1" value="%">%</button>
+        <button type="button" class="data c2" value="/">/</button>
         <button class="data" value="7">7</button>
         <button class="data" value="8">8</button>
         <button class="data" value="9">9</button>
-        <button class="data c2" value="X">X</button>
+        <button type="button" class="data c2" value="X" aria-label="multiply">&#215;</button>
         <button class="data" value="4">4</button>
         <button class="data" value="5">5</button>
         <button class="data" value="6">6</button>
-        <button class="data c2" value="-">-</button>
+        <button type="button" class="data c2" value="-">-</button>
         <button class="data" value="1">1</button>
         <button class="data" value="2">2</button>
         <button class="data" value="3">3</button>
-        <button class="data c2" value="+">+</button>
-        <button class="data ze" value="0">0</button>
+        <button type="button" class="data c2" value="+">+</button>
+        <button type="button" class="data ze" value="0">0</button>
         <button class="data" value=".">.</button>
-        <button class="data c3" value="=">=</button>
+        <button type="button" class="data c3" type="button" value="=">=</button>
       </div>
     </div>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>

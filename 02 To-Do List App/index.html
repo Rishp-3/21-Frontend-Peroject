@@ -4,22 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>To-DO LIst</title>
+    <title>To-Do List</title>
   </head>
   <body>
-    <div class="contaner">
-      <div class="input-comn">
-        <input type="text" placeholder="Add a new task..." />
-        <button>Add</button>
-        
-      </div>
-      <div class="task">
-        <div class="task-head">
-          <h1>My Task</h1>
-        </div>
-        <table></table>
-      </div>
-    </div>
+    <main class="container">
+      <h1>My Tasks</h1>
+      <form class="input-comn" id="taskForm">
+        <label class="visually-hidden" for="taskInput">New task</label>
+        <input type="text" id="taskInput" placeholder="Add a new task..." autocomplete="off" />
+        <button type="submit" id="addBtn">Add</button>
+      </form>
+      <section class="task" aria-label="Task list">
+        <ul id="taskList"></ul>
+        <p id="emptyState" class="empty-state">No tasks yet — add one above!</p>
+      </section>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>

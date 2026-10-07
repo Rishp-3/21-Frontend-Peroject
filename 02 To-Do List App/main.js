@@ -1,8 +1,9 @@
-const input = document.querySelector("input");
-const button = document.querySelector("button");
-const table = document.querySelector("table");
+const input = document.getElementById("taskInput");
+const form = document.getElementById("taskForm");
+const list = document.getElementById("taskList");
+const emptyState = document.getElementById("emptyState");
 
-// Safe load: corrupted JSON in localStorage used to crash the whole app.
+// Safe load: corrupted JSON in localStorage must not crash the app.
 let tasks = [];
 try {
   tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -11,45 +12,40 @@ try {
 }
 
 function renderTasks() {
-  table.innerHTML = "";
+  list.textContent = ""; // clear without innerHTML
+  emptyState.hidden = tasks.length > 0;
 
   tasks.forEach((t, index) => {
-    const row = document.createElement("tr");
-    const task = document.createElement("td");
-    const btn = document.createElement("td");
+    const li = document.createElement("li");
+    if (t.done) li.classList.add("done");
 
-    // Build nodes with textContent instead of innerHTML + raw interpolation.
-    // (Previously `${t.text}` went straight into innerHTML -> stored XSS.)
+    // Build nodes with textContent only (XSS fix: raw ${t.text} used to go into innerHTML).
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = !!t.done;
     checkbox.id = "task-" + index;
     checkbox.setAttribute("aria-label", "Mark task as done: " + t.text);
+
     const label = document.createElement("label");
     label.htmlFor = "task-" + index;
-    label.textContent = " " + t.text;
-
-    task.appendChild(checkbox);
-    task.appendChild(label);
-    if (t.done) task.classList.add("don");
+    label.className = "task-text";
+    label.textContent = t.text;
 
     const delBtn = document.createElement("button");
-    delBtn.className = "Btn";
-    delBtn.textContent = "\u{1F5D1}\uFE0F";
+    delBtn.type = "button";
+    delBtn.className = "del";
+    delBtn.textContent = "🗑️";
     delBtn.setAttribute("aria-label", "Delete task: " + t.text);
-    btn.appendChild(delBtn);
 
-    row.appendChild(task);
-    row.appendChild(btn);
-    table.appendChild(row);
+    li.append(checkbox, label, delBtn);
+    list.appendChild(li);
 
     delBtn.addEventListener("click", () => {
       tasks.splice(index, 1);
       saveAndRender();
     });
-
-    checkbox.addEventListener("change", function () {
-      tasks[index].done = this.checked;
+    checkbox.addEventListener("change", () => {
+      tasks[index].done = checkbox.checked;
       saveAndRender();
     });
   });
@@ -59,7 +55,7 @@ function saveAndRender() {
   try {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   } catch (err) {
-    /* storage full/blocked - still render in-memory */
+    /* storage full/blocked - keep working in memory */
   }
   renderTasks();
 }
@@ -68,17 +64,15 @@ function addTask() {
   const text = input.value.trim();
   if (text === "") return;
   tasks.push({ text, done: false });
-  saveAndRender();
   input.value = "";
+  input.focus();
+  saveAndRender();
 }
 
-button.addEventListener("click", addTask);
-// Enter key now adds a task too (was missing before).
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    addTask();
-  }
+// Submitting the form covers both the Add button and the Enter key.
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addTask();
 });
 
 renderTasks();

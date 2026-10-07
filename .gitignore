@@ -1,6 +1,9 @@
-(empty)node_modules/
-.next/
+node_modules/
+.DS_Store
+*.log
 dist/
 build/
-*.log
-node_modules/
+
+# Local API keys (copy config.example.js -> config.js)
+config.js
+.testenv/

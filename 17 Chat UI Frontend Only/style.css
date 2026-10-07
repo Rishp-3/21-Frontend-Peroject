@@ -62,3 +62,4 @@ body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; ba
   .mobile-only { display: inline-flex; }
   .bubble { max-width: 85%; }
 }
+.day-sep { display: flex; justify-content: center; margin: .75rem 0; } .day-sep span { background: #e2e8f0; color: #475569; font-size: .75rem; padding: .2rem .6rem; border-radius: 999px; }

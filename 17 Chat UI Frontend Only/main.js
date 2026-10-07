@@ -7,7 +7,8 @@ function esc(str) {
   }[c]));
 }
 
-const conversations = [
+/* Seed data; overwritten by localStorage if present (persistence across reloads). */
+const SEED_CONVERSATIONS = [
   { id: 'alex', name: 'Alex', color: '#4f6df5', status: 'online', unread: 0, messages: [
     { from: 'peer', text: 'Hey! Are we still on for tomorrow?', ts: Date.now() - 3600e3 },
     { from: 'me', text: 'Absolutely 😄', ts: Date.now() - 3500e3 },
@@ -24,6 +25,25 @@ const conversations = [
     { from: 'peer', text: 'Standup at 10am sharp.', ts: Date.now() - 20 * 3600e3 },
   ]},
 ];
+
+const STORE_KEY = 'chatUI.conversations.v1';
+
+function loadConversations() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    }
+  } catch { /* corrupt or unavailable storage -> fall back to seed */ }
+  return structuredClone(SEED_CONVERSATIONS);
+}
+
+function persist() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(conversations)); } catch {}
+}
+
+const conversations = loadConversations();
 
 const botReplies = [
   "That sounds great!", "Interesting — tell me more 🤔", "Haha, nice one 😄",
@@ -49,6 +69,14 @@ const els = {
 let activeId = conversations[0].id;
 const activeConv = () => conversations.find((c) => c.id === activeId);
 const fmtTime = (ts) => new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+function formatDayLabel(ts) {
+  const d = new Date(ts);
+  const today = new Date();
+  const yest = new Date(today.getTime() - 864e5);
+  if (d.toDateString() === today.toDateString()) return 'Today';
+  if (d.toDateString() === yest.toDateString()) return 'Yesterday';
+  return d.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+}
 
 function renderConvList(filter = '') {
   const f = filter.trim().toLowerCase();
@@ -77,10 +105,17 @@ function renderMessages() {
   els.peerStatus.textContent = c.status;
   els.headerAvatar.textContent = c.name[0];
   els.headerAvatar.style.background = c.color;
-  els.messages.innerHTML = c.messages.map((m) => `
+  let lastDay = '';
+  els.messages.innerHTML = c.messages.map((m) => {
+    const day = new Date(m.ts).toDateString();
+    const sep = day !== lastDay
+      ? `<div class="day-sep"><span>${formatDayLabel(m.ts)}</span></div>` : '';
+    lastDay = day;
+    return sep + `
     <div class="msg-row ${m.from}">
       <div class="bubble">${escapeHtml(m.text)}<span class="time">${fmtTime(m.ts)}</span></div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   scrollToBottom();
 }
 
@@ -97,22 +132,37 @@ function sendMessage(text) {
   c.messages.push({ from: 'me', text, ts: Date.now() });
   renderMessages();
   renderConvList(els.convSearch.value);
+  persist();
   simulateReply(c);
 }
 
-let replyTimer = null;
+/* FIX: previously a single global replyTimer plus an untracked inner timeout meant
+   (a) switching chats within ~400ms lost the reply forever, and (b) rapid sends could
+   stack replies. Now each conversation owns its own timer pair, replies are always
+   delivered to the right conversation (unread++ when it isn't active), and sending
+   again in the same chat replaces that chat's pending reply instead of stacking. */
+const replyTimers = new Map(); // convId -> {outer, inner}
+
+function clearReplyTimer(convId) {
+  const t = replyTimers.get(convId);
+  if (t) { clearTimeout(t.outer); clearTimeout(t.inner); replyTimers.delete(convId); }
+}
+
 function simulateReply(conv) {
-  clearTimeout(replyTimer);
-  replyTimer = setTimeout(() => {
-    if (activeId !== conv.id) return; // don't show typing for non-active chat
-    els.typing.classList.remove('hidden');
-    setTimeout(() => {
-      els.typing.classList.add('hidden');
+  clearReplyTimer(conv.id);
+  const timers = {};
+  replyTimers.set(conv.id, timers);
+  timers.outer = setTimeout(() => {
+    if (activeId === conv.id) els.typing.classList.remove('hidden');
+    timers.inner = setTimeout(() => {
+      if (activeId === conv.id) els.typing.classList.add('hidden');
+      replyTimers.delete(conv.id);
       const reply = botReplies[Math.floor(Math.random() * botReplies.length)];
       conv.messages.push({ from: 'peer', text: reply, ts: Date.now() });
       if (activeId === conv.id) renderMessages();
       else conv.unread++;
       renderConvList(els.convSearch.value);
+      persist();
     }, 900 + Math.random() * 1200);
   }, 400);
 }
@@ -135,7 +185,9 @@ els.convList.addEventListener('click', (e) => {
   c.unread = 0;
   renderConvList(els.convSearch.value);
   renderMessages();
+  persist();
   els.sidebar.classList.remove('open');
+  if (activeId !== item.dataset.id) els.typing.classList.add('hidden');
 });
 
 els.convSearch.addEventListener('input', () => renderConvList(els.convSearch.value));

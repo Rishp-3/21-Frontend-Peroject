@@ -57,16 +57,16 @@ A collection of **21 interactive frontend projects** built with **vanilla HTML, 
 ```text
 21-Frontend-Peroject/
 │
-├── 01 Calculator/
+├── 01-calculator/
 │   ├── index.html
 │   ├── style.css
 │   ├── main.js
 │   └── README.md
 │
-├── 02 To-Do List App/
-├── 03 Digital Clock/
+├── 02-to-do-list/
+├── 03-digital-clock/
 ├── ...
-├── 21 Rock Paper Scissors Game/
+├── 21-rock-paper-scissors/
 │
 └── README.md
 ```

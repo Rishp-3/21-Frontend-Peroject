@@ -10,7 +10,6 @@ const city = document.querySelector(".city");
 const dayTime = document.querySelector(".dayTime");
 const temp = document.querySelector(".temp");
 const description = document.querySelector(".description");
-const icon = document.querySelector(".icon");
 const humidity = document.querySelector(".humidity");
 const windSpeed = document.querySelector(".windSpeed");
 const pressure = document.querySelector(".pressure");

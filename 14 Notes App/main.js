@@ -40,6 +40,7 @@ const notesGrid = document.getElementById("notesGrid");
 const emptyState = document.getElementById("emptyState");
 const notesCount = document.getElementById("notesCount");
 const charCount = document.getElementById("charCount");
+const cancelEditBtn = document.getElementById("cancelEditBtn"); // declared before use below
 const swatches = Array.from(document.querySelectorAll(".swatch"));
 
 let notes = loadNotes(); // [{id, title, body, color, date}]

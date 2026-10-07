@@ -303,3 +303,6 @@ mark {
 .status-msg { color: #b45309; font-size: .85rem; }
 .btn.ghost { background: transparent; border: 1px solid #cbd5e1; color: #334155; }
 .btn.ghost:hover { background: #f1f5f9; }
+
+/* Repo-wide a11y polish: visible keyboard focus indicator */
+:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }

@@ -235,3 +235,6 @@ body {
   border-radius: 8px; cursor: pointer;
 }
 .pw-toggle:hover { background: #dde4f2; }
+
+/* Repo-wide a11y polish: visible keyboard focus indicator */
+:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }

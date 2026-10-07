@@ -78,3 +78,6 @@ body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; ba
 @media (max-width: 860px) { .product-layout { grid-template-columns: 1fr; gap: 24px; } }
 @media (max-width: 480px) { .buy-row .btn { flex: 1; } }
 .checkout-summary { margin: .5rem 0; font-size: .9rem; } .sum-row { display: flex; justify-content: space-between; gap: .5rem; padding: .15rem 0; }
+
+/* Repo-wide a11y polish: visible keyboard focus indicator */
+:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }

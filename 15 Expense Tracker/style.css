@@ -331,3 +331,6 @@ select:focus {
 .bar-amount { font-size: .85rem; font-variant-numeric: tabular-nums; color: #334155; }
 .muted { color: #64748b; font-size: .9rem; }
 @media (max-width: 480px) { .bar-row { grid-template-columns: 90px 1fr auto; } }
+
+/* Repo-wide a11y polish: visible keyboard focus indicator */
+:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }

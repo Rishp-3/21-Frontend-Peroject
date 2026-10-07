@@ -112,3 +112,6 @@ select {
   .date-day { font-size: clamp(0.9rem, 1.4vw, 1.2rem); }
   .box { padding: 10px 28px; border-radius: 18px; }
 }
+
+/* Repo-wide a11y polish: visible keyboard focus indicator */
+:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }

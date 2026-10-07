@@ -26,3 +26,6 @@ header h1 { text-align: center; font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bo
 .result strong { color: #7fd4ff; }
 .best { font-size: .9rem; }
 @media (max-width: 560px) { .stats { grid-template-columns: repeat(2, 1fr); } .text-display { font-size: 1.05rem; } }
+
+/* Repo-wide a11y polish: visible keyboard focus indicator */
+:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }

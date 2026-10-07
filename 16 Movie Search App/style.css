@@ -376,3 +376,6 @@ body {
     gap: 12px;
   }
 }
+
+/* Repo-wide a11y polish: visible keyboard focus indicator */
+:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }

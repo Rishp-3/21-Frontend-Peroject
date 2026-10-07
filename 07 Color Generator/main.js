@@ -7,6 +7,12 @@ const hslValue = document.querySelector(".hslValue");
 const cmykValue = document.querySelector(".cmykValue");
 const recBox = document.querySelectorAll(".recBox");
 
+// aria-live region so screen readers hear copy feedback.
+const copyStatus = document.createElement("span");
+copyStatus.setAttribute("aria-live", "polite");
+copyStatus.className = "sr-only";
+document.body.appendChild(copyStatus);
+
 const HEX_CHARS = "0123456789ABCDEF";
 let currentHex = "";
 
@@ -85,13 +91,18 @@ function renderColor(hex) {
   hslValue.innerText = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
   cmykValue.innerText = `cmyk(${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%)`;
 
-  // Update recent swatches (most recent first)
-  recentColors.unshift(full);
-  if (recentColors.length > 6) recentColors.pop();
+  // Update recent swatches (most recent first). Empty slots are hidden.
+  if (recentColors[0] !== full) {
+    recentColors.unshift(full);
+    if (recentColors.length > 6) recentColors.pop();
+  }
   recBox.forEach((box, i) => {
-    box.style.backgroundColor = recentColors[i] || "#e9e9ee";
-    box.dataset.color = recentColors[i] || "";
-    box.title = recentColors[i] ? `Click to copy ${recentColors[i]}` : "";
+    const inner = box.querySelector(".recentColor") || box;
+    const color = recentColors[i];
+    box.classList.toggle("empty", !color);
+    inner.style.backgroundColor = color || "transparent";
+    box.dataset.color = color || "";
+    box.title = color ? `Click to copy ${color}` : "";
   });
 }
 
@@ -116,8 +127,9 @@ async function copyText(text) {
   return ok;
 }
 
-function flashCopied(btn) {
+function flashCopied(btn, text) {
   btn.classList.add("copied");
+  copyStatus.textContent = "Copied " + text;
   setTimeout(() => btn.classList.remove("copied"), 1200);
 }
 
@@ -133,17 +145,19 @@ document.querySelectorAll(".copyBtn").forEach((btn) => {
     const get = valueByType[btn.dataset.copy];
     const text = get ? get() : "";
     if (!text || text.includes("---")) return; // nothing generated yet
-    if (await copyText(text)) flashCopied(btn);
+    if (await copyText(text)) flashCopied(btn, text);
   });
 });
 
-// Recent swatches are clickable too
+// Each recent swatch has its own copy button; clicking the box copies too.
 recBox.forEach((box) => {
-  box.style.cursor = "pointer";
-  box.addEventListener("click", async () => {
+  const doCopy = async (btn) => {
     const c = box.dataset.color;
-    if (c && await copyText(c)) flashCopied(box);
-  });
+    if (c && (await copyText(c))) flashCopied(btn || box, c);
+  };
+  const btn = box.querySelector(".recentCopyBtn");
+  if (btn) btn.addEventListener("click", () => doCopy(btn));
+  box.addEventListener("click", () => doCopy(btn || box));
 });
 
 /* -------------------------------- Main -------------------------------- */

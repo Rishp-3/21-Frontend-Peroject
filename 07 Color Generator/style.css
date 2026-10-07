@@ -1,46 +1,248 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: #f4f5fb;
+  color: #111827;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+  background-color: #0e418f;
+  color: #fff;
 }
-header div {
+
+.headerBox {
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
 }
+
+.headerText a {
+  color: #cfe0ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.headerText a:hover,
+.headerText a:focus-visible {
+  text-decoration: underline;
+}
+
+main {
+  flex: 1;
+  width: min(92%, 880px);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2.5rem) 0;
+}
+
 .mainText {
   text-align: center;
+  margin-bottom: 1.5rem;
 }
+
+.mainText h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  margin-bottom: 0.35rem;
+}
+
+.mainText p {
+  color: #4b5563;
+}
+
+/* Current color preview */
 .genBut {
-  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
 }
+
 .colorShow {
-  height: 20vh;
-  width: 70vw;
+  height: clamp(120px, 24vh, 200px);
+  width: min(100%, 640px);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.15);
 }
+
+.colorText {
+  font-size: 1.1rem;
+}
+
+.button {
+  background-color: #0e418f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.button:hover {
+  background-color: #0a3372;
+}
+
+.button:focus-visible,
+.copyBtn:focus-visible,
+.recentCopyBtn:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
+/* Color data cards */
 .genData {
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(2, 1fr);
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
+
+.curData {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.06);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.curData > div:first-child {
+  font-weight: 700;
+  color: #374151;
+}
+
+.curData .valueRow,
+.curData > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.hexValue,
+.rgbValue,
+.hslValue,
+.cmykValue {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+/* Recent colors */
 .recText {
   text-align: center;
+  margin-bottom: 0.75rem;
+  font-size: 1.15rem;
 }
+
 .recData {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 0.75rem;
 }
+
 .recBox {
-  height: 50px;
-  width: min(100%, 640px);
+  position: relative;
+  min-height: 72px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.recBox.empty {
+  visibility: hidden; /* hide unused recent slots until history exists */
+}
+
+.recentColor {
+  display: block;
+  width: 100%;
+  height: 72px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.15);
+}
+
+.recentCopyBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #111827;
+  cursor: pointer;
 }
 
 footer {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+  background-color: #e7e9f2;
+  color: #374151;
+  font-size: 0.9rem;
 }
 
-/* Copy feedback + recent swatch affordance */
-.copyBtn { cursor: pointer; transition: transform 0.15s ease, background-color 0.15s ease; }
-.copyBtn:hover { transform: scale(1.12); }
-.copyBtn.copied, .recBox.copied { outline: 2px solid #2ecc71; outline-offset: 2px; }
-.recBox { cursor: pointer; }
+/* Copy feedback */
+.copyBtn,
+.recentCopyBtn {
+  background: none;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  color: #374151;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.copyBtn:hover,
+.recentCopyBtn:hover {
+  transform: scale(1.1);
+  background-color: #eef2ff;
+}
+
+.copyBtn.copied,
+.recBox.copied {
+  outline: 2px solid #15803d;
+  outline-offset: 2px;
+}
+
+/* Screen-reader-only live region */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 480px) {
+  header,
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}

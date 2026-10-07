@@ -10,7 +10,7 @@
 <body>
   <header class="navbar">
     <span class="brand">🛍️ Aurora Store</span>
-    <button id="cartBtn" class="cart-btn" aria-label="Open cart">🛒 <span id="cartCount" class="cart-count">0</span></button>
+    <button type="button" id="cartBtn" class="cart-btn" aria-label="Open cart">🛒 <span id="cartCount" class="cart-count">0</span></button>
   </header>
 
   <main class="product-layout">
@@ -26,7 +26,7 @@
       <h1>Aurora Wireless Headphones</h1>
       <div class="rating-row">
         <span id="stars" class="stars" aria-label="Rated 4.5 out of 5">★★★★½</span>
-        <span class="rating-text"><strong>4.5</strong> · <a href="#reviews">128 reviews</a></span>
+        <span class="rating-text"><strong>4.5</strong> · <a id="reviewCount" href="#reviews">0 reviews</a></span>
       </div>
       <p class="price"><span id="price">$129.00</span> <s class="old-price">$169.00</s> <em class="save">Save 24%</em></p>
 
@@ -46,8 +46,8 @@
           <input id="qtyInput" type="number" min="1" max="10" value="1" aria-label="Quantity" />
           <button id="qtyPlus" type="button" aria-label="Increase quantity">+</button>
         </div>
-        <button id="addToCart" class="btn primary">Add to Cart</button>
-        <button id="buyNow" class="btn ghost">Buy Now</button>
+        <button type="button" id="addToCart" class="btn primary">Add to Cart</button>
+        <button type="button" id="buyNow" class="btn ghost">Buy Now</button>
       </div>
 
       <ul class="specs">
@@ -77,12 +77,13 @@
   </section>
 
   <!-- Cart drawer -->
-  <aside class="drawer hidden" id="cartDrawer" aria-label="Shopping cart">
-    <div class="drawer-head"><h3>Your Cart</h3><button id="closeCart" class="icon-btn" aria-label="Close cart">✕</button></div>
+  <aside class="drawer hidden" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
+    <div class="drawer-head"><h3>Your Cart</h3><button type="button" id="closeCart" class="icon-btn" aria-label="Close cart">✕</button></div>
     <ul class="cart-items" id="cartItems"></ul>
+    <div class="checkout-summary" id="checkoutSummary" aria-live="polite"></div>
     <div class="drawer-foot">
       <p>Total: <strong id="cartTotal">$0.00</strong></p>
-      <button id="checkoutBtn" class="btn primary wide">Checkout</button>
+      <button type="button" id="checkoutBtn" class="btn primary wide">Checkout</button>
     </div>
   </aside>
   <div class="overlay hidden" id="overlay"></div>

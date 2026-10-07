@@ -6,154 +6,98 @@
 ![No Frameworks](https://img.shields.io/badge/Frameworks-None-success?style=flat)
 ![Projects](https://img.shields.io/badge/Projects-21-blue?style=flat)
 
-A collection of **21 interactive frontend projects** built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no libraries. Each project is built from scratch to practice one or more core frontend concepts, going from beginner to intermediate level.
+A collection of **21 interactive frontend projects** built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build tools. Every project is complete, responsive, keyboard-accessible, and error-handled.
 
-> **Build → Practice → Improve → Repeat.**
+**Live demo:** [GitHub Pages](https://Rishp-3.github.io/21-Frontend-Peroject/) (enable via *Settings → Pages → Deploy from branch → `main` / root*)
 
 ---
 
 ## 📚 Projects
 
-| #  | Project | Description | Key Concepts | Status |
-| -- | ------- | ----------- | ------------ | ------ |
-| 01 | [🧮 Calculator](./01%20Calculator) | Basic arithmetic calculator | DOM, events, grid layout | 🟢 Completed |
-| 02 | [📝 To-Do List App](./02%20To-Do%20List%20App) | Simple task management app | Arrays, dynamic rendering | 🟢 Completed |
-| 03 | [🕐 Digital Clock](./03%20Digital%20Clock) | Real-time digital clock | `Date`, `setInterval` | 🟢 Completed |
-| 04 | [🎯 Number Guessing Game](./04%20Number%20Guessing%20Game) | Guess the random number | `Math.random`, conditionals | ⚪ Planned |
-| 05 | [🔢 Counter App](./05%20Counter%20App) | Increment, decrement and reset | State, events | 🟢 Completed |
-| 06 | [💬 Random Quote Generator](./06%20Random%20Quote%20Generator) | Displays random quotes | Arrays, objects | ⚪ Planned |
-| 07 | [🎨 Color Generator](./07%20Color%20Generator) | Generates random colors | Hex/RGB, DOM styling | ⚪ Planned |
-| 08 | [🌦️ Weather App](./08%20Weather%20App) | Shows weather information | Fetch API, async/await | ⚪ Planned |
-| 09 | [⏱️ Stopwatch Timer](./09%20Stopwatch%20Timer) | Stopwatch with controls | Timers, state | ⚪ Planned |
-| 10 | [📋 Form Validation](./10%20Form%20Validation) | Client-side form validation | Regex, events | ⚪ Planned |
-| 11 | [🖼️ Image Slider](./11%20Image%20Slider) | Responsive image carousel | Indexing, CSS transitions | ⚪ Planned |
-| 12 | [🧠 Quiz App](./12%20Quiz%20App) | Interactive quiz with scoring | Objects, logic | ⚪ Planned |
-| 13 | [🔐 Password Generator](./13%20Password%20Generator) | Generates random passwords | Strings, Clipboard API | ⚪ Planned |
-| 14 | [📝 Notes App](./14%20Notes%20App) | Create and manage notes | Local Storage, CRUD | ⚪ Planned |
-| 15 | [💰 Expense Tracker](./15%20Expense%20Tracker) | Track income and expenses | Local Storage, calculations | ⚪ Planned |
-| 16 | [🎬 Movie Search App](./16%20Movie%20Search%20App) | Search movie information | API integration, JSON | ⚪ Planned |
-| 17 | [💬 Chat UI](./17%20Chat%20UI%20Frontend%20Only) | Frontend-only chat interface | Layout, dynamic DOM | ⚪ Planned |
-| 18 | [🎵 Music Player](./18%20Music%20Player) | Audio player with custom controls | Audio API | ⚪ Planned |
-| 19 | [🛒 E-commerce Product Page](./19%20E-commerce%20Product%20Page) | Interactive product page | Components, UI state | ⚪ Planned |
-| 20 | [⌨️ Typing Speed Test](./20%20Typing%20Speed%20Test) | Test typing speed and accuracy | Timers, string comparison | ⚪ Planned |
-| 21 | [✊ Rock Paper Scissors](./21%20Rock%20Paper%20Scissors%20Game) | Player vs computer game | Game logic, randomness | ⚪ Planned |
+| #  | Project | Description | Live Demo | Status |
+| -- | ------- | ----------- | --------- | ------ |
+| 01 | [🧮 Calculator](./01-calculator) | Arithmetic calculator with keyboard support & chained operators | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/01-calculator/) | ✅ Complete |
+| 02 | [📝 To-Do List](./02-to-do-list) | Task manager with localStorage persistence (XSS-safe) | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/02-to-do-list/) | ✅ Complete |
+| 03 | [🕐 Digital Clock](./03-digital-clock) | Real-time clock with 12/24h and timezone selector (Intl) | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/03-digital-clock/) | ✅ Complete |
+| 04 | [🎯 Number Guessing Game](./04-number-guessing-game) | Guess 1–100 with hot/cold hints and stats | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/04-number-guessing-game/) | ✅ Complete |
+| 05 | [🔢 Counter App](./05-counter-app) | Increment/decrement/reset with highest & total-clicks tracking | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/05-counter-app/) | ✅ Complete |
+| 06 | [💬 Random Quote Generator](./06-random-quote-generator) | Quotes from DummyJSON API with loading/error states | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/06-random-quote-generator/) | ✅ Complete |
+| 07 | [🎨 Color Generator](./07-color-generator) | Random colors, HEX/RGB/HSL/CMYK (computed locally), copy buttons, recents | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/07-color-generator/) | ✅ Complete |
+| 08 | [🌦️ Weather App](./08-weather-app) | Current weather + 5-day forecast (OpenWeather API, bring your own key) | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/08-weather-app/) | ✅ Complete* |
+| 09 | [⏱️ Stopwatch](./09-stopwatch-timer) | Stopwatch with lap tracking and best/worst highlighting | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/09-stopwatch-timer/) | ✅ Complete |
+| 10 | [📋 Form Validation](./10-form-validation) | Client-side validation, Unicode names, password strength & toggle | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/10-form-validation/) | ✅ Complete |
+| 11 | [🖼️ Image Slider](./11-image-slider) | Carousel with autoplay, swipe, drag, reduced-motion support | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/11-image-slider/) | ✅ Complete |
+| 12 | [🧠 Quiz App](./12-quiz-app) | Timed quiz, shuffled questions/options, best score saved | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/12-quiz-app/) | ✅ Complete |
+| 13 | [🔐 Password Generator](./13-password-generator) | Crypto-random passwords (rejection sampling), strength meter, history | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/13-password-generator/) | ✅ Complete |
+| 14 | [🗒️ Notes App](./14-notes-app) | CRUD notes with search highlighting, color labels, localStorage | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/14-notes-app/) | ✅ Complete |
+| 15 | [💰 Expense Tracker](./15-expense-tracker) | Income/expense with categories, multi-currency, edit, breakdown bars | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/15-expense-tracker/) | ✅ Complete |
+| 16 | [🎬 Movie Search](./16-movie-search-app) | OMDb search with debounce, race-safe requests, detail modal (bring your own key) | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/16-movie-search-app/) | ✅ Complete* |
+| 17 | [💬 Chat UI](./17-chat-ui) | Frontend-only messenger: conversations, typing indicator, persistence | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/17-chat-ui/) | ✅ Complete |
+| 18 | [🎵 Music Player](./18-music-player) | Tracks synthesized with Web Audio (lookahead scheduler), playlist, shuffle/repeat | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/18-music-player/) | ✅ Complete |
+| 19 | [🛒 E-commerce Product Page](./19-ecommerce-product-page) | Variants, gallery, cart drawer, checkout summary, reviews | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/19-ecommerce-product-page/) | ✅ Complete |
+| 20 | [⌨️ Typing Speed Test](./20-typing-speed-test) | WPM/CPM/accuracy with keystroke tracking, per-duration bests | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/20-typing-speed-test/) | ✅ Complete |
+| 21 | [✊ Rock Paper Scissors](./21-rock-paper-scissors) | Match play vs adaptive CPU, streaks, lifetime wins | [Demo](https://Rishp-3.github.io/21-Frontend-Peroject/21-rock-paper-scissors/) | ✅ Complete |
 
-**Legend:** 🟢 Completed · 🟡 In Progress · ⚪ Planned
+\* Projects 08 and 16 need **your own free API key** — see their READMEs (`config.example.js` → `config.js`). Screenshots: add images under each project's `screenshots/` folder if you want a visual column later.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5** — semantic structure
-- **CSS3** — Flexbox, Grid, responsive layouts
-- **JavaScript (ES6+)** — logic, DOM manipulation, event handling
-
-**Browser APIs used across projects:** Local Storage · Fetch API · Audio API · Clipboard API · Date & Time
+- **HTML5** — semantic structure, ARIA where needed
+- **CSS3** — Flexbox, Grid, `clamp()`, media queries, `:focus-visible`
+- **JavaScript (ES6+)** — no libraries; Local Storage, Fetch, Web Audio, Clipboard, Intl APIs
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-21-Frontend-Peroject/
-│
+21-Frontend-Project/            (repo currently named "21-Frontend-Peroject" — rename recommended)
+├── index.html                  ← landing page linking all 21 projects (GitHub Pages)
+├── .github/workflows/pages.yml ← auto-deploy to GitHub Pages
 ├── 01-calculator/
 │   ├── index.html
 │   ├── style.css
 │   ├── main.js
 │   └── README.md
-│
-├── 02-to-do-list/
-├── 03-digital-clock/
-├── ...
-├── 21-rock-paper-scissors/
-│
-└── README.md
+├── 02-to-do-list/ … 21-rock-paper-scissors/   (same layout for every project)
+├── .gitignore  .gitattributes  LICENSE  README.md
 ```
 
-Every project folder is self-contained: just open its `index.html`.
+Every project folder is self-contained: open its `index.html` directly, or serve the repo root.
 
 ---
 
 ## 🚦 Getting Started
 
-**1. Clone the repository**
-
 ```bash
 git clone https://github.com/Rishp-3/21-Frontend-Peroject.git
-```
-
-**2. Go into the folder**
-
-```bash
 cd 21-Frontend-Peroject
+python3 -m http.server 8000     # then visit http://localhost:8000 (landing page)
 ```
 
-**3. Open any project**
+Or just open any `<project>/index.html` in a browser. For VS Code, right-click → **Open with Live Server**.
 
-Open `index.html` of any project folder in your browser.
-
-**Recommended:** use the **Live Server** extension in VS Code — right-click `index.html` → **Open with Live Server**.
+**API-key projects (08, 16):** copy `config.example.js` to `config.js` inside the project folder and paste your own key. `config.js` is gitignored so keys never get committed.
 
 ---
 
-## 🎯 What I'm Learning
+## ⚠️ Security Note
 
-**Core**
-- HTML structure and semantics
-- CSS styling, Flexbox, Grid, responsive design
-- JavaScript fundamentals: variables, data types, conditionals, functions, arrays, objects
-- DOM manipulation and event handling
-- Dynamic content rendering
+Two API keys were previously hardcoded and are visible in this repository's **git history**. They have been removed from the code, but the keys themselves must be **regenerated/revoked**:
 
-**Advanced**
-- Local Storage
-- Fetch API and async/await
-- JSON handling and API integration
-- State management
-- Building interactive UIs
-
----
-
-## 📱 Responsive Design
-
-Projects aim to work on mobile, tablet, desktop, and large screens. Responsiveness may vary between individual projects, and it improves as the collection progresses.
-
----
-
-## 🤝 Contributing
-
-Suggestions, issues, and pull requests are welcome.
-
-```bash
-git checkout -b feature/AmazingFeature
-git add .
-git commit -m "Add AmazingFeature"
-git push origin feature/AmazingFeature
-```
-
-Then open a Pull Request.
+- OpenWeather account → regenerate the API key used by project 08
+- OMDb account → regenerate the API key used by project 16
 
 ---
 
 ## 👤 Author
 
-**Rishabh Pal**
+**Rishabh Pal** — [@Rishp-3](https://github.com/Rishp-3) · [LinkedIn](https://linkedin.com/in/rishp3)
 
-- GitHub: [@Rishp-3](https://github.com/Rishp-3)
-- LinkedIn: [Rishabh](https://linkedin.com/in/rishp3)
+## 📄 License
 
----
-
-## ⭐ Support
-
-If this repo helps you, consider to:
-
-- ⭐ Star the repository
-- 🍴 Fork it
-- 💡 Suggest improvements
-- 🐛 Report issues
-
----
+[MIT](./LICENSE)
 
 <p align="center"><b>Happy Coding! 🚀</b></p>

@@ -4,6 +4,7 @@
 /*  Storage                                                            */
 /* ------------------------------------------------------------------ */
 const STORAGE_KEY = "expenseTracker.items";
+const CURRENCY_KEY = "expenseTracker.currency";
 
 function loadTransactions() {
   try {
@@ -14,7 +15,21 @@ function loadTransactions() {
 }
 
 function saveTransactions() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+  // Storage can fail (quota / private mode) — surface instead of crashing.
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(transactions));
+  } catch {
+    alert("Could not save: browser storage is full or unavailable.");
+  }
+}
+
+/* Local date as YYYY-MM-DD (toISOString() is UTC and would show yesterday's
+   date late at night in timezones ahead of UTC, e.g. Asia/Kolkata). */
+function localTodayISO(d = new Date()) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
 }
 
 /* ------------------------------------------------------------------ */
@@ -30,6 +45,8 @@ const filterSort = document.getElementById("filterSort");
 const txList = document.getElementById("txList");
 const emptyState = document.getElementById("emptyState");
 const clearAllBtn = document.getElementById("clearAllBtn");
+const submitBtn = document.getElementById("submitBtn");
+const cancelEditBtn = document.getElementById("cancelEditBtn");
 
 const balanceAmt = document.getElementById("balanceAmt");
 const incomeAmt = document.getElementById("incomeAmt");
@@ -38,7 +55,7 @@ const expenseAmt = document.getElementById("expenseAmt");
 let transactions = loadTransactions(); // [{id, desc, amount(cents), type, category, date}]
 
 // Default date = today (YYYY-MM-DD for the date input)
-dateInput.value = new Date().toISOString().slice(0, 10);
+dateInput.value = localTodayISO();
 
 /* ------------------------------------------------------------------ */
 /*  Income / expense toggle styling                                    */
@@ -55,12 +72,27 @@ refreshToggleUI();
 /* ------------------------------------------------------------------ */
 /*  Money helpers (store cents to avoid float drift)                   */
 /* ------------------------------------------------------------------ */
+const CURRENCIES = { USD: "en-US", INR: "en-IN", EUR: "de-DE" };
+let currency = (() => {
+  try { return localStorage.getItem(CURRENCY_KEY) || "USD"; } catch { return "USD"; }
+})();
+if (!CURRENCIES[currency]) currency = "USD";
+
 function fmt(cents) {
-  return (cents / 100).toLocaleString("en-US", {
+  return (cents / 100).toLocaleString(CURRENCIES[currency], {
     style: "currency",
-    currency: "USD",
+    currency,
   });
 }
+
+// Currency selector wiring
+const currencySelect = document.getElementById("currencySelect");
+currencySelect.value = currency;
+currencySelect.addEventListener("change", () => {
+  currency = currencySelect.value;
+  try { localStorage.setItem(CURRENCY_KEY, currency); } catch {}
+  render();
+});
 
 function toCents(str) {
   return Math.round(parseFloat(str) * 100);
@@ -69,6 +101,8 @@ function toCents(str) {
 /* ------------------------------------------------------------------ */
 /*  Add transaction                                                    */
 /* ------------------------------------------------------------------ */
+let editingId = null;
+
 txForm.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -82,20 +116,53 @@ txForm.addEventListener("submit", (event) => {
     return; // HTML5 validation normally catches this
   }
 
-  transactions.push({
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-    desc,
-    amount: cents,
-    type,
-    category,
-    date,
-  });
+  if (editingId) {
+    // Update the transaction being edited, then leave edit mode.
+    const t = transactions.find((x) => x.id === editingId);
+    if (t) Object.assign(t, { desc, amount: cents, type, category, date });
+    stopEdit();
+  } else {
+    transactions.push({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      desc,
+      amount: cents,
+      type,
+      category,
+      date,
+    });
+  }
 
   saveTransactions();
   txForm.reset();
-  dateInput.value = new Date().toISOString().slice(0, 10);
+  dateInput.value = localTodayISO();
   refreshToggleUI();
   render();
+});
+
+function startEdit(t) {
+  editingId = t.id;
+  descInput.value = t.desc;
+  amountInput.value = (t.amount / 100).toFixed(2);
+  categorySelect.value = t.category;
+  dateInput.value = t.date;
+  typeRadios.forEach((r) => { r.checked = r.value === t.type; });
+  refreshToggleUI();
+  submitBtn.textContent = "Update Transaction";
+  cancelEditBtn.hidden = false;
+  descInput.focus();
+}
+
+function stopEdit() {
+  editingId = null;
+  submitBtn.textContent = "Add Transaction";
+  cancelEditBtn.hidden = true;
+}
+
+cancelEditBtn.addEventListener("click", () => {
+  txForm.reset();
+  dateInput.value = localTodayISO();
+  refreshToggleUI();
+  stopEdit();
 });
 
 /* ------------------------------------------------------------------ */
@@ -165,6 +232,44 @@ function renderSummary() {
   balanceAmt.textContent = fmt(income - expense);
   incomeAmt.textContent = fmt(income);
   expenseAmt.textContent = fmt(expense);
+  renderBreakdown();
+}
+
+const breakdownBars = document.getElementById("breakdownBars");
+const breakdownEmpty = document.getElementById("breakdownEmpty");
+
+/* Simple horizontal CSS bars: one per expense category, width ∝ share of total. */
+function renderBreakdown() {
+  const totals = {};
+  transactions
+    .filter((t) => t.type === "expense")
+    .forEach((t) => { totals[t.category] = (totals[t.category] || 0) + t.amount; });
+
+  const entries = Object.entries(totals).sort((a, b) => b[1] - a[1]);
+  const max = entries.length ? entries[0][1] : 0;
+  breakdownBars.innerHTML = "";
+  breakdownEmpty.hidden = entries.length > 0;
+
+  entries.forEach(([cat, cents], i) => {
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    const label = document.createElement("span");
+    label.className = "bar-label";
+    label.textContent = cat;
+    const track = document.createElement("div");
+    track.className = "bar-track";
+    const fill = document.createElement("div");
+    fill.className = "bar-fill";
+    fill.style.width = `${Math.round((cents / max) * 100)}%`;
+    fill.setAttribute("role", "img");
+    fill.setAttribute("aria-label", `${cat}: ${fmt(cents)}`);
+    const amt = document.createElement("span");
+    amt.className = "bar-amount";
+    amt.textContent = fmt(cents);
+    track.appendChild(fill);
+    row.append(label, track, amt);
+    breakdownBars.appendChild(row);
+  });
 }
 
 function render() {
@@ -181,8 +286,12 @@ function render() {
         <div class="tx-meta">${escapeHtml(t.category)} • ${formatDate(t.date)}</div>
       </div>
       <span class="tx-amount ${t.type}">${sign}${fmt(t.amount)}</span>
-      <button type="button" class="tx-del" aria-label="Delete transaction">❌</button>`;
+      <span class="tx-actions">
+        <button type="button" class="tx-edit" aria-label="Edit transaction">✏️</button>
+        <button type="button" class="tx-del" aria-label="Delete transaction">🗑️</button>
+      </span>`;
     li.querySelector(".tx-del").addEventListener("click", () => deleteTransaction(t.id));
+    li.querySelector(".tx-edit").addEventListener("click", () => startEdit(t));
     txList.appendChild(li);
   });
 

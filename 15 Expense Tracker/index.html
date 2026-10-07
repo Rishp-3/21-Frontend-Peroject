@@ -17,8 +17,17 @@
         <p class="subtitle">Keep your money in check — data stays in your browser.</p>
       </header>
 
+      <div class="header-row">
+        <label class="currency-label" for="currencySelect">Currency</label>
+        <select id="currencySelect" aria-label="Display currency">
+          <option value="USD">USD $</option>
+          <option value="INR">INR ₹</option>
+          <option value="EUR">EUR €</option>
+        </select>
+      </div>
+
       <!-- Summary -->
-      <section class="summary">
+      <section class="summary" aria-label="Totals">
         <div class="sum-card balance">
           <span class="sum-label">Balance</span>
           <strong id="balanceAmt" class="sum-amount">$0.00</strong>
@@ -74,6 +83,7 @@
             <input type="date" id="txDate" required />
           </div>
           <button type="submit" class="btn primary" id="submitBtn">➕ Add Transaction</button>
+          <button type="button" class="btn ghost" id="cancelEditBtn" hidden>Cancel Edit</button>
         </form>
       </section>
 

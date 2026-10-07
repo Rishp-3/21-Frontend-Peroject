@@ -3,20 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple counter app with +1/-1, ±10 buttons, reset, total clicks and highest value tracking." />
     <link rel="stylesheet" href="style.css" />
-    <title>Counter</title>
+    <title>Counter App</title>
   </head>
   <body>
-    <div class="container">
-      <div class="con-text">
-        <p>Current Count</p>
-      </div>
+    <main class="container">
+      <h1 class="con-text">Counter App</h1>
+
+      <!-- Counter value is an <output>, not a heading (a11y fix). -->
       <div class="count">
-        <h1 class="ans">0</h1>
+        <output class="ans" id="countValue" aria-live="polite" aria-label="Current count">0</output>
       </div>
+
       <div class="btn">
-        <button class="increment butt">+</button>
-        <button class="reset butt">
+        <button type="button" class="increment butt" aria-label="Increment by 1">+</button>
+        <button type="button" class="reset butt" aria-label="Reset">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="15"
@@ -24,6 +26,7 @@
             fill="currentColor"
             class="bi bi-arrow-repeat"
             viewBox="0 0 16 16"
+            aria-hidden="true"
           >
             <path
               d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"
@@ -34,17 +37,20 @@
             ></path>
           </svg>
         </button>
-        <button class="decrement butt">-</button>
+        <button type="button" class="decrement butt" aria-label="Decrement by 1">-</button>
       </div>
+
       <div class="btn">
-        <button class="incres10 ">+10</button>
-        <button class="decres10 ">-10</button>
+        <!-- Typo classes renamed: incres10 -> inc-ten, decres10 -> dec-ten -->
+        <button type="button" class="inc-ten">+10</button>
+        <button type="button" class="dec-ten">-10</button>
       </div>
+
       <div class="data">
         <p>Total Clicks: <span class="total">0</span></p>
         <p>Highest: <span class="highest">0</span></p>
       </div>
-    </div>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>

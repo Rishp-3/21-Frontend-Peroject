@@ -1,68 +1,100 @@
-* {
+/* Counter App — responsive, accessible styles */
+*,
+*::before,
+*::after {
   margin: 0;
-  padding: 0px;
-  color: #000;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f8f9fa;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #1f2937; /* was `* { color:#000 }` universal rule — scoped to body now */
+  padding: 16px;
 }
+
 .container {
   background-color: #fff;
-  padding: 10px;
+  padding: clamp(20px, 5vw, 32px);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  width: min(420px, 100%);
 }
+
 .con-text {
-  display: flex;
-  justify-content: center;
-  font-size: 4vw;
+  text-align: center;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  margin-bottom: 12px;
 }
+
 .count {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #7c3aed;
-  height: 10vh;
-  width: 30vw;
-  margin-bottom: 1vh;
+  height: 90px;
+  margin-bottom: 16px;
   border-radius: 10px;
 }
+
 .ans {
-  color: white;
+  color: #fff;
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
+
 .btn {
   display: flex;
   justify-content: space-around;
+  gap: 12px;
+  margin-bottom: 16px;
 }
+
+/* Minimum 44px tap targets (was 5vw ≈ 19px on mobile) */
 .butt {
-  height: 5vh;
-  width: 5vw;
+  height: 48px;
+  min-width: 48px;
   border: none;
-  border-radius: 1vw;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  cursor: pointer;
 }
-.increment {
-  background-color: #10b981;
-}
-.reset {
-}
-.decrement {
-  background-color: #ef4444;
-}
-.incres10 {
-  width: 10vw;
+
+.increment { background-color: #10b981; color: #fff; }
+.reset     { background-color: #e5e7eb; color: #1f2937; display: grid; place-items: center; }
+.decrement { background-color: #ef4444; color: #fff; }
+
+/* +10 / -10 are identical size (previously only one had a fixed height) */
+.inc-ten,
+.dec-ten {
+  flex: 1;
+  height: 44px;
   border: none;
-  border-radius: 1vw;
-  height: 25px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
 }
-.decres10 {
-  width: 10vw;
-  border: none;
-  border-radius: 1vw;
-}
+.inc-ten { background-color: #0ea5e9; }
+.dec-ten { background-color: #f97316; }
+
+button:hover { filter: brightness(0.93); }
+button:focus-visible { outline: 3px solid #7c3aed; outline-offset: 2px; }
+
 .data {
   display: flex;
   justify-content: space-between;
+  gap: 12px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+  .data { flex-direction: column; text-align: center; }
 }

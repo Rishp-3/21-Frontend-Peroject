@@ -3,63 +3,123 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Client-side registration form validation with real-time feedback, regex rules and password strength meter."
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Form Validation</title>
   </head>
   <body>
-    //header
-    <header class="header">
-      <div class="iconText">
-        <span class="icon"></span><span class="text">Form Validation</span>
-      </div>
-      <div class=""></div>
-    </header>
-    //sum text
-    <section id="topText">
-      <h1>Create Your Account</h1>
-      <p>Fill in Your Details Below</p>
-    </section>
-    //form input
-    <section id="allInput">
-      <div class="Name">
-        <label for="fullName">Full Name</label>
-        <input
-          type="text"
-          name="fullName"
-          id="fullName"
-          placeholder="Enter Your Full Name"
-        />
-        <span class="fullNameCheck"></span>
-      </div>
-      <div class="emailBox">
-        <label for="email">Email Address</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Enter Your Email"
-        />
-        <span class="emailCheck"></span>
-      </div>
-      <div class="passwordBox">
-        <label for="password">Password</label
-        ><input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Create Your password"
-        />
-        <div class="weak"></div>
-        <div class=""></div>
-        <div class="strong"></div>
-      </div>
-      <div class="">
-        <label for="">Password</label><input type="password" name="" id="" />
-      </div>
-      <div class="Weak"></div>
-      <div class=""></div>
-      <div class=""></div>
-    </section>
-    <section id=""></section>
-    <footer></footer>
+    <div class="container">
+      <header class="head">
+        <h1>📋 Form Validation</h1>
+        <p class="subtitle">
+          Create your account — all fields are validated in real time.
+        </p>
+      </header>
+
+      <main>
+        <form id="regForm" class="form" novalidate autocomplete="off">
+          <!-- Full name -->
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="e.g. Rahul Sharma"
+            />
+            <small id="fullNameError" class="error" role="alert"></small>
+          </div>
+
+          <!-- Email -->
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+            />
+            <small id="emailError" class="error" role="alert"></small>
+          </div>
+
+          <!-- Phone -->
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="10-digit number, e.g. 9876543210"
+            />
+            <small id="phoneError" class="error" role="alert"></small>
+          </div>
+
+          <!-- Date of birth -->
+          <div class="field">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" />
+            <small id="dobError" class="error" role="alert"></small>
+          </div>
+
+          <!-- Password -->
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Min. 8 characters"
+            />
+            <div class="strength" aria-hidden="true">
+              <div id="strengthBar" class="strength-bar"></div>
+            </div>
+            <small id="passwordError" class="error" role="alert"></small>
+            <ul class="pw-rules">
+              <li id="rule-length">At least 8 characters</li>
+              <li id="rule-upper">One uppercase letter</li>
+              <li id="rule-lower">One lowercase letter</li>
+              <li id="rule-number">One number</li>
+              <li id="rule-special">One special character (!@#$…)</li>
+            </ul>
+          </div>
+
+          <!-- Confirm password -->
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Re-enter password"
+            />
+            <small id="confirmPasswordError" class="error" role="alert"></small>
+          </div>
+
+          <!-- Terms -->
+          <div class="field checkbox-field">
+            <label class="checkbox-label">
+              <input type="checkbox" id="terms" name="terms" />
+              <span>I agree to the Terms &amp; Conditions</span>
+            </label>
+            <small id="termsError" class="error" role="alert"></small>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <div id="successPanel" class="success-panel hidden" role="status">
+          <div class="success-icon">✅</div>
+          <h2>Registration Successful!</h2>
+          <p id="successSummary"></p>
+          <button type="button" id="resetBtn" class="submit-btn secondary">
+            Register Another User
+          </button>
+        </div>
+      </main>
+    </div>
+    <script src="main.js"></script>
   </body>
 </html>

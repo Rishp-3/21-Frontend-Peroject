@@ -2,9 +2,7 @@ const input = document.querySelector("input");
 const button = document.querySelector("button");
 const table = document.querySelector("table");
 
-
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
 
 function renderTasks() {
   table.innerHTML = "";

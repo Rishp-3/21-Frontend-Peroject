@@ -24,24 +24,24 @@ body {
   padding: 10px;
   overflow: hidden;
 }
-.que{
+.que {
   display: flex;
   justify-content: end;
   font-size: small;
   overflow: hidden;
 }
-.ans{
+.ans {
   display: flex;
   justify-content: end;
   align-items: end;
-  font-size:x-large;
+  font-size: x-large;
   overflow: hidden;
 }
-.but{
+.but {
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(4,45px);
-  grid-template-rows: repeat(5,45px);
+  grid-template-columns: repeat(4, 45px);
+  grid-template-rows: repeat(5, 45px);
   grid-gap: 5px;
   margin-top: 10px;
 }
@@ -52,7 +52,7 @@ body {
   border: none;
 }
 
-.ze{
+.ze {
   grid-column-start: 1;
   grid-column-end: 3;
 }
@@ -67,5 +67,3 @@ body {
   background-color: #7c3aed;
   color: #fff;
 }
-
-

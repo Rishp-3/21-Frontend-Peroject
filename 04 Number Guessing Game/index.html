@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Guess the secret number between 1 and 100 with hot/cold hints, attempt tracking and win statistics."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Number Guessing Game</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="head">
+        <h1>🎯 Number Guessing Game</h1>
+        <p class="subtitle">
+          I'm thinking of a number between <strong>1</strong> and
+          <strong>100</strong>. Can you find it?
+        </p>
+      </header>
+
+      <main class="game">
+        <form id="guessForm" class="guess-form" autocomplete="off">
+          <input
+            type="number"
+            id="guessInput"
+            class="guess-input"
+            min="1"
+            max="100"
+            step="1"
+            placeholder="Enter your guess"
+            aria-label="Your guess"
+            required
+          />
+          <button type="submit" class="check-btn">Check Guess</button>
+        </form>
+
+        <p id="message" class="message" role="status" aria-live="polite">
+          Take your first guess!
+        </p>
+
+        <section class="stats">
+          <div class="stat-box">
+            <span class="stat-label">Attempts</span>
+            <span id="attempts" class="stat-value">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Best Score</span>
+            <span id="bestScore" class="stat-value">&ndash;</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Games Won</span>
+            <span id="gamesWon" class="stat-value">0</span>
+          </div>
+        </section>
+
+        <section class="history-section">
+          <h2 class="history-title">Previous Guesses</h2>
+          <ul id="history" class="history"></ul>
+        </section>
+
+        <button id="newGame" class="new-game-btn" type="button">
+          🔄 New Game
+        </button>
+      </main>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

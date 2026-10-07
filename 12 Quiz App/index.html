@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Interactive multiple-choice quiz app with timer, instant feedback, score tracking and result screen."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Quiz App</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Start screen -->
+      <section id="startScreen" class="screen">
+        <header class="head">
+          <h1>🧠 Quiz App</h1>
+          <p class="subtitle">
+            Test your general knowledge — 8 questions, 15 seconds each.
+          </p>
+        </header>
+        <ul class="rules">
+          <li>⏱️ You have <strong>15 seconds</strong> per question</li>
+          <li>✅ One correct answer per question</li>
+          <li>🚫 No going back to previous questions</li>
+          <li>🏆 Your best score is saved locally</li>
+        </ul>
+        <button id="startBtn" class="btn primary" type="button">
+          Start Quiz
+        </button>
+      </section>
+
+      <!-- Quiz screen -->
+      <section id="quizScreen" class="screen hidden">
+        <div class="topbar">
+          <span id="questionCount" class="counter">Question 1 / 8</span>
+          <span id="timer" class="timer">⏱ 15</span>
+        </div>
+        <div class="progress-track">
+          <div id="quizProgress" class="progress-fill"></div>
+        </div>
+
+        <h2 id="questionText" class="question"></h2>
+        <div id="answers" class="answers"></div>
+
+        <div class="bottombar">
+          <span id="scoreLive" class="score-live">Score: 0</span>
+          <button id="nextBtn" class="btn primary hidden" type="button">
+            Next →
+          </button>
+        </div>
+      </section>
+
+      <!-- Result screen -->
+      <section id="resultScreen" class="screen hidden">
+        <div class="result-card">
+          <div id="resultEmoji" class="result-emoji">🏆</div>
+          <h2>Quiz Complete!</h2>
+          <p class="result-score">
+            You scored <strong id="finalScore">0</strong> out of
+            <strong id="totalQuestions">8</strong>
+          </p>
+          <p id="resultMessage" class="result-message"></p>
+          <div class="result-stats">
+            <div class="stat-box">
+              <span class="stat-label">Correct</span>
+              <span id="correctCount" class="stat-value good">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Wrong</span>
+              <span id="wrongCount" class="stat-value bad">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Best Score</span>
+              <span id="bestScore" class="stat-value">–</span>
+            </div>
+          </div>
+          <button id="restartBtn" class="btn primary" type="button">
+            🔄 Play Again
+          </button>
+        </div>
+      </section>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

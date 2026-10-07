@@ -45,7 +45,7 @@ table {
 }
 
 td {
-    margin: 5px;
+  margin: 5px;
 }
 
 tr {
@@ -53,11 +53,11 @@ tr {
   justify-content: space-between;
   border-top: 1px solid #e2e2e2;
 }
-.Btn{
+.Btn {
   background-color: #fff;
   color: #000;
 }
-.don{
+.don {
   text-decoration: line-through;
-  color:#e2e2e2 ;
+  color: #e2e2e2;
 }

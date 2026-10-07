@@ -1,6 +1,15 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 body {
   height: 100vh;
@@ -67,7 +76,10 @@ select {
   font-size: 14px;
   font-weight: bold;
   color: #333;
-  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23333'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
   margin: 5px;
 }
 
@@ -76,4 +88,63 @@ select {
 }
 #format {
   background-color: #eeeafe;
+}
+
+/* Screen-reader-only labels */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Responsive: replace vw-only sizing that collapsed to ~7px on phones */
+@media (max-width: 900px) {
+  .cont {
+    width: 92vw;
+    height: auto;
+    min-height: 80vh;
+    padding: 24px 0;
+  }
+  .head {
+    font-size: 1.4rem;
+  }
+  .time {
+    font-size: clamp(2.2rem, 11vw, 5rem);
+  }
+  .am-pm {
+    font-size: 1.1rem;
+  }
+  .date-day {
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.95rem;
+  }
+  .box {
+    padding: 8px 18px;
+    border-radius: 14px;
+  }
+}
+@media (min-width: 901px) {
+  .time {
+    font-size: clamp(3rem, 8vw, 7rem);
+  }
+  .head {
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  }
+  .am-pm {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+  }
+  .date-day {
+    font-size: clamp(0.9rem, 1.4vw, 1.2rem);
+  }
+  .box {
+    padding: 10px 28px;
+    border-radius: 18px;
+  }
 }

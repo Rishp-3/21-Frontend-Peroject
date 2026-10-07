@@ -20,7 +20,7 @@
       </header>
 
       <main>
-        <form id="regForm" class="form" novalidate autocomplete="off">
+        <form id="regForm" class="form" novalidate>
           <!-- Full name -->
           <div class="field">
             <label for="fullName">Full Name</label>
@@ -28,9 +28,11 @@
               type="text"
               id="fullName"
               name="fullName"
+              autocomplete="name"
+              aria-describedby="fullNameError"
               placeholder="e.g. Rahul Sharma"
             />
-            <small id="fullNameError" class="error" role="alert"></small>
+            <small id="fullNameError" class="error" aria-live="polite"></small>
           </div>
 
           <!-- Email -->
@@ -40,9 +42,11 @@
               type="email"
               id="email"
               name="email"
+              autocomplete="email"
+              aria-describedby="emailError"
               placeholder="you@example.com"
             />
-            <small id="emailError" class="error" role="alert"></small>
+            <small id="emailError" class="error" aria-live="polite"></small>
           </div>
 
           <!-- Phone -->
@@ -52,16 +56,24 @@
               type="tel"
               id="phone"
               name="phone"
+              autocomplete="tel"
+              aria-describedby="phoneError"
               placeholder="10-digit number, e.g. 9876543210"
             />
-            <small id="phoneError" class="error" role="alert"></small>
+            <small id="phoneError" class="error" aria-live="polite"></small>
           </div>
 
           <!-- Date of birth -->
           <div class="field">
             <label for="dob">Date of Birth</label>
-            <input type="date" id="dob" name="dob" />
-            <small id="dobError" class="error" role="alert"></small>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              autocomplete="bday"
+              aria-describedby="dobError"
+            />
+            <small id="dobError" class="error" aria-live="polite"></small>
           </div>
 
           <!-- Password -->
@@ -71,12 +83,23 @@
               type="password"
               id="password"
               name="password"
+              autocomplete="new-password"
               placeholder="Min. 8 characters"
+              aria-describedby="passwordError"
             />
+            <button
+              type="button"
+              id="togglePassword"
+              class="pw-toggle"
+              aria-pressed="false"
+              aria-label="Show password"
+            >
+              👁 Show
+            </button>
             <div class="strength" aria-hidden="true">
               <div id="strengthBar" class="strength-bar"></div>
             </div>
-            <small id="passwordError" class="error" role="alert"></small>
+            <small id="passwordError" class="error" aria-live="polite"></small>
             <ul class="pw-rules">
               <li id="rule-length">At least 8 characters</li>
               <li id="rule-upper">One uppercase letter</li>
@@ -93,9 +116,15 @@
               type="password"
               id="confirmPassword"
               name="confirmPassword"
+              autocomplete="new-password"
               placeholder="Re-enter password"
+              aria-describedby="confirmPasswordError"
             />
-            <small id="confirmPasswordError" class="error" role="alert"></small>
+            <small
+              id="confirmPasswordError"
+              class="error"
+              aria-live="polite"
+            ></small>
           </div>
 
           <!-- Terms -->
@@ -104,7 +133,7 @@
               <input type="checkbox" id="terms" name="terms" />
               <span>I agree to the Terms &amp; Conditions</span>
             </label>
-            <small id="termsError" class="error" role="alert"></small>
+            <small id="termsError" class="error" aria-live="polite"></small>
           </div>
 
           <button type="submit" class="submit-btn">Submit</button>

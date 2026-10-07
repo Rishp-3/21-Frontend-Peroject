@@ -26,7 +26,6 @@ slideEls.forEach((_, i) => {
   const dot = document.createElement("button");
   dot.type = "button";
   dot.className = "dot";
-  dot.setAttribute("role", "tab");
   dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
   dot.addEventListener("click", () => goTo(i, true));
   dotsEl.appendChild(dot);
@@ -40,7 +39,10 @@ function render() {
   slidesEl.style.transform = `translateX(-${current * 100}%)`;
   dotEls.forEach((d, i) => {
     d.classList.toggle("active", i === current);
-    d.setAttribute("aria-selected", String(i === current));
+    // ARIA fix: dots are plain buttons; aria-current marks the active one.
+    // (They previously had role="tab" without any tabpanel — invalid ARIA.)
+    if (i === current) d.setAttribute("aria-current", "true");
+    else d.removeAttribute("aria-current");
   });
 }
 
@@ -107,12 +109,16 @@ playToggle.addEventListener("click", () => {
 });
 
 /* Pause on hover, resume on leave (desktop nicety) */
-slider.addEventListener("mouseenter", () => {
-  hovering = true;
+// FIX: mouseenter sticks on touch devices (freezing autoplay forever). Use
+// pointer events and only react to actual mouse pointers.
+slider.addEventListener("pointerenter", (e) => {
+  if (e.pointerType === "mouse") hovering = true;
 });
-slider.addEventListener("mouseleave", () => {
-  hovering = false;
-  slideStartTs = 0; // restart the interval cleanly after the pause
+slider.addEventListener("pointerleave", (e) => {
+  if (e.pointerType === "mouse") {
+    hovering = false;
+    slideStartTs = 0; // restart the interval cleanly after the pause
+  }
 });
 
 /* ------------------------------------------------------------------ */
@@ -127,7 +133,9 @@ nextBtn.addEventListener("click", () => {
   restartAutoplay();
 });
 
-document.addEventListener("keydown", (event) => {
+// FIX: arrow keys used to hijack the whole document. Only handle them when
+// focus is inside the slider so page scrolling / other widgets still work.
+slider.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
     prev();
     restartAutoplay();
@@ -169,4 +177,9 @@ slidesEl.addEventListener(
 /*  Init                                                               */
 /* ------------------------------------------------------------------ */
 render();
-startAutoplay();
+// Respect prefers-reduced-motion: users who ask for less motion get a manual slider.
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+if (!reduceMotion) startAutoplay();
+else stopAutoplay();

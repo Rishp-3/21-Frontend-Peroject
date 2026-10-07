@@ -301,3 +301,15 @@ body {
     max-width: 85%;
   }
 }
+.day-sep {
+  display: flex;
+  justify-content: center;
+  margin: 0.75rem 0;
+}
+.day-sep span {
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+}

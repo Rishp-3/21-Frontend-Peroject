@@ -451,3 +451,13 @@ body {
     flex: 1;
   }
 }
+.checkout-summary {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+.sum-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.15rem 0;
+}

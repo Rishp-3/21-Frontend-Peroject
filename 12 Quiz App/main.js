@@ -95,6 +95,30 @@ const bestScoreEl = document.getElementById("bestScore");
 /* ------------------------------------------------------------------ */
 let index = 0;
 let score = 0;
+// Per-game shuffled copy of QUESTIONS (question order + answer options).
+let gameQuestions = [];
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildGame() {
+  // Shuffle the option texts and recompute each question's correct index.
+  gameQuestions = shuffle(QUESTIONS).map((q) => {
+    const correctText = q.answers[q.correct];
+    const answers = shuffle(q.answers);
+    return {
+      question: q.question,
+      answers,
+      correct: answers.indexOf(correctText),
+    };
+  });
+}
 let answered = false;
 let timeLeft = TIME_PER_QUESTION;
 let countdownId = null;
@@ -133,13 +157,16 @@ function stopTimer() {
 
 function renderTimer() {
   timerEl.textContent = `⏱ ${timeLeft}`;
-  timerEl.classList.toggle("low", timeLeft <= 5);
+  const low = timeLeft <= 5;
+  timerEl.classList.toggle("low", low);
+  // Announce only in the low state (not every second) to avoid spamming SRs.
+  timerEl.setAttribute("aria-live", low ? "assertive" : "off");
 }
 
 function handleTimeout() {
   if (answered) return;
   answered = true;
-  const q = QUESTIONS[index];
+  const q = gameQuestions[index];
   Array.from(answersEl.children).forEach((btn, i) => {
     btn.disabled = true;
     if (i === q.correct) btn.classList.add("correct");
@@ -151,14 +178,15 @@ function handleTimeout() {
 /*  Rendering                                                         */
 /* ------------------------------------------------------------------ */
 function loadQuestion() {
-  const q = QUESTIONS[index];
+  const q = gameQuestions[index];
   answered = false;
 
-  questionCountEl.textContent = `Question ${index + 1} / ${QUESTIONS.length}`;
-  quizProgressEl.style.width = `${(index / QUESTIONS.length) * 100}%`;
+  questionCountEl.textContent = `Question ${index + 1} / ${gameQuestions.length}`;
+  quizProgressEl.style.width = `${(index / gameQuestions.length) * 100}%`;
   questionTextEl.textContent = q.question;
   scoreLiveEl.textContent = `Score: ${score}`;
   nextBtn.classList.add("hidden");
+  updateNextLabel();
 
   answersEl.innerHTML = "";
   q.answers.forEach((text, i) => {
@@ -178,7 +206,7 @@ function selectAnswer(choice, btn) {
   answered = true;
   stopTimer();
 
-  const q = QUESTIONS[index];
+  const q = gameQuestions[index];
   const buttons = Array.from(answersEl.children);
   buttons.forEach((b) => (b.disabled = true));
 
@@ -192,11 +220,19 @@ function selectAnswer(choice, btn) {
   }
 
   nextBtn.classList.remove("hidden");
+  updateNextLabel();
+  nextBtn.focus(); // keyboard users land on Next after answering
+}
+
+function updateNextLabel() {
+  // Last question -> button reads "Finish".
+  nextBtn.textContent =
+    index >= gameQuestions.length - 1 ? "Finish" : "Next Question →";
 }
 
 function goNext() {
   index++;
-  if (index < QUESTIONS.length) {
+  if (index < gameQuestions.length) {
     loadQuestion();
   } else {
     showResults();
@@ -210,7 +246,7 @@ function showResults() {
   stopTimer();
   quizProgressEl.style.width = "100%";
 
-  const total = QUESTIONS.length;
+  const total = gameQuestions.length;
   const wrong = total - score;
   const pct = score / total;
 
@@ -236,11 +272,17 @@ function showResults() {
   resultEmojiEl.textContent = emoji;
   resultMessageEl.textContent = message;
 
-  // Persist best score
-  const prevBest = Number(localStorage.getItem(BEST_KEY) || 0);
-  const best = Math.max(prevBest, score);
-  localStorage.setItem(BEST_KEY, String(best));
+  // Persist best score (try/catch: storage can be full or blocked)
+  let best = score;
+  try {
+    const prevBest = Number(localStorage.getItem(BEST_KEY) || 0);
+    best = Math.max(prevBest, score);
+    localStorage.setItem(BEST_KEY, String(best));
+  } catch (err) {
+    best = Math.max(Number(localStorageFallback) || 0, score);
+  }
   bestScoreEl.textContent = best;
+  setStartBest(best);
 
   show(resultScreen);
 }
@@ -251,14 +293,31 @@ function showResults() {
 function startQuiz() {
   index = 0;
   score = 0;
+  buildGame();
   show(quizScreen);
   loadQuestion();
+  updateNextLabel();
 }
 
 startBtn.addEventListener("click", startQuiz);
 restartBtn.addEventListener("click", startQuiz);
 nextBtn.addEventListener("click", goNext);
 
-// Show saved best score on the start screen area (result screen element is reused)
-const storedBest = localStorage.getItem(BEST_KEY);
-if (storedBest) bestScoreEl.textContent = storedBest;
+// Show saved best score on both the result screen and the start screen.
+let localStorageFallback = null;
+function getStoredBest() {
+  try {
+    return Number(localStorage.getItem(BEST_KEY)) || 0;
+  } catch (err) {
+    return 0;
+  }
+}
+function setStartBest(v) {
+  const el = document.getElementById("startBestScore");
+  if (el) el.textContent = v > 0 ? v : "–";
+}
+const storedBest = getStoredBest();
+if (storedBest > 0) {
+  bestScoreEl.textContent = storedBest;
+  setStartBest(storedBest);
+}

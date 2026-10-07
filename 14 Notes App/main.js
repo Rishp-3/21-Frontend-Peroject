@@ -14,7 +14,19 @@ function loadNotes() {
 }
 
 function saveNotes() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+  // Storage can fail (quota exceeded / private mode) — surface it instead of crashing.
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+    return true;
+  } catch {
+    setStatus("Could not save: browser storage is full or unavailable.");
+    return false;
+  }
+}
+
+function setStatus(msg) {
+  const el = document.getElementById("statusMsg");
+  if (el) el.textContent = msg;
 }
 
 /* ------------------------------------------------------------------ */
@@ -28,6 +40,7 @@ const notesGrid = document.getElementById("notesGrid");
 const emptyState = document.getElementById("emptyState");
 const notesCount = document.getElementById("notesCount");
 const charCount = document.getElementById("charCount");
+const cancelEditBtn = document.getElementById("cancelEditBtn"); // declared before use below
 const swatches = Array.from(document.querySelectorAll(".swatch"));
 
 let notes = loadNotes(); // [{id, title, body, color, date}]
@@ -127,6 +140,7 @@ function startEdit(note) {
     s.setAttribute("aria-checked", String(s.dataset.color === note.color));
   });
   addBtn.textContent = "💾 Save Changes";
+  cancelEditBtn.hidden = false; // Cancel only makes sense while editing
   window.scrollTo({ top: 0, behavior: "smooth" });
   titleInput.focus();
 }
@@ -134,7 +148,17 @@ function startEdit(note) {
 function cancelEdit() {
   editingId = null;
   addBtn.textContent = "➕ Add Note";
+  cancelEditBtn.hidden = true;
+  titleInput.value = "";
+  bodyInput.value = "";
+  charCount.textContent = "0 / 2000";
 }
+
+cancelEditBtn.addEventListener("click", cancelEdit);
+// Escape also exits edit mode.
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && editingId !== null) cancelEdit();
+});
 
 /* ------------------------------------------------------------------ */
 /*  Delete                                                             */
@@ -171,10 +195,26 @@ function escapeHtml(str) {
 }
 
 function highlight(text, query) {
-  const safe = escapeHtml(text);
-  if (!query) return safe;
-  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return safe.replace(new RegExp(`(${escapedQuery})`, "gi"), "<mark>$1</mark>");
+  // FIX: previously we regex-replaced on the FULLY escaped string, so searching
+  // for "amp"/"lt"/"gt" injected <mark> inside &amp;/&lt;/&gt; entities and broke
+  // rendering. Correct approach: split the RAW text around matches (case-insensitive),
+  // escape each piece individually, then wrap only the escaped match in <mark>.
+  if (!query) return escapeHtml(text);
+  const lower = text.toLowerCase();
+  const q = query.toLowerCase();
+  let out = "";
+  let i = 0;
+  while (true) {
+    const idx = lower.indexOf(q, i);
+    if (idx === -1) {
+      out += escapeHtml(text.slice(i));
+      break;
+    }
+    out += escapeHtml(text.slice(i, idx));
+    out += "<mark>" + escapeHtml(text.slice(idx, idx + q.length)) + "</mark>";
+    i = idx + q.length;
+  }
+  return out;
 }
 
 function formatDate(ts) {

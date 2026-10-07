@@ -40,7 +40,8 @@ const ruleItems = {
 /* ------------------------------------------------------------------ */
 /*  Regex patterns                                                     */
 /* ------------------------------------------------------------------ */
-const NAME_RE = /^[A-Za-z][A-Za-z\s.'-]{1,49}$/; // letters, spaces, dots, apostrophes, hyphens
+// Unicode-aware: any script's letters (Hindi, accented names pass), plus spaces . ' -
+const NAME_RE = /^[\p{L}][\p{L}\s.'-]{1,49}$/u;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/;
 const PHONE_RE = /^[6-9]\d{9}$/; // 10-digit Indian mobile style
 
@@ -51,7 +52,7 @@ const validators = {
   fullName(value) {
     if (!value.trim()) return "Full name is required.";
     if (!NAME_RE.test(value.trim()))
-      return "Use only letters and spaces (2–50 chars, no digits).";
+      return "Use letters, spaces and . ' - (2–50 chars, no digits).";
     return "";
   },
 
@@ -62,10 +63,13 @@ const validators = {
   },
 
   phone(value) {
-    const digits = value.replace(/[\s-]/g, "");
+    let digits = value.replace(/[\s()-]/g, "");
     if (!digits) return "Phone number is required.";
+    // Strip common Indian prefixes so +91 98765 43210 validates too.
+    digits = digits.replace(/^\+?91[- ]?/, "").replace(/^0(?=\d{10}$)/, "");
     if (!/^\d+$/.test(digits)) return "Phone must contain digits only.";
-    if (digits.length !== 10) return "Phone number must be exactly 10 digits.";
+    if (digits.length !== 10)
+      return "Phone number must be exactly 10 digits (after country code).";
     if (!PHONE_RE.test(digits)) return "Phone must start with digit 6–9.";
     return "";
   },
@@ -115,6 +119,9 @@ function setFieldState(name, message) {
   const input = fields[name];
   const errorEl = errors[name];
   errorEl.textContent = message;
+  input.setAttribute("aria-invalid", message ? "true" : "false");
+  // role="alert" (assertive) only while an error is visible; otherwise polite.
+  errorEl.setAttribute("role", message ? "alert" : "status");
   if (message) {
     input.classList.add("invalid");
     input.classList.remove("valid");
@@ -225,3 +232,21 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
+
+/* ------------------------------------------------------------------ */
+/*  Extra fixes: DOB max date + show/hide password toggle              */
+/* ------------------------------------------------------------------ */
+fields.dob.max = new Date().toISOString().slice(0, 10); // can't pick a future birthday
+
+(function initPasswordToggle() {
+  const btn = document.getElementById("togglePassword");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const show = fields.password.type === "password";
+    fields.password.type = show ? "text" : "password";
+    btn.setAttribute("aria-pressed", String(show));
+    btn.setAttribute("aria-label", show ? "Hide password" : "Show password");
+    btn.textContent = show ? "🙈 Hide" : "👁 Show";
+    fields.password.focus();
+  });
+})();

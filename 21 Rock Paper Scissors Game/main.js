@@ -41,9 +41,12 @@ function pickCpu() {
 }
 let lastPlayerMove = null;
 
+let roundToken = 0; // FIX: invalidates in-flight rounds when Reset is pressed mid-animation
+
 async function play(playerMove) {
   if (busy) return;
   busy = true;
+  const myRound = ++roundToken;
   document.querySelectorAll(".choice").forEach((b) => (b.disabled = true));
 
   $("playerHand").textContent = "✊";
@@ -52,6 +55,7 @@ async function play(playerMove) {
   $("cpuHand").classList.add("shake");
   setStatus("Rock… Paper… Scissors…");
   await wait(600);
+  if (myRound !== roundToken) return; // match was reset while animating – discard result
 
   const cpuMove = pickCpu();
   $("playerHand").textContent = EMOJI[playerMove];
@@ -101,6 +105,7 @@ async function play(playerMove) {
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function resetMatch() {
+  roundToken++; // cancel any in-flight round (race-condition fix)
   playerScore = 0;
   cpuScore = 0;
   busy = false;
@@ -127,6 +132,10 @@ $("targetSel").addEventListener("change", () => {
 
 // Keyboard shortcuts: R / P / S
 document.addEventListener("keydown", (e) => {
+  // Ignore keystrokes while a form control (select/input/textarea) has focus,
+  // otherwise pressing "s" inside the target dropdown would throw scissors.
+  const tag = document.activeElement && document.activeElement.tagName;
+  if (tag === "SELECT" || tag === "INPUT" || tag === "TEXTAREA") return;
   const map = { r: "rock", p: "paper", s: "scissors" };
   const m = map[e.key.toLowerCase()];
   if (m && !busy) play(m);

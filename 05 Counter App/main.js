@@ -1,47 +1,32 @@
-let ans = document.querySelector(".ans");
-let increment = document.querySelector(".increment");
-let reset = document.querySelector(".reset");
-let decrement = document.querySelector(".decrement");
-let incBy10 = document.querySelector(".incres10");
-let decBy10 = document.querySelector(".decres10");
-let total = document.querySelector(".total");
-let highest = document.querySelector(".highest");
-let num = 0;
-let totalClick = 0;
-let highestNum = 0;
-increment.addEventListener("click", () => {
-  num = num + 1;
-  ans.innerText = num;
-  clickUpdate();
-  highestUpdate();
-});
-reset.addEventListener("click", () => {
-  num = 0;
-  ans.innerText = num;
-  clickUpdate();
-});
-decrement.addEventListener("click", () => {
-  num = num - 1;
-  ans.innerText = num;
-  clickUpdate();
-});
-incBy10.addEventListener("click", () => {
-  num = num + 10;
-  ans.innerText = num;
-  clickUpdate();
-  highestUpdate();
-});
-decBy10.addEventListener("click", () => {
-  num = num - 10;
-  ans.innerText = num;
-  clickUpdate();
-});
+// Counter App — single change(delta) helper removes the repeated handlers.
+const ans = document.querySelector(".ans");
+const totalEl = document.querySelector(".total");
+const highestEl = document.querySelector(".highest");
 
-function highestUpdate() {
-  highestNum = highestNum > num ? highestNum : num;
-  highest.innerText = highestNum;
+let num = 0;
+let totalClicks = 0;
+let highestNum = 0;
+
+function render() {
+  ans.innerText = num;
+  totalEl.innerText = totalClicks;
+  highestEl.innerText = highestNum;
 }
-function clickUpdate() {
-  totalClick = totalClick + 1;
-  total.innerText = totalClick;
+
+function change(delta) {
+  num += delta;
+  totalClicks += 1;
+  if (num > highestNum) highestNum = num; // "Highest" tracks max value reached
+  render();
 }
+
+document.querySelector(".increment").addEventListener("click", () => change(+1));
+document.querySelector(".decrement").addEventListener("click", () => change(-1));
+document.querySelector(".inc-ten").addEventListener("click", () => change(+10));
+document.querySelector(".dec-ten").addEventListener("click", () => change(-10));
+// Reset zeroes the count but keeps Total Clicks / Highest stats (original behavior).
+document.querySelector(".reset").addEventListener("click", () => {
+  num = 0;
+  totalClicks += 1;
+  render();
+});

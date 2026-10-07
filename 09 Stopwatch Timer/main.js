@@ -98,16 +98,18 @@ function renderLaps() {
 
     // highlight rows
     [...lapTableBody.rows].forEach((row) => {
-      const lapTime = laps[laps.length - 1 - row.rowIndex];
-      if (
-        lapTime === best && laps.filter((l) => l === best).length > 1
-          ? [...lapTableBody.rows].filter(
-              (r) => laps[laps.length - 1 - r.rowIndex] === best,
-            )[0] === row
-          : lapTime === best
-      )
+      // rowIndex counts rows inside <thead> too -> off-by-one. sectionRowIndex is
+      // the index within tbody only, which matches how we prepend lap rows.
+      const idx = row.sectionRowIndex; // tbody-only index (fixes off-by-one vs rowIndex)
+      if (idx < 0 || idx >= laps.length) return;
+      const lapTime = laps[laps.length - 1 - idx];
+      // Highlight only the FIRST lap (lowest lap number) achieving best/worst time.
+      const firstBestIdx = laps.indexOf(best);
+      const firstWorstIdx = laps.indexOf(worst);
+      if (lapTime === best && firstBestIdx === laps.length - 1 - idx)
         row.classList.add("best-lap");
-      else if (lapTime === worst) row.classList.add("worst-lap");
+      else if (lapTime === worst && firstWorstIdx === laps.length - 1 - idx)
+        row.classList.add("worst-lap");
     });
   } else {
     bestData.textContent = "--:--.--";

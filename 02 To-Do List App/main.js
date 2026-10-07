@@ -1,62 +1,78 @@
-const input = document.querySelector("input");
-const button = document.querySelector("button");
-const table = document.querySelector("table");
+const input = document.getElementById("taskInput");
+const form = document.getElementById("taskForm");
+const list = document.getElementById("taskList");
+const emptyState = document.getElementById("emptyState");
 
-let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+// Safe load: corrupted JSON in localStorage must not crash the app.
+let tasks = [];
+try {
+  tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+} catch (err) {
+  tasks = [];
+}
 
 function renderTasks() {
-  table.innerHTML = "";
+  list.textContent = ""; // clear without innerHTML
+  emptyState.hidden = tasks.length > 0;
 
   tasks.forEach((t, index) => {
-    let row = document.createElement("tr");
-    let task = document.createElement("td");
-    let btn = document.createElement("td");
+    const li = document.createElement("li");
+    if (t.done) li.classList.add("done");
 
-    task.innerHTML = `<input type="checkbox" ${
-      t.done ? "checked" : ""
-    }> ${t.text}`;
+    // Build nodes with textContent only (XSS fix: raw ${t.text} used to go into innerHTML).
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = !!t.done;
+    checkbox.id = "task-" + index;
+    checkbox.setAttribute("aria-label", "Mark task as done: " + t.text);
 
-    if (t.done) task.classList.add("don");
+    const label = document.createElement("label");
+    label.htmlFor = "task-" + index;
+    label.className = "task-text";
+    label.textContent = t.text;
 
-    btn.innerHTML = `<button class="Btn">🗑️</button>`;
+    const delBtn = document.createElement("button");
+    delBtn.type = "button";
+    delBtn.className = "del";
+    delBtn.textContent = "🗑️";
+    delBtn.setAttribute("aria-label", "Delete task: " + t.text);
 
-    row.appendChild(task);
-    row.appendChild(btn);
-    table.appendChild(row);
+    li.append(checkbox, label, delBtn);
+    list.appendChild(li);
 
-    // ✅ delete
-    btn.querySelector("button").addEventListener("click", () => {
+    delBtn.addEventListener("click", () => {
       tasks.splice(index, 1);
       saveAndRender();
     });
-
-    // ✅ checkbox
-    let checkbox = task.querySelector("input");
-    checkbox.addEventListener("change", function () {
-      tasks[index].done = this.checked;
+    checkbox.addEventListener("change", () => {
+      tasks[index].done = checkbox.checked;
       saveAndRender();
     });
   });
 }
 
-// 👉 Save + render
 function saveAndRender() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  try {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  } catch (err) {
+    /* storage full/blocked - keep working in memory */
+  }
   renderTasks();
 }
 
-// 👉 Add new task
-button.addEventListener("click", function () {
-  if (input.value.trim() === "") return;
-
-  tasks.push({
-    text: input.value,
-    done: false,
-  });
-
-  saveAndRender();
+function addTask() {
+  const text = input.value.trim();
+  if (text === "") return;
+  tasks.push({ text, done: false });
   input.value = "";
+  input.focus();
+  saveAndRender();
+}
+
+// Submitting the form covers both the Add button and the Enter key.
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addTask();
 });
 
-// 👉 First load
 renderTasks();

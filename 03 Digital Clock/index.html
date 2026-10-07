@@ -33,7 +33,13 @@
       </div>
       <div class="setting">
         <div class="timezone-con">
-          <select name="timezone" title="timezone" id="timezone">
+          <label for="timezone" class="sr-only">Time zone</label>
+          <select
+            name="timezone"
+            title="timezone"
+            id="timezone"
+            aria-label="Time zone"
+          >
             <option value="1">IST</option>
             <option value="2">UTC</option>
             <option value="3">PST</option>
@@ -42,7 +48,13 @@
           </select>
         </div>
         <div class="format-con">
-          <select name="format" title="format" id="format">
+          <label for="format" class="sr-only">Time format</label>
+          <select
+            name="format"
+            title="format"
+            id="format"
+            aria-label="Time format (12 or 24 hour)"
+          >
             <option value="1">12</option>
             <option value="2">24</option>
           </select>

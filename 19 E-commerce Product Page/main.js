@@ -27,6 +27,8 @@ let reviews = load("aurora-reviews", [
     when: "Oct 02, 2026",
   },
 ]);
+// The marketing page advertises 128 store reviews; user-added reviews count on top.
+const baseReviewCount = 128;
 
 function load(k, fb) {
   try {
@@ -83,66 +85,103 @@ function svgFor(i) {
   return views[i];
 }
 
+/* Thumbnails are built ONCE and updated in place afterwards — rebuilding the DOM
+   on every click destroyed keyboard focus. role=tablist lives on #thumbs in HTML. */
 function renderGallery() {
   $("mainImg").innerHTML = svgFor(view);
+  $("mainImgWrap")?.setAttribute("aria-label", `Product view ${view + 1} of 4`);
   const thumbs = $("thumbs");
-  thumbs.innerHTML = "";
-  for (let i = 0; i < 4; i++) {
-    const b = document.createElement("button");
-    b.className = "thumb" + (i === view ? " active" : "");
-    b.setAttribute("role", "tab");
-    b.setAttribute("aria-label", `View ${i + 1}`);
-    b.innerHTML = svgFor(i);
-    b.addEventListener("click", () => {
-      view = i;
-      renderGallery();
-    });
-    thumbs.appendChild(b);
+  if (!thumbs.dataset.built) {
+    for (let i = 0; i < 4; i++) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "thumb";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", THUMB_LABELS[i]);
+      b.innerHTML = svgFor(i);
+      b.addEventListener("click", () => {
+        view = i;
+        renderGallery();
+      });
+      thumbs.appendChild(b);
+    }
+    thumbs.dataset.built = "1";
   }
+  [...thumbs.children].forEach((b, i) => {
+    const active = i === view;
+    b.classList.toggle("active", active);
+    b.setAttribute("aria-selected", String(active));
+    b.tabIndex = active ? 0 : -1; // roving tabindex for the tablist
+  });
 }
+const THUMB_LABELS = [
+  "Front view",
+  "Side view",
+  "Detail view",
+  "Travel case view",
+];
 
-function renderOptions() {
+/* Swatches & style chips are created once; selection state is then toggled in place
+   so the clicked button keeps focus (no innerHTML='' rebuild). */
+function buildOptions() {
   const sw = $("swatches");
-  sw.innerHTML = "";
   colors.forEach((c) => {
     const b = document.createElement("button");
-    b.className = "swatch" + (c.name === selColor.name ? " active" : "");
+    b.type = "button";
+    b.className = "swatch";
     b.style.background = c.hex;
     b.title = c.name;
+    b.dataset.color = c.name;
     b.setAttribute("role", "radio");
-    b.setAttribute("aria-checked", String(c.name === selColor.name));
     b.setAttribute("aria-label", c.name);
     b.addEventListener("click", () => {
       selColor = c;
       $("colorName").textContent = c.name;
-      renderOptions();
+      syncOptionState();
       renderGallery();
     });
     sw.appendChild(b);
   });
   const ch = $("styles");
-  ch.innerHTML = "";
-  styles.forEach((s) => {
+  styles.forEach((name) => {
     const b = document.createElement("button");
-    b.className = "chip" + (s === selStyle ? " active" : "");
-    b.textContent = s;
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = name;
+    b.dataset.style = name;
     b.setAttribute("role", "radio");
-    b.setAttribute("aria-checked", String(s === selStyle));
     b.addEventListener("click", () => {
-      selStyle = s;
-      $("styleName").textContent = s;
-      renderOptions();
+      selStyle = name;
+      $("styleName").textContent = name;
+      syncOptionState();
       updatePrice();
     });
     ch.appendChild(b);
   });
 }
 
+function syncOptionState() {
+  [...$("swatches").children].forEach((b) => {
+    const on = b.dataset.color === selColor.name;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-checked", String(on));
+  });
+  [...$("styles").children].forEach((b) => {
+    const on = b.dataset.style === selStyle;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-checked", String(on));
+  });
+}
+
+const DISCOUNT_PCT = 20; // single source of truth for the "was / save" display
 function updatePrice() {
-  const p = basePrice[selStyle];
+  const p = basePrice[selStyle]; // current (discounted) price
+  const old = Math.round((p / (1 - DISCOUNT_PCT / 100)) * 100) / 100; // pre-discount price
   $("price").textContent = money(p);
-  const old = Math.round(p * 1.31);
   document.querySelector(".old-price").textContent = money(old);
+  document.querySelectorAll(".save").forEach((el) => {
+    el.textContent = `Save ${DISCOUNT_PCT}%`;
+  });
 }
 
 // --- Quantity ---
@@ -187,8 +226,9 @@ function renderCart() {
     cart.forEach((it, i) => {
       const li = document.createElement("li");
       li.className = "cart-item";
-      li.innerHTML = `<div><strong>${it.style}</strong><div class="meta">${it.color} · Qty ${it.qty} · ${money(it.price)} each</div></div>
-        <button class="rm" aria-label="Remove ${it.style}" data-i="${i}">✕</button>`;
+      // style/color come from localStorage -> escape before injecting (self-XSS guard)
+      li.innerHTML = `<div><strong>${escapeHtml(it.style)}</strong><div class="meta">${escapeHtml(it.color)} · Qty ${Number(it.qty) || 0} · ${money(it.price)} each</div></div>
+        <button class="rm" aria-label="Remove ${escapeHtml(it.style)}" data-i="${i}">✕</button>`;
       list.appendChild(li);
     });
   }
@@ -209,25 +249,75 @@ $("addToCart").addEventListener("click", () => {
   addToCart(getQty());
   toast(`Added ${getQty()} × ${selStyle} (${selColor.name}) to cart`);
 });
+/* "Buy Now" adds to cart AND opens a real checkout summary (itemised totals),
+   instead of silently just opening the cart drawer. */
 $("buyNow").addEventListener("click", () => {
   addToCart(getQty());
-  openCart(true);
+  showCheckoutSummary();
 });
+
+let pendingCheckout = false;
+function showCheckoutSummary() {
+  const subtotal = cart.reduce((sum, it) => sum + it.price * it.qty, 0);
+  const shipping = subtotal > 0 ? 0 : 0; // free shipping badge in HTML
+  const tax = Math.round(subtotal * 0.08 * 100) / 100;
+  $("checkoutSummary").innerHTML = "";
+  const rows = [
+    ...cart.map((it) => [
+      ` ${escapeHtml(it.style)} (${escapeHtml(it.color)}) × ${Number(it.qty) || 0}`,
+      money(it.price * (Number(it.qty) || 0)),
+    ]),
+    ["Subtotal", money(subtotal)],
+    ["Shipping (free)", money(shipping)],
+    ["Est. tax (8%)", money(tax)],
+    ["Total", money(subtotal + tax)],
+  ];
+  rows.forEach(([label, val]) => {
+    const div = document.createElement("div");
+    div.className = "sum-row";
+    const l = document.createElement("span");
+    l.textContent = label;
+    const v = document.createElement("span");
+    v.textContent = val;
+    div.append(l, v);
+    $("checkoutSummary").appendChild(div);
+  });
+  $("checkoutBtn").textContent = "Confirm & Pay";
+  pendingCheckout = true;
+  openCart(true);
+}
 $("checkoutBtn").addEventListener("click", () => {
   if (!cart.length) {
     toast("Cart is empty — add something first!");
     return;
   }
+  if (!pendingCheckout) {
+    showCheckoutSummary();
+    return;
+  } // first click shows summary
   toast("✅ Order placed! Thank you for shopping.");
   cart = [];
   save("aurora-cart", cart);
   renderCart();
   openCart(false);
+  pendingCheckout = false;
+  $("checkoutBtn").textContent = "Checkout";
 });
 
+let lastFocusedBeforeCart = null;
 function openCart(open) {
   $("cartDrawer").classList.toggle("hidden", !open);
   $("overlay").classList.toggle("hidden", !open);
+  if (open) {
+    lastFocusedBeforeCart = document.activeElement;
+    $("closeCart")?.focus();
+  } else if (
+    lastFocusedBeforeCart &&
+    document.contains(lastFocusedBeforeCart)
+  ) {
+    lastFocusedBeforeCart.focus();
+    lastFocusedBeforeCart = null;
+  }
 }
 $("cartBtn").addEventListener("click", () => openCart(true));
 $("closeCart").addEventListener("click", () => openCart(false));
@@ -251,8 +341,12 @@ function renderReviews() {
   });
   const avg = reviews.reduce((s, r) => s + r.stars, 0) / (reviews.length || 1);
   document.querySelector(".rating-text strong").textContent = avg.toFixed(1);
-  document.querySelector(".rating-text").childNodes[3].textContent =
-    ` ${reviews.length} review${reviews.length === 1 ? "" : "s"}`;
+  // FIX: previously used childNodes[3] -> undefined -> crash on load & after each
+  // new review. Now we target the link by its stable id.
+  const countLink = $("reviewCount");
+  if (countLink) {
+    countLink.textContent = `${baseReviewCount + reviews.length} reviews`;
+  }
 }
 function escapeHtml(s) {
   return String(s).replace(
@@ -309,8 +403,9 @@ function toast(msg) {
 }
 
 // Init
+buildOptions();
+syncOptionState();
 renderGallery();
-renderOptions();
 updatePrice();
 renderCart();
 renderReviews();

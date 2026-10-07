@@ -237,3 +237,18 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Show/hide password button */
+.pw-toggle {
+  margin-top: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  background: #eef1f8;
+  color: #24304a;
+  border: 1px solid #c9d2e4;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.pw-toggle:hover {
+  background: #dde4f2;
+}

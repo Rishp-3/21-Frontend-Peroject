@@ -11,7 +11,7 @@
     <title>Expense Tracker</title>
   </head>
   <body>
-    <div class="app">
+    <main class="app">
       <header class="topbar">
         <h1>💰 Expense Tracker</h1>
         <p class="subtitle">
@@ -19,8 +19,17 @@
         </p>
       </header>
 
+      <div class="header-row">
+        <label class="currency-label" for="currencySelect">Currency</label>
+        <select id="currencySelect" aria-label="Display currency">
+          <option value="USD">USD $</option>
+          <option value="INR">INR ₹</option>
+          <option value="EUR">EUR €</option>
+        </select>
+      </div>
+
       <!-- Summary -->
-      <section class="summary">
+      <section class="summary" aria-label="Totals">
         <div class="sum-card balance">
           <span class="sum-label">Balance</span>
           <strong id="balanceAmt" class="sum-amount">$0.00</strong>
@@ -96,6 +105,9 @@
           <button type="submit" class="btn primary" id="submitBtn">
             ➕ Add Transaction
           </button>
+          <button type="button" class="btn ghost" id="cancelEditBtn" hidden>
+            Cancel Edit
+          </button>
         </form>
       </section>
 
@@ -127,7 +139,18 @@
           </button>
         </div>
       </section>
-    </div>
+      <!-- Category breakdown (pure CSS bars, no chart library) -->
+      <section
+        class="card breakdown"
+        aria-label="Expense breakdown by category"
+      >
+        <h2>Expense Breakdown</h2>
+        <div id="breakdownBars" class="bars"></div>
+        <p id="breakdownEmpty" class="muted">
+          Add expenses to see a breakdown.
+        </p>
+      </section>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>

@@ -1,9 +1,11 @@
 # 🗒️ Notes App
 
 ## Description
+
 A sticky-note style notes application with full create / edit / delete lifecycle, live search with match highlighting, five color labels and automatic persistence to `localStorage`.
 
 ## Features
+
 - ✅ Add notes with title, body and a color label (5 colors)
 - ✅ Edit any note in place (composer switches to "Save Changes" mode)
 - ✅ Delete with confirmation + shrink animation
@@ -16,11 +18,13 @@ A sticky-note style notes application with full create / edit / delete lifecycle
 - ✅ XSS-safe rendering (all user input escaped)
 
 ## Technologies Used
+
 - HTML5
 - CSS3 (grid, keyframe animations, transitions, media queries)
 - Vanilla JavaScript (`localStorage`, dynamic DOM, event delegation patterns)
 
 ## How to Run
+
 ```bash
 # Option 1: just open the file
 open "14 Notes App/index.html"        # macOS
@@ -33,4 +37,5 @@ python3 -m http.server 8000
 ```
 
 ## Main Functionality
+
 Type a title/body, pick a swatch color and press **Add Note** — the note appears at the top of the grid and is stored locally. The search box instantly filters notes and highlights matching text. Each card has ✏️ (loads the note back into the composer for editing) and 🗑️ (asks to confirm, then animates the removal). Everything persists between sessions via `localStorage`.

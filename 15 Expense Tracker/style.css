@@ -344,3 +344,72 @@ select:focus {
     padding: 18px 16px;
   }
 }
+
+/* --- Phase-2 additions: currency row, cancel btn, breakdown bars --- */
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+.currency-label {
+  font-size: 0.85rem;
+  color: #475569;
+}
+#currencySelect {
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  min-height: 40px;
+}
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+.btn.ghost:hover {
+  background: #f1f5f9;
+}
+.bars {
+  display: grid;
+  gap: 0.6rem;
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+}
+.bar-label {
+  font-size: 0.85rem;
+  color: #334155;
+  overflow-wrap: anywhere;
+}
+.bar-track {
+  background: #e2e8f0;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f87171, #dc2626);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.bar-amount {
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: #334155;
+}
+.muted {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+@media (max-width: 480px) {
+  .bar-row {
+    grid-template-columns: 90px 1fr auto;
+  }
+}

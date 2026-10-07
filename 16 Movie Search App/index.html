@@ -31,6 +31,16 @@
             required
           />
           <select
+            id="typeFilter"
+            class="year-select"
+            aria-label="Filter by type"
+          >
+            <option value="all" selected>Everything</option>
+            <option value="movie">Movies</option>
+            <option value="series">Series</option>
+            <option value="episode">Episodes</option>
+          </select>
+          <select
             id="yearFilter"
             class="year-select"
             aria-label="Filter by year"
@@ -91,6 +101,7 @@
       </div>
     </div>
 
+    <script src="config.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

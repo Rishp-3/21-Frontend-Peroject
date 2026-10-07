@@ -36,12 +36,22 @@ const history = []; // in-memory only — never persisted for security
 /*  Cryptographically stronger random index                            */
 /* ------------------------------------------------------------------ */
 function secureRandomInt(max) {
-  if (window.crypto && window.crypto.getRandomValues) {
-    const arr = new Uint32Array(1);
-    window.crypto.getRandomValues(arr);
-    return arr[0] % max;
+  if (!(window.crypto && window.crypto.getRandomValues)) {
+    // Never silently downgrade to Math.random — warn the user instead.
+    console.warn(
+      "crypto.getRandomValues unavailable — falling back to weak randomness.",
+    );
+    showCopied("⚠ Insecure random source in this browser.");
+    return Math.floor(Math.random() * max);
   }
-  return Math.floor(Math.random() * max);
+  // Rejection sampling: discard values >= limit so every index is equally
+  // likely (arr[0] % max has a modulo bias when max doesn't divide 2^32).
+  const limit = 0x100000000 - (0x100000000 % max);
+  const arr = new Uint32Array(1);
+  do {
+    window.crypto.getRandomValues(arr);
+  } while (arr[0] >= limit);
+  return arr[0] % max;
 }
 
 /* ------------------------------------------------------------------ */
@@ -84,7 +94,9 @@ function generatePassword() {
   output.value = pw;
   copyMsg.textContent = "";
   updateStrength(pw);
-  addHistory(pw);
+  // History is appended only when the Generate button was clicked (addHistory
+  // flag), so slider/toggle changes and initial load don't flood it.
+  if (generatePassword.toHistory) addHistory(pw);
 }
 
 /* ------------------------------------------------------------------ */
@@ -172,17 +184,22 @@ async function copyToClipboard(text) {
     }
   }
   if (!ok) {
-    // Fallback for older browsers / insecure contexts (file://)
-    const prevType = output.type;
-    output.type = "text"; // reveal so selection works
-    output.select();
+    // Fallback for older browsers / insecure contexts (file://).
+    // FIX: previously selected the main output field, so clicking a HISTORY
+    // item copied the wrong text. Copy the requested `text` via a temp node.
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
     try {
       ok = document.execCommand("copy");
     } catch {
       ok = false;
     }
-    window.getSelection().removeAllRanges();
-    output.type = prevType;
+    document.body.removeChild(ta);
   }
   showCopied(
     ok
@@ -204,11 +221,18 @@ function showCopied(msg) {
 lengthRange.addEventListener("input", () => {
   lengthValue.textContent = lengthRange.value;
 });
+// Regenerate when the slider is released (change, not input -> no history flood).
+lengthRange.addEventListener("change", generatePassword);
 
 Object.values(optEls).forEach((cb) =>
   cb.addEventListener("change", generatePassword),
 );
-generateBtn.addEventListener("click", generatePassword);
+// Only Generate-button clicks record history.
+generateBtn.addEventListener("click", () => {
+  generatePassword.toHistory = true;
+  generatePassword();
+  generatePassword.toHistory = false;
+});
 copyBtn.addEventListener("click", () => copyToClipboard(output.value));
 
 // Initial password on load

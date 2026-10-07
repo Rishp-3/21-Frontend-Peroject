@@ -192,3 +192,24 @@ input[type="range"]::-moz-range-thumb {
     padding: 20px 14px;
   }
 }
+.pl-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 8px;
+}
+.pl-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.pl-btn:focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 2px;
+}

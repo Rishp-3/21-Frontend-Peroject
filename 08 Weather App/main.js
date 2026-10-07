@@ -1,8 +1,9 @@
 // SECURITY NOTE: the previous OpenWeather API key was committed to this public
-// repository and has been REVOKED. Generate your own free key at
-// https://home.openweathermap.org/api_keys and set it below (or better, keep it
-// out of source control entirely). The app shows a clear message if no key is set.
-const API_KEY = ""; // <- put your OpenWeather API key here
+// repo (it still exists in git history) — regenerate/revoke it at
+// https://home.openweathermap.org/api_keys . Put your new key in config.js
+// (gitignored; copy config.example.js to config.js). The app shows a clear
+// message if no key is configured.
+const API_KEY = (typeof WEATHER_CONFIG !== "undefined" && WEATHER_CONFIG.API_KEY) || "";
 const cityInp = document.querySelector(".cityInp");
 const submit = document.querySelector(".submit");
 const city = document.querySelector(".city");
@@ -116,7 +117,7 @@ function setAll(a) {
   pressure.innerText = `${data.main.pressure} hPa`;
 
   // Visibility card was never filled before
-  const visEl = document.querySelector(".visiblity");
+  const visEl = document.querySelector(".visibility");
   if (visEl) visEl.innerText = `${((data.visibility || 10000) / 1000).toFixed(1)} km`;
 
   // dayTime was never set before

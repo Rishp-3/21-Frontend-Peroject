@@ -139,8 +139,9 @@ function renderCart() {
     cart.forEach((it, i) => {
       const li = document.createElement('li');
       li.className = 'cart-item';
-      li.innerHTML = `<div><strong>${it.style}</strong><div class="meta">${it.color} · Qty ${it.qty} · ${money(it.price)} each</div></div>
-        <button class="rm" aria-label="Remove ${it.style}" data-i="${i}">✕</button>`;
+      // style/color come from localStorage -> escape before injecting (self-XSS guard)
+      li.innerHTML = `<div><strong>${escapeHtml(it.style)}</strong><div class="meta">${escapeHtml(it.color)} · Qty ${Number(it.qty) || 0} · ${money(it.price)} each</div></div>
+        <button class="rm" aria-label="Remove ${escapeHtml(it.style)}" data-i="${i}">✕</button>`;
       list.appendChild(li);
     });
   }

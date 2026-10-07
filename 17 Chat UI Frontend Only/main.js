@@ -63,7 +63,7 @@ function renderConvList(filter = '') {
       li.innerHTML = `
         <div class="avatar" style="background:${c.color}">${c.name[0]}</div>
         <div class="conv-meta">
-          <div class="conv-name">${c.name}</div>
+          <div class="conv-name">${esc(c.name)}</div>
           <div class="conv-preview">${last ? esc((last.from === 'me' ? 'You: ' : '') + last.text) : 'No messages yet'}</div>
         </div>
         ${c.unread ? `<span class="unread-badge">${c.unread}</span>` : ''}`;

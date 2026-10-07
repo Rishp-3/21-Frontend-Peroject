@@ -1,8 +1,9 @@
 // 16 - Movie Search App (OMDb API)
 // SECURITY NOTE: the previous OMDb key committed here was a PERSONAL key (OMDb
-// has no public demo keys) and must be ROTATED. Get your own free key at
-// https://www.omdbapi.com/apikey.aspx and paste it below.
-const API_KEY = ''; // <- put your OMDb API key here
+// has no public demo keys) and is still visible in git history — rotate it.
+// Get your own free key at https://www.omdbapi.com/apikey.aspx and put it in
+// config.js (gitignored; copy config.example.js to config.js).
+const API_KEY = (typeof MOVIE_CONFIG !== 'undefined' && MOVIE_CONFIG.API_KEY) || '';
 const BASE = 'https://www.omdbapi.com/';
 
 const searchForm = document.getElementById('searchForm');

@@ -17,7 +17,7 @@
         <p class="subtitle">Swipe, click the arrows, use ← → keys, or let it autoplay.</p>
       </header>
 
-      <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Featured scenery">
+      <div class="slider" id="slider" aria-roledescription="carousel" aria-label="Featured scenery" tabindex="0">
         <div class="slides" id="slides">
           <div class="slide" role="group" aria-label="Slide 1 of 5">
             <img src="assets/slide1.svg" alt="Sunset Beach — warm coastal gradient artwork" draggable="false" />
@@ -44,7 +44,7 @@
         <button class="nav prev" id="prevBtn" type="button" aria-label="Previous slide">&#10094;</button>
         <button class="nav next" id="nextBtn" type="button" aria-label="Next slide">&#10095;</button>
 
-        <div class="dots" id="dots" role="tablist" aria-label="Choose slide"></div>
+        <div class="dots" id="dots" aria-label="Choose slide"></div>
 
         <button class="play-toggle" id="playToggle" type="button" aria-pressed="true">⏸ Pause</button>
         <div class="progress"><div id="progressBar" class="progress-bar"></div></div>

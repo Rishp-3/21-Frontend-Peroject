@@ -300,3 +300,6 @@ mark {
     grid-template-columns: 1fr;
   }
 }
+.status-msg { color: #b45309; font-size: .85rem; }
+.btn.ghost { background: transparent; border: 1px solid #cbd5e1; color: #334155; }
+.btn.ghost:hover { background: #f1f5f9; }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Typing speed test with live WPM, accuracy, timer and results." />
+  <link rel="stylesheet" href="style.css" />
+  <title>Typing Speed Test</title>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>⌨️ Typing Speed Test</h1>
+      <div class="stats">
+        <div class="stat"><span id="wpm">0</span><label>WPM</label></div>
+        <div class="stat"><span id="cpm">0</span><label>CPM</label></div>
+        <div class="stat"><span id="accuracy">100</span><label>Accuracy %</label></div>
+        <div class="stat"><span id="timer">60</span><label>Time left (s)</label></div>
+      </div>
+      <div class="setup">
+        <label for="duration">Duration:
+          <select id="duration">
+            <option value="30">30 s</option>
+            <option value="60" selected>60 s</option>
+            <option value="120">120 s</option>
+          </select>
+        </label>
+        <button id="restartBtn" class="btn">↺ Restart</button>
+      </div>
+    </header>
+
+    <section class="text-display" id="textDisplay" aria-label="Text to type"></section>
+
+    <textarea id="typeInput" class="type-input" placeholder="Click here and start typing…" spellcheck="false" autocomplete="off" aria-label="Typing input"></textarea>
+
+    <div class="result hidden" id="result" role="status">
+      <h2>🎉 Test complete!</h2>
+      <p><strong id="resWpm">0</strong> WPM · <strong id="resCpm">0</strong> CPM · <strong id="resAcc">0%</strong> accuracy · <strong id="resChars">0</strong> characters</p>
+      <p class="best">Personal best: <strong id="resBest">0</strong> WPM</p>
+      <button id="againBtn" class="btn">Try again</button>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

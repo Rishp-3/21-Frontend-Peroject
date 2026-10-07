@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rock Paper Scissors game vs the computer with score tracking and streaks." />
+  <link rel="stylesheet" href="style.css" />
+  <title>Rock · Paper · Scissors</title>
+</head>
+<body>
+  <div class="game">
+    <h1>✊ Rock · 🖐 Paper · ✌️ Scissors</h1>
+
+    <div class="scoreboard">
+      <div class="score"><span id="playerScore">0</span><label>You</label></div>
+      <div class="score mid"><label>First to <strong id="target">5</strong><br><select id="targetSel" aria-label="Round target">
+        <option value="3">3</option><option value="5" selected>5</option><option value="10">10</option>
+      </select></label></div>
+      <div class="score"><span id="cpuScore">0</span><label>CPU</label></div>
+    </div>
+
+    <p class="status" id="status" role="status">Make your move!</p>
+
+    <div class="arena">
+      <div class="hand" id="playerHand" aria-hidden="true">❔</div>
+      <div class="vs">vs</div>
+      <div class="hand" id="cpuHand" aria-hidden="true">❔</div>
+    </div>
+
+    <div class="choices">
+      <button class="choice" data-move="rock" aria-label="Rock">✊</button>
+      <button class="choice" data-move="paper" aria-label="Paper">🖐</button>
+      <button class="choice" data-move="scissors" aria-label="Scissors">✌️</button>
+    </div>
+
+    <p class="streak">🔥 Win streak: <strong id="streak">0</strong> · Games won: <strong id="gamesWon">0</strong></p>
+    <button id="resetBtn" class="reset">Reset match</button>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

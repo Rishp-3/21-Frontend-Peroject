@@ -28,3 +28,4 @@ input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 
 .pl-item.active { background: rgba(124,92,255,.35); }
 .pl-item .len { font-size: .75rem; color: #cbc2ec; }
 @media (max-width: 420px) { .album-art { width: 150px; height: 150px; } .player-wrap { padding: 20px 14px; } }
+.pl-btn { display: flex; justify-content: space-between; gap: .5rem; width: 100%; background: none; border: 0; color: inherit; font: inherit; padding: .55rem .75rem; cursor: pointer; text-align: left; border-radius: 8px; } .pl-btn:hover { background: rgba(255,255,255,.08); } .pl-btn:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 2px; }

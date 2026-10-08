@@ -12,6 +12,7 @@ A collection of **21 interactive frontend projects** built with **vanilla HTML, 
 
 ---
 
+
 ## 📚 Projects
 
 | #   | Project                                                   | Description                                                                       | Live Demo                                                                         | Status        |

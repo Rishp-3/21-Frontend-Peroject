@@ -36,7 +36,8 @@ function loadConversations() {
       if (Array.isArray(parsed) && parsed.length) return parsed;
     }
   } catch { /* corrupt or unavailable storage -> fall back to seed */ }
-  return structuredClone(SEED_CONVERSATIONS);
+  // JSON round-trip clone (structuredClone is not available in all browsers/jsdom)
+  return JSON.parse(JSON.stringify(SEED_CONVERSATIONS));
 }
 
 function persist() {

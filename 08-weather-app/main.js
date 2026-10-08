@@ -88,7 +88,7 @@ async function get() {
     return;
   }
   data = await response.json();
-  if (!response.ok) {
+  if (!response.ok || !data.weather || !data.main) {
     showError(`City "${cityV}" not found. Check the spelling and try again.`);
     return;
   }
@@ -98,7 +98,7 @@ async function get() {
 }
 
 get();
-function setAll(a) {
+function setAll() {
   city.innerText = data.name;
 
   temp.innerText = `${Math.round(data.main.temp)}\u00B0C`;

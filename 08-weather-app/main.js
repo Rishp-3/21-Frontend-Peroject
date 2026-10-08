@@ -3,8 +3,10 @@
 // https://home.openweathermap.org/api_keys . Put your new key in config.js
 // (gitignored; copy config.example.js to config.js). The app shows a clear
 // message if no key is configured.
-const API_KEY =
+const RAW_KEY =
   (typeof WEATHER_CONFIG !== "undefined" && WEATHER_CONFIG.API_KEY) || "";
+// Treat the placeholder from config.example.js as "no key configured".
+const API_KEY = RAW_KEY.startsWith("PASTE_YOUR") ? "" : RAW_KEY.trim();
 const cityInp = document.querySelector(".cityInp");
 const submitBtn = document.querySelector(".submit");
 const city = document.querySelector(".city");

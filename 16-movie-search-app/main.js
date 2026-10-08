@@ -3,8 +3,10 @@
 // has no public demo keys) and is still visible in git history — rotate it.
 // Get your own free key at https://www.omdbapi.com/apikey.aspx and put it in
 // config.js (gitignored; copy config.example.js to config.js).
-const API_KEY =
+const RAW_KEY =
   (typeof MOVIE_CONFIG !== "undefined" && MOVIE_CONFIG.API_KEY) || "";
+// Treat the placeholder from config.example.js as "no key configured".
+const API_KEY = RAW_KEY.startsWith("PASTE_YOUR") ? "" : RAW_KEY.trim();
 const BASE = "https://www.omdbapi.com/";
 
 const searchForm = document.getElementById("searchForm");

@@ -1,0 +1,10 @@
+# API keys (copy config.example.js -> config.js and add your own key)
+08-weather-app/config.js
+16-movie-search-app/config.js
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+node_modules/

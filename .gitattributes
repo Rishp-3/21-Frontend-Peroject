@@ -1,6 +1,0 @@
-# Normalize line endings: LF everywhere
-* text=auto eol=lf
-*.png binary
-*.jpg binary
-*.ico binary
-*.svg text eol=lf

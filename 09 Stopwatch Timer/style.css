@@ -1,0 +1,282 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+}
+
+.iconText {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.status p {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #334155;
+  color: #94a3b8;
+}
+
+.status p.running {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+}
+
+.status p.paused {
+  background: rgba(234, 179, 8, 0.15);
+  color: #facc15;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+/* Display */
+#currData {
+  text-align: center;
+  padding: 32px 16px;
+  background: #1e293b;
+  border-radius: 20px;
+  border: 1px solid #334155;
+}
+
+.currTime {
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(2.4rem, 9vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #38bdf8;
+  margin-bottom: 24px;
+}
+
+.ms {
+  font-size: 0.5em;
+  color: #7dd3fc;
+}
+
+.allButton {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.allButton button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 110px;
+  justify-content: center;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    transform 0.1s,
+    filter 0.2s;
+  color: #fff;
+}
+
+.allButton button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.allButton button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.startBut {
+  background: #16a34a;
+}
+
+.startBut.running {
+  background: #ca8a04;
+}
+
+.addLapBut {
+  background: #2563eb;
+}
+
+.resetBut {
+  background: #dc2626;
+}
+
+/* Lap list */
+#lapData {
+  margin-top: 24px;
+  background: #1e293b;
+  border-radius: 20px;
+  border: 1px solid #334155;
+  overflow: hidden;
+}
+
+.lapHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #334155;
+}
+
+.lapHead h2 {
+  font-size: 1.05rem;
+}
+
+.lapCount {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.lapDataDisplay {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+th {
+  color: #94a3b8;
+  font-weight: 600;
+  background: #172033;
+  position: sticky;
+  top: 0;
+}
+
+tbody tr {
+  border-bottom: 1px solid #26334a;
+}
+
+tbody tr.best-lap td {
+  color: #4ade80;
+}
+
+tbody tr.worst-lap td {
+  color: #f87171;
+}
+
+.empty-note {
+  padding: 18px 20px;
+  color: #64748b;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Extra info */
+#extraInfo {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+#extraInfo > div {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 16px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#extraInfo span:first-child {
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.best span:first-child {
+  color: #4ade80;
+}
+
+.worst span:first-child {
+  color: #f87171;
+}
+
+.average span:first-child {
+  color: #38bdf8;
+}
+
+#extraInfo span:last-child {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+}
+
+.foot {
+  text-align: center;
+  padding: 16px;
+  color: #475569;
+  font-size: 0.85rem;
+}
+
+/* Tablet */
+@media (max-width: 640px) {
+  main {
+    padding: 16px 12px 32px;
+  }
+
+  .allButton button {
+    min-width: 90px;
+    padding: 10px 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 420px) {
+  #extraInfo {
+    grid-template-columns: 1fr;
+  }
+
+  th,
+  td {
+    padding: 8px 12px;
+  }
+}

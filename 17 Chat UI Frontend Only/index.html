@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Chat UI frontend with conversations sidebar, message bubbles, typing indicator and simulated bot replies."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Chat UI</title>
+  </head>
+  <body>
+    <div class="chat-app">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <h2>Chats</h2>
+          <button
+            id="sidebarClose"
+            class="icon-btn mobile-only"
+            aria-label="Close chat list"
+          >
+            ✕
+          </button>
+        </div>
+        <div class="search-box">
+          <input
+            type="search"
+            id="convSearch"
+            placeholder="Search conversations…"
+            aria-label="Search conversations"
+          />
+        </div>
+        <ul class="conv-list" id="convList"></ul>
+      </aside>
+
+      <!-- Main chat -->
+      <main class="chat-main">
+        <header class="chat-header">
+          <button
+            id="sidebarOpen"
+            class="icon-btn mobile-only"
+            aria-label="Open chat list"
+          >
+            ☰
+          </button>
+          <div class="avatar" id="headerAvatar">A</div>
+          <div class="peer-info">
+            <h3 id="peerName">Alex</h3>
+            <p id="peerStatus" class="status">online</p>
+          </div>
+        </header>
+
+        <div class="messages" id="messages" role="log" aria-live="polite"></div>
+
+        <div
+          class="typing-indicator hidden"
+          id="typingIndicator"
+          aria-hidden="true"
+        >
+          <span></span><span></span><span></span>
+        </div>
+
+        <form class="composer" id="composer">
+          <input
+            type="text"
+            id="msgInput"
+            placeholder="Type a message…"
+            autocomplete="off"
+            aria-label="Message input"
+            required
+          />
+          <button type="submit" class="send-btn" aria-label="Send message">
+            ➤
+          </button>
+        </form>
+      </main>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

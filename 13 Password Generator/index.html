@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Configurable secure password generator with strength meter, copy to clipboard and history."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Password Generator</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="head">
+        <h1>🔐 Password Generator</h1>
+        <p class="subtitle">Create strong, random passwords in one click.</p>
+      </header>
+
+      <main class="panel">
+        <!-- Output -->
+        <div class="output-row">
+          <input
+            type="text"
+            id="pwOutput"
+            class="pw-output"
+            readonly
+            placeholder="Click Generate!"
+            aria-label="Generated password"
+          />
+          <button
+            id="copyBtn"
+            class="icon-btn"
+            type="button"
+            title="Copy to clipboard"
+            aria-label="Copy password"
+          >
+            📋
+          </button>
+        </div>
+        <span id="copyMsg" class="copy-msg" role="status"></span>
+
+        <!-- Length -->
+        <div class="option">
+          <div class="option-top">
+            <label for="lengthRange">Length</label>
+            <output id="lengthValue" class="badge">16</output>
+          </div>
+          <input
+            type="range"
+            id="lengthRange"
+            min="4"
+            max="64"
+            step="1"
+            value="16"
+          />
+        </div>
+
+        <!-- Character types -->
+        <div class="options-grid">
+          <label class="toggle">
+            <input type="checkbox" id="optUpper" checked />
+            <span>Uppercase (A–Z)</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="optLower" checked />
+            <span>Lowercase (a–z)</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="optNumbers" checked />
+            <span>Numbers (0–9)</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="optSymbols" checked />
+            <span>Symbols (!@#$)</span>
+          </label>
+        </div>
+
+        <!-- Strength -->
+        <div class="strength-section">
+          <div class="strength-track">
+            <div id="strengthFill" class="strength-fill"></div>
+          </div>
+          <span id="strengthLabel" class="strength-label">Strength: –</span>
+        </div>
+
+        <!-- Generate -->
+        <button id="generateBtn" class="btn primary" type="button">
+          ⚡ Generate Password
+        </button>
+
+        <!-- History -->
+        <section class="history-section">
+          <h2>Recent Passwords</h2>
+          <ul id="historyList" class="history-list">
+            <li class="history-empty">No passwords generated yet.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

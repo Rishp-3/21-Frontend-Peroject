@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Responsive image carousel with autoplay, arrows, dots, keyboard and touch-swipe navigation."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Image Slider</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="head">
+        <h1>🖼️ Image Slider</h1>
+        <p class="subtitle">
+          Swipe, click the arrows, use ← → keys, or let it autoplay.
+        </p>
+      </header>
+
+      <div
+        class="slider"
+        id="slider"
+        aria-roledescription="carousel"
+        aria-label="Featured scenery"
+        tabindex="0"
+      >
+        <div class="slides" id="slides">
+          <div class="slide" role="group" aria-label="Slide 1 of 5">
+            <img
+              src="assets/slide1.svg"
+              alt="Sunset Beach — warm coastal gradient artwork"
+              draggable="false"
+            />
+            <div class="caption"><span class="num">01</span> Sunset Beach</div>
+          </div>
+          <div class="slide" role="group" aria-label="Slide 2 of 5">
+            <img
+              src="assets/slide2.svg"
+              alt="Mountain Mist — cool alpine blue artwork"
+              draggable="false"
+            />
+            <div class="caption"><span class="num">02</span> Mountain Mist</div>
+          </div>
+          <div class="slide" role="group" aria-label="Slide 3 of 5">
+            <img
+              src="assets/slide3.svg"
+              alt="Forest Lake — fresh emerald tone artwork"
+              draggable="false"
+            />
+            <div class="caption"><span class="num">03</span> Forest Lake</div>
+          </div>
+          <div class="slide" role="group" aria-label="Slide 4 of 5">
+            <img
+              src="assets/slide4.svg"
+              alt="Lavender Fields — dreamy purple artwork"
+              draggable="false"
+            />
+            <div class="caption">
+              <span class="num">04</span> Lavender Fields
+            </div>
+          </div>
+          <div class="slide" role="group" aria-label="Slide 5 of 5">
+            <img
+              src="assets/slide5.svg"
+              alt="Desert Dawn — golden morning light artwork"
+              draggable="false"
+            />
+            <div class="caption"><span class="num">05</span> Desert Dawn</div>
+          </div>
+        </div>
+
+        <button
+          class="nav prev"
+          id="prevBtn"
+          type="button"
+          aria-label="Previous slide"
+        >
+          &#10094;
+        </button>
+        <button
+          class="nav next"
+          id="nextBtn"
+          type="button"
+          aria-label="Next slide"
+        >
+          &#10095;
+        </button>
+
+        <div class="dots" id="dots" aria-label="Choose slide"></div>
+
+        <button
+          class="play-toggle"
+          id="playToggle"
+          type="button"
+          aria-pressed="true"
+        >
+          ⏸ Pause
+        </button>
+        <div class="progress">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

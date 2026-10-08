@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Music player with Web Audio synthesized tracks, playlist, seek bar, volume, shuffle and repeat."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Music Player</title>
+  </head>
+  <body>
+    <div class="player-wrap">
+      <div class="album-art" id="albumArt">
+        <div class="disc" id="disc"></div>
+        <span class="note">🎵</span>
+      </div>
+      <h2 class="track-title" id="trackTitle">—</h2>
+      <p class="track-artist" id="trackArtist">—</p>
+
+      <div class="progress-area">
+        <input
+          type="range"
+          id="seekBar"
+          min="0"
+          max="100"
+          value="0"
+          step="0.1"
+          aria-label="Seek"
+        />
+        <div class="times">
+          <span id="curTime">0:00</span><span id="totTime">0:00</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button
+          id="shuffleBtn"
+          class="ctrl ghost"
+          aria-label="Toggle shuffle"
+          title="Shuffle"
+        >
+          🔀
+        </button>
+        <button
+          id="prevBtn"
+          class="ctrl"
+          aria-label="Previous track"
+          title="Previous"
+        >
+          ⏮
+        </button>
+        <button
+          id="playBtn"
+          class="ctrl big"
+          aria-label="Play or pause"
+          title="Play/Pause"
+        >
+          ▶
+        </button>
+        <button id="nextBtn" class="ctrl" aria-label="Next track" title="Next">
+          ⏭
+        </button>
+        <button
+          id="repeatBtn"
+          class="ctrl ghost"
+          aria-label="Toggle repeat"
+          title="Repeat"
+        >
+          🔁
+        </button>
+      </div>
+
+      <div class="volume-area">
+        <span aria-hidden="true">🔈</span>
+        <input
+          type="range"
+          id="volBar"
+          min="0"
+          max="100"
+          value="70"
+          aria-label="Volume"
+        />
+      </div>
+
+      <h3 class="playlist-head">Playlist</h3>
+      <ul class="playlist" id="playlist"></ul>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

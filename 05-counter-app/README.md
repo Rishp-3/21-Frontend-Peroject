@@ -19,7 +19,11 @@ HTML5 · CSS3 · Vanilla JavaScript
 Open `index.html` in a browser, or:
 
 ```bash
+<<<<<<< HEAD:05-counter-app/README.md
 cd "05-counter-app" && python3 -m http.server 8000
+=======
+cd "05 Counter App" && python3 -m http.server 8000
+>>>>>>> fb0135e8399964d5be3fe967e313ec751795e9a2:05 Counter App/README.md
 ```
 
 ## Main functionality

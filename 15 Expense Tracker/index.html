@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Track income and expenses with categories, filters, monthly summary and localStorage persistence."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Expense Tracker</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <h1>💰 Expense Tracker</h1>
+        <p class="subtitle">
+          Keep your money in check — data stays in your browser.
+        </p>
+      </header>
+
+      <div class="header-row">
+        <label class="currency-label" for="currencySelect">Currency</label>
+        <select id="currencySelect" aria-label="Display currency">
+          <option value="USD">USD $</option>
+          <option value="INR">INR ₹</option>
+          <option value="EUR">EUR €</option>
+        </select>
+      </div>
+
+      <!-- Summary -->
+      <section class="summary" aria-label="Totals">
+        <div class="sum-card balance">
+          <span class="sum-label">Balance</span>
+          <strong id="balanceAmt" class="sum-amount">$0.00</strong>
+        </div>
+        <div class="sum-card income">
+          <span class="sum-label">Income</span>
+          <strong id="incomeAmt" class="sum-amount">$0.00</strong>
+        </div>
+        <div class="sum-card expense">
+          <span class="sum-label">Expenses</span>
+          <strong id="expenseAmt" class="sum-amount">$0.00</strong>
+        </div>
+      </section>
+
+      <!-- Transaction form -->
+      <section class="form-card card">
+        <h2>New Transaction</h2>
+        <form id="txForm" autocomplete="off">
+          <div class="row">
+            <input
+              type="text"
+              id="txDesc"
+              placeholder="Description (e.g. Salary, Groceries)"
+              maxlength="60"
+              required
+            />
+          </div>
+          <div class="row two-col">
+            <input
+              type="number"
+              id="txAmount"
+              placeholder="Amount"
+              min="0.01"
+              step="0.01"
+              required
+            />
+            <select id="txCategory" required>
+              <option value="" disabled selected>Category…</option>
+              <optgroup label="Income">
+                <option>Salary</option>
+                <option>Freelance</option>
+                <option>Investments</option>
+                <option>Gifts</option>
+                <option>Other Income</option>
+              </optgroup>
+              <optgroup label="Expenses">
+                <option>Food</option>
+                <option>Transport</option>
+                <option>Shopping</option>
+                <option>Bills</option>
+                <option>Entertainment</option>
+                <option>Health</option>
+                <option>Other Expense</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="row two-col">
+            <div
+              class="type-toggle"
+              role="radiogroup"
+              aria-label="Transaction type"
+            >
+              <label class="type-opt income-opt">
+                <input type="radio" name="txType" value="income" /> Income
+              </label>
+              <label class="type-opt expense-opt">
+                <input type="radio" name="txType" value="expense" checked />
+                Expense
+              </label>
+            </div>
+            <input type="date" id="txDate" required />
+          </div>
+          <button type="submit" class="btn primary" id="submitBtn">
+            ➕ Add Transaction
+          </button>
+          <button type="button" class="btn ghost" id="cancelEditBtn" hidden>
+            Cancel Edit
+          </button>
+        </form>
+      </section>
+
+      <!-- Filters + list -->
+      <section class="list-card card">
+        <div class="list-head">
+          <h2>History</h2>
+          <div class="filters">
+            <select id="filterType" aria-label="Filter by type">
+              <option value="all">All types</option>
+              <option value="income">Income only</option>
+              <option value="expense">Expense only</option>
+            </select>
+            <select id="filterSort" aria-label="Sort order">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="high">Amount: high → low</option>
+              <option value="low">Amount: low → high</option>
+            </select>
+          </div>
+        </div>
+        <ul id="txList" class="tx-list"></ul>
+        <p id="emptyState" class="empty-state">
+          No transactions yet. Add one above! 🧾
+        </p>
+        <div class="list-foot">
+          <button id="clearAllBtn" class="btn danger" type="button">
+            🗑 Clear All
+          </button>
+        </div>
+      </section>
+      <!-- Category breakdown (pure CSS bars, no chart library) -->
+      <section
+        class="card breakdown"
+        aria-label="Expense breakdown by category"
+      >
+        <h2>Expense Breakdown</h2>
+        <div id="breakdownBars" class="bars"></div>
+        <p id="breakdownEmpty" class="muted">
+          Add expenses to see a breakdown.
+        </p>
+      </section>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>

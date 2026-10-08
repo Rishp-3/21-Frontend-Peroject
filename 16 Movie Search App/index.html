@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Movie search app powered by the OMDb API with debounced search, posters, ratings and pagination."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Movie Search App</title>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <h1>🎬 Movie Search App</h1>
+        <p class="subtitle">
+          Powered by the free
+          <a href="https://www.omdbapi.com/" target="_blank" rel="noopener"
+            >OMDb API</a
+          >.
+        </p>
+
+        <form id="searchForm" class="search-row" role="search">
+          <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Search for any movie, e.g. Interstellar…"
+            aria-label="Search movies"
+            required
+          />
+          <select
+            id="typeFilter"
+            class="year-select"
+            aria-label="Filter by type"
+          >
+            <option value="all" selected>Everything</option>
+            <option value="movie">Movies</option>
+            <option value="series">Series</option>
+            <option value="episode">Episodes</option>
+          </select>
+          <select
+            id="yearFilter"
+            class="year-select"
+            aria-label="Filter by year"
+          >
+            <option value="">Any year</option>
+          </select>
+          <button type="submit" class="btn search-btn">Search</button>
+        </form>
+
+        <p class="key-hint">
+          ⚠ Demo key included — for production use your own free key at
+          <code>omdbapi.com/apikey.aspx</code> (update <code>API_KEY</code> in
+          main.js).
+        </p>
+      </header>
+
+      <!-- Status line -->
+      <div
+        id="statusLine"
+        class="status-line"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+      <!-- Results grid -->
+      <main id="resultsGrid" class="results-grid"></main>
+
+      <!-- Pagination -->
+      <nav class="pager" id="pager" aria-label="Pagination">
+        <button id="prevBtn" class="btn page-btn" type="button" disabled>
+          ← Prev
+        </button>
+        <span id="pageInfo" class="page-info">Page 1</span>
+        <button id="nextBtn" class="btn page-btn" type="button" disabled>
+          Next →
+        </button>
+      </nav>
+    </div>
+
+    <!-- Detail modal -->
+    <div
+      id="modal"
+      class="modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <div class="modal-box">
+        <button
+          id="modalClose"
+          class="modal-close"
+          type="button"
+          aria-label="Close details"
+        >
+          ✕
+        </button>
+        <div id="modalContent" class="modal-content"></div>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Client-side registration form validation with real-time feedback, regex rules and password strength meter."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Form Validation</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="head">
+        <h1>📋 Form Validation</h1>
+        <p class="subtitle">
+          Create your account — all fields are validated in real time.
+        </p>
+      </header>
+
+      <main>
+        <form id="regForm" class="form" novalidate>
+          <!-- Full name -->
+          <div class="field">
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              autocomplete="name"
+              aria-describedby="fullNameError"
+              placeholder="e.g. Rahul Sharma"
+            />
+            <small id="fullNameError" class="error" aria-live="polite"></small>
+          </div>
+
+          <!-- Email -->
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              aria-describedby="emailError"
+              placeholder="you@example.com"
+            />
+            <small id="emailError" class="error" aria-live="polite"></small>
+          </div>
+
+          <!-- Phone -->
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              autocomplete="tel"
+              aria-describedby="phoneError"
+              placeholder="10-digit number, e.g. 9876543210"
+            />
+            <small id="phoneError" class="error" aria-live="polite"></small>
+          </div>
+
+          <!-- Date of birth -->
+          <div class="field">
+            <label for="dob">Date of Birth</label>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              autocomplete="bday"
+              aria-describedby="dobError"
+            />
+            <small id="dobError" class="error" aria-live="polite"></small>
+          </div>
+
+          <!-- Password -->
+          <div class="field">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              autocomplete="new-password"
+              placeholder="Min. 8 characters"
+              aria-describedby="passwordError"
+            />
+            <button
+              type="button"
+              id="togglePassword"
+              class="pw-toggle"
+              aria-pressed="false"
+              aria-label="Show password"
+            >
+              👁 Show
+            </button>
+            <div class="strength" aria-hidden="true">
+              <div id="strengthBar" class="strength-bar"></div>
+            </div>
+            <small id="passwordError" class="error" aria-live="polite"></small>
+            <ul class="pw-rules">
+              <li id="rule-length">At least 8 characters</li>
+              <li id="rule-upper">One uppercase letter</li>
+              <li id="rule-lower">One lowercase letter</li>
+              <li id="rule-number">One number</li>
+              <li id="rule-special">One special character (!@#$…)</li>
+            </ul>
+          </div>
+
+          <!-- Confirm password -->
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              autocomplete="new-password"
+              placeholder="Re-enter password"
+              aria-describedby="confirmPasswordError"
+            />
+            <small
+              id="confirmPasswordError"
+              class="error"
+              aria-live="polite"
+            ></small>
+          </div>
+
+          <!-- Terms -->
+          <div class="field checkbox-field">
+            <label class="checkbox-label">
+              <input type="checkbox" id="terms" name="terms" />
+              <span>I agree to the Terms &amp; Conditions</span>
+            </label>
+            <small id="termsError" class="error" aria-live="polite"></small>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <div id="successPanel" class="success-panel hidden" role="status">
+          <div class="success-icon">✅</div>
+          <h2>Registration Successful!</h2>
+          <p id="successSummary"></p>
+          <button type="button" id="resetBtn" class="submit-btn secondary">
+            Register Another User
+          </button>
+        </div>
+      </main>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

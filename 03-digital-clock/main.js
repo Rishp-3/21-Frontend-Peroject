@@ -9,11 +9,11 @@ const formate = document.querySelector("#format");
 // FIX: "PST" was mapped to America/New_York (that's EST) and "CST" to
 // America/Los_Angeles (that's PST). Correct zones below; CST -> America/Chicago.
 let zones = {
-  1: "Asia/Kolkata",   // IST
+  1: "Asia/Kolkata", // IST
   2: "UTC",
   3: "America/Los_Angeles", // PST
-  4: "America/Chicago",     // CST
-  5: "Asia/Tokyo",          // JST
+  4: "America/Chicago", // CST
+  5: "Asia/Tokyo", // JST
 };
 
 // Intl.DateTimeFormat is far more reliable than the old
@@ -63,5 +63,5 @@ function set() {
 timeZOne.addEventListener("change", set);
 formate.addEventListener("change", set);
 
-set();            // render immediately (was missing -> blank for first second)
+set(); // render immediately (was missing -> blank for first second)
 setInterval(set, 1000);

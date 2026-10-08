@@ -85,13 +85,22 @@ function press(val) {
 
 function update() {
   const shownOp = operation === "X" ? "×" : operation;
-  que.textContent = num1 + (shownOp ? " " + shownOp : "") + (num2 ? " " + num2 : "");
+  que.textContent =
+    num1 + (shownOp ? " " + shownOp : "") + (num2 ? " " + num2 : "");
 }
 
 function output() {
-  if (num1 === "" || num1 === "-" || num2 === "" || num2 === "-" || operation === "") return;
+  if (
+    num1 === "" ||
+    num1 === "-" ||
+    num2 === "" ||
+    num2 === "-" ||
+    operation === ""
+  )
+    return;
 
-  const a = Number(num1), b = Number(num2);
+  const a = Number(num1),
+    b = Number(num2);
   let result;
   if (operation === "+") result = a + b;
   if (operation === "-") result = a - b;

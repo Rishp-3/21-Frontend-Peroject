@@ -5,7 +5,11 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: linear-gradient(135deg, #0f172a, #1e293b);
   min-height: 100vh;
   display: flex;
@@ -71,7 +75,9 @@ body {
   background: #1e293b;
   font-size: 1.15rem;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background 0.2s,
+    transform 0.15s;
 }
 
 .icon-btn:hover {
@@ -130,7 +136,9 @@ input[type="range"] {
   padding: 10px 12px;
   font-size: 0.84rem;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
   user-select: none;
 }
 
@@ -163,7 +171,9 @@ input[type="range"] {
   width: 0;
   border-radius: 6px;
   background: #dc2626;
-  transition: width 0.3s ease, background 0.3s ease;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
 }
 
 .strength-label {
@@ -181,7 +191,9 @@ input[type="range"] {
   font-size: 1rem;
   font-weight: 800;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 
 .btn.primary:hover {
@@ -240,4 +252,7 @@ input[type="range"] {
 }
 
 /* Repo-wide a11y polish: visible keyboard focus indicator */
-:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }
+:focus-visible {
+  outline: 3px solid #7fd4ff;
+  outline-offset: 2px;
+}

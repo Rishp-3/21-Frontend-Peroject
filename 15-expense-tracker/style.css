@@ -5,7 +5,11 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: linear-gradient(135deg, #134e5e, #71b280);
   min-height: 100vh;
   padding: 32px 20px;
@@ -50,9 +54,15 @@ body {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
-.sum-card.balance { background: linear-gradient(135deg, #6366f1, #4338ca); }
-.sum-card.income { background: linear-gradient(135deg, #16a34a, #15803d); }
-.sum-card.expense { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+.sum-card.balance {
+  background: linear-gradient(135deg, #6366f1, #4338ca);
+}
+.sum-card.income {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+.sum-card.expense {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
 
 .sum-label {
   display: block;
@@ -102,7 +112,9 @@ select {
   font-size: 0.92rem;
   font-family: inherit;
   background: #f8fafc;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 input:focus,
@@ -157,7 +169,9 @@ select:focus {
   border-radius: 10px;
   font-weight: 800;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 
 .btn.primary {
@@ -230,12 +244,22 @@ select:focus {
 }
 
 @keyframes slideIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.tx-item.income { border-left-color: #16a34a; }
-.tx-item.expense { border-left-color: #dc2626; }
+.tx-item.income {
+  border-left-color: #16a34a;
+}
+.tx-item.expense {
+  border-left-color: #dc2626;
+}
 
 .tx-info {
   flex: 1;
@@ -263,8 +287,12 @@ select:focus {
   white-space: nowrap;
 }
 
-.tx-amount.income { color: #16a34a; }
-.tx-amount.expense { color: #dc2626; }
+.tx-amount.income {
+  color: #16a34a;
+}
+.tx-amount.expense {
+  color: #dc2626;
+}
 
 .tx-del {
   border: none;
@@ -318,19 +346,76 @@ select:focus {
 }
 
 /* --- Phase-2 additions: currency row, cancel btn, breakdown bars --- */
-.header-row { display: flex; align-items: center; gap: .5rem; justify-content: flex-end; margin-bottom: .75rem; }
-.currency-label { font-size: .85rem; color: #475569; }
-#currencySelect { padding: .4rem .6rem; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; min-height: 40px; }
-.btn.ghost { background: transparent; border: 1px solid #cbd5e1; color: #334155; }
-.btn.ghost:hover { background: #f1f5f9; }
-.bars { display: grid; gap: .6rem; }
-.bar-row { display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: .6rem; }
-.bar-label { font-size: .85rem; color: #334155; overflow-wrap: anywhere; }
-.bar-track { background: #e2e8f0; border-radius: 999px; height: 12px; overflow: hidden; }
-.bar-fill { height: 100%; background: linear-gradient(90deg, #f87171, #dc2626); border-radius: 999px; transition: width .3s ease; }
-.bar-amount { font-size: .85rem; font-variant-numeric: tabular-nums; color: #334155; }
-.muted { color: #64748b; font-size: .9rem; }
-@media (max-width: 480px) { .bar-row { grid-template-columns: 90px 1fr auto; } }
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+.currency-label {
+  font-size: 0.85rem;
+  color: #475569;
+}
+#currencySelect {
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  min-height: 40px;
+}
+.btn.ghost {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+.btn.ghost:hover {
+  background: #f1f5f9;
+}
+.bars {
+  display: grid;
+  gap: 0.6rem;
+}
+.bar-row {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+}
+.bar-label {
+  font-size: 0.85rem;
+  color: #334155;
+  overflow-wrap: anywhere;
+}
+.bar-track {
+  background: #e2e8f0;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f87171, #dc2626);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+.bar-amount {
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  color: #334155;
+}
+.muted {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+@media (max-width: 480px) {
+  .bar-row {
+    grid-template-columns: 90px 1fr auto;
+  }
+}
 
 /* Repo-wide a11y polish: visible keyboard focus indicator */
-:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }
+:focus-visible {
+  outline: 3px solid #7fd4ff;
+  outline-offset: 2px;
+}

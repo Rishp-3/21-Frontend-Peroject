@@ -20,8 +20,23 @@
       <main class="panel">
         <!-- Output -->
         <div class="output-row">
-          <input type="text" id="pwOutput" class="pw-output" readonly placeholder="Click Generate!" aria-label="Generated password" />
-          <button id="copyBtn" class="icon-btn" type="button" title="Copy to clipboard" aria-label="Copy password">📋</button>
+          <input
+            type="text"
+            id="pwOutput"
+            class="pw-output"
+            readonly
+            placeholder="Click Generate!"
+            aria-label="Generated password"
+          />
+          <button
+            id="copyBtn"
+            class="icon-btn"
+            type="button"
+            title="Copy to clipboard"
+            aria-label="Copy password"
+          >
+            📋
+          </button>
         </div>
         <span id="copyMsg" class="copy-msg" role="status"></span>
 
@@ -31,7 +46,14 @@
             <label for="lengthRange">Length</label>
             <output id="lengthValue" class="badge">16</output>
           </div>
-          <input type="range" id="lengthRange" min="4" max="64" step="1" value="16" />
+          <input
+            type="range"
+            id="lengthRange"
+            min="4"
+            max="64"
+            step="1"
+            value="16"
+          />
         </div>
 
         <!-- Character types -->
@@ -56,12 +78,16 @@
 
         <!-- Strength -->
         <div class="strength-section">
-          <div class="strength-track"><div id="strengthFill" class="strength-fill"></div></div>
+          <div class="strength-track">
+            <div id="strengthFill" class="strength-fill"></div>
+          </div>
           <span id="strengthLabel" class="strength-label">Strength: –</span>
         </div>
 
         <!-- Generate -->
-        <button id="generateBtn" class="btn primary" type="button">⚡ Generate Password</button>
+        <button id="generateBtn" class="btn primary" type="button">
+          ⚡ Generate Password
+        </button>
 
         <!-- History -->
         <section class="history-section">

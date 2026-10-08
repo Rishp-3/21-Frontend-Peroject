@@ -151,25 +151,35 @@ slider.addEventListener("keydown", (event) => {
 let touchStartX = 0;
 let touchEndX = 0;
 
-slidesEl.addEventListener("touchstart", (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
+slidesEl.addEventListener(
+  "touchstart",
+  (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  },
+  { passive: true },
+);
 
-slidesEl.addEventListener("touchend", (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  const diff = touchStartX - touchEndX;
-  if (Math.abs(diff) > 50) {
-    if (diff > 0) next();
-    else prev();
-    restartAutoplay();
-  }
-}, { passive: true });
+slidesEl.addEventListener(
+  "touchend",
+  (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) next();
+      else prev();
+      restartAutoplay();
+    }
+  },
+  { passive: true },
+);
 
 /* ------------------------------------------------------------------ */
 /*  Init                                                               */
 /* ------------------------------------------------------------------ */
 render();
 // Respect prefers-reduced-motion: users who ask for less motion get a manual slider.
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
 if (!reduceMotion) startAutoplay();
 else stopAutoplay();

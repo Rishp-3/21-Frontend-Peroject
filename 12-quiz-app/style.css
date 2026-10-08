@@ -5,7 +5,11 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
   min-height: 100vh;
   display: flex;
@@ -67,7 +71,10 @@ body {
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    opacity 0.2s;
 }
 
 .btn.primary {
@@ -101,7 +108,9 @@ body {
   background: #eff6ff;
   border-radius: 20px;
   padding: 5px 14px;
-  transition: color 0.2s, background 0.2s;
+  transition:
+    color 0.2s,
+    background 0.2s;
 }
 
 .timer.low {
@@ -111,8 +120,13 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.07); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
 }
 
 .progress-track {
@@ -153,7 +167,10 @@ body {
   font-size: 0.95rem;
   color: #334155;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    transform 0.15s;
 }
 
 .answer-btn:hover:not(:disabled) {
@@ -256,8 +273,12 @@ body {
   color: #1e293b;
 }
 
-.stat-value.good { color: #16a34a; }
-.stat-value.bad { color: #dc2626; }
+.stat-value.good {
+  color: #16a34a;
+}
+.stat-value.bad {
+  color: #dc2626;
+}
 
 .hidden {
   display: none;
@@ -279,4 +300,7 @@ body {
 }
 
 /* Repo-wide a11y polish: visible keyboard focus indicator */
-:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }
+:focus-visible {
+  outline: 3px solid #7fd4ff;
+  outline-offset: 2px;
+}

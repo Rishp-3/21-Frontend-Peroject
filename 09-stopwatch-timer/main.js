@@ -65,7 +65,9 @@ function setStatus() {
     const idle = elapsed === 0;
     statusText.textContent = idle ? "Idle" : "Paused";
     statusText.className = idle ? "" : "paused";
-    startBtn.querySelector(".startText").textContent = idle ? "Start" : "Resume";
+    startBtn.querySelector(".startText").textContent = idle
+      ? "Start"
+      : "Resume";
     startBtn.querySelector(".startIcon").textContent = "▶";
     startBtn.classList.remove("running");
   }
@@ -90,7 +92,9 @@ function renderLaps() {
     const worst = Math.max(...laps);
     bestData.textContent = formatFull(best);
     worstData.textContent = formatFull(worst);
-    averageData.textContent = formatFull(laps.reduce((a, b) => a + b, 0) / laps.length);
+    averageData.textContent = formatFull(
+      laps.reduce((a, b) => a + b, 0) / laps.length,
+    );
 
     // highlight rows
     [...lapTableBody.rows].forEach((row) => {
@@ -102,8 +106,10 @@ function renderLaps() {
       // Highlight only the FIRST lap (lowest lap number) achieving best/worst time.
       const firstBestIdx = laps.indexOf(best);
       const firstWorstIdx = laps.indexOf(worst);
-      if (lapTime === best && firstBestIdx === laps.length - 1 - idx) row.classList.add("best-lap");
-      else if (lapTime === worst && firstWorstIdx === laps.length - 1 - idx) row.classList.add("worst-lap");
+      if (lapTime === best && firstBestIdx === laps.length - 1 - idx)
+        row.classList.add("best-lap");
+      else if (lapTime === worst && firstWorstIdx === laps.length - 1 - idx)
+        row.classList.add("worst-lap");
     });
   } else {
     bestData.textContent = "--:--.--";

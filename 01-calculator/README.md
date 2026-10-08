@@ -6,23 +6,23 @@ This project provides basic arithmetic operations with a clean and simple calcul
 
 ## 🚀 Features
 
-* ➕ Addition
-* ➖ Subtraction
-* ✖️ Multiplication
-* ➗ Division
-* `%` Percentage calculation
-* `AC` — Clear all values
-* `⌫` — Backspace
-* `.` — Decimal number support
-* `=` — Calculate result
-* Division-by-zero error handling
-* Simple and clean UI
+- ➕ Addition
+- ➖ Subtraction
+- ✖️ Multiplication
+- ➗ Division
+- `%` Percentage calculation
+- `AC` — Clear all values
+- `⌫` — Backspace
+- `.` — Decimal number support
+- `=` — Calculate result
+- Division-by-zero error handling
+- Simple and clean UI
 
 ## 🛠️ Technologies Used
 
-* **HTML5** — Calculator structure and buttons
-* **CSS3** — Layout and styling
-* **JavaScript** — Calculator logic and operations
+- **HTML5** — Calculator structure and buttons
+- **CSS3** — Layout and styling
+- **JavaScript** — Calculator logic and operations
 
 ## 📁 Project Structure
 
@@ -41,15 +41,15 @@ The calculator interface is created using HTML buttons for numbers and operation
 
 JavaScript handles:
 
-* User button clicks
-* Number input
-* Decimal input
-* Arithmetic operations
-* Percentage calculation
-* Backspace
-* Clearing the calculator
-* Displaying the result
-* Division-by-zero error handling
+- User button clicks
+- Number input
+- Decimal input
+- Arithmetic operations
+- Percentage calculation
+- Backspace
+- Clearing the calculator
+- Displaying the result
+- Division-by-zero error handling
 
 The calculator stores the first number, second number, and selected operation separately before calculating the final result.
 
@@ -95,25 +95,25 @@ No additional installation or dependencies are required.
 
 This project was created to practice:
 
-* HTML structure
-* CSS Grid
-* DOM manipulation
-* JavaScript event listeners
-* Conditional statements
-* Functions
-* Variables and state management
-* Basic arithmetic operations
+- HTML structure
+- CSS Grid
+- DOM manipulation
+- JavaScript event listeners
+- Conditional statements
+- Functions
+- Variables and state management
+- Basic arithmetic operations
 
 ## 🔮 Future Improvements
 
 Possible improvements for future versions:
 
-* Keyboard support
-* Calculation history
-* Dark/Light mode
-* More advanced mathematical operations
-* Better mobile responsiveness
-* Improved error handling
+- Keyboard support
+- Calculation history
+- Dark/Light mode
+- More advanced mathematical operations
+- Better mobile responsiveness
+- Improved error handling
 
 ## 👨‍💻 Author
 

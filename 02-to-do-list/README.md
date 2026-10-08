@@ -6,17 +6,17 @@ This project provides a simple interface to add and manage tasks.
 
 ## 🚀 Features
 
-* ➕ Add new tasks
-* 📝 Task input field
-* 📋 My Task section
-* 🖥️ Simple and clean user interface
-* 🌐 Runs directly in a web browser
+- ➕ Add new tasks
+- 📝 Task input field
+- 📋 My Task section
+- 🖥️ Simple and clean user interface
+- 🌐 Runs directly in a web browser
 
 ## 🛠️ Technologies Used
 
-* **HTML5** — Structure of the application
-* **CSS3** — Styling and layout
-* **JavaScript** — Task management and functionality
+- **HTML5** — Structure of the application
+- **CSS3** — Styling and layout
+- **JavaScript** — Task management and functionality
 
 ## 📁 Project Structure
 
@@ -37,10 +37,10 @@ After entering a task, the **Add** button is used to add the task to the **My Ta
 
 The HTML structure contains:
 
-* Task input field
-* Add button
-* My Task heading
-* Task table
+- Task input field
+- Add button
+- My Task heading
+- Task table
 
 ## ▶️ How to Run
 
@@ -70,25 +70,25 @@ No additional installation or dependencies are required.
 
 This project is useful for practicing:
 
-* HTML elements
-* CSS styling
-* JavaScript DOM manipulation
-* Input handling
-* Button click events
-* Dynamic task management
-* Basic frontend development
+- HTML elements
+- CSS styling
+- JavaScript DOM manipulation
+- Input handling
+- Button click events
+- Dynamic task management
+- Basic frontend development
 
 ## 🔮 Future Improvements
 
 Possible improvements:
 
-* ✅ Mark tasks as completed
-* 🗑️ Delete tasks
-* ✏️ Edit tasks
-* 💾 Save tasks using Local Storage
-* 🔍 Filter tasks
-* 📅 Add task dates
-* 📱 Improve mobile responsiveness
+- ✅ Mark tasks as completed
+- 🗑️ Delete tasks
+- ✏️ Edit tasks
+- 💾 Save tasks using Local Storage
+- 🔍 Filter tasks
+- 📅 Add task dates
+- 📱 Improve mobile responsiveness
 
 ## 👨‍💻 Author
 

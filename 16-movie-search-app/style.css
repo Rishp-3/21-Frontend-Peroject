@@ -5,7 +5,11 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: #0b0f19;
   min-height: 100vh;
   color: #e2e8f0;
@@ -79,7 +83,10 @@ body {
   border-radius: 30px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    opacity 0.2s;
 }
 
 .search-btn {
@@ -130,13 +137,22 @@ body {
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    border-color 0.2s;
   animation: fadeUp 0.35s ease both;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .movie-card:hover {
@@ -206,7 +222,9 @@ body {
 }
 
 @keyframes shimmer {
-  to { background-position: -200% 0; }
+  to {
+    background-position: -200% 0;
+  }
 }
 
 /* Pagination */
@@ -378,4 +396,7 @@ body {
 }
 
 /* Repo-wide a11y polish: visible keyboard focus indicator */
-:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }
+:focus-visible {
+  outline: 3px solid #7fd4ff;
+  outline-offset: 2px;
+}

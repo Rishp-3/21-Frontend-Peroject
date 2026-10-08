@@ -20,8 +20,12 @@ function change(delta) {
   render();
 }
 
-document.querySelector(".increment").addEventListener("click", () => change(+1));
-document.querySelector(".decrement").addEventListener("click", () => change(-1));
+document
+  .querySelector(".increment")
+  .addEventListener("click", () => change(+1));
+document
+  .querySelector(".decrement")
+  .addEventListener("click", () => change(-1));
 document.querySelector(".inc-ten").addEventListener("click", () => change(+10));
 document.querySelector(".dec-ten").addEventListener("click", () => change(-10));
 // Reset zeroes the count but keeps Total Clicks / Highest stats (original behavior).

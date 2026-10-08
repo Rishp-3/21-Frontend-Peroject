@@ -14,38 +14,101 @@
     <main class="app">
       <header class="topbar">
         <h1>🗒️ Notes App</h1>
-        <p class="subtitle">Your quick sticky notes — saved automatically in this browser.</p>
+        <p class="subtitle">
+          Your quick sticky notes — saved automatically in this browser.
+        </p>
       </header>
 
       <!-- Composer -->
       <section class="composer card" aria-label="Create a new note">
-        <input type="text" id="noteTitle" class="title-input" placeholder="Note title…" maxlength="80" />
-        <textarea id="noteBody" class="body-input" placeholder="Write your note here…" rows="3" maxlength="2000"></textarea>
+        <input
+          type="text"
+          id="noteTitle"
+          class="title-input"
+          placeholder="Note title…"
+          maxlength="80"
+        />
+        <textarea
+          id="noteBody"
+          class="body-input"
+          placeholder="Write your note here…"
+          rows="3"
+          maxlength="2000"
+        ></textarea>
         <div class="composer-bottom">
           <div class="color-picker" role="radiogroup" aria-label="Note color">
-            <button type="button" class="swatch yellow active" data-color="yellow" role="radio" aria-checked="true" aria-label="Yellow"></button>
-            <button type="button" class="swatch green" data-color="green" role="radio" aria-checked="false" aria-label="Green"></button>
-            <button type="button" class="swatch blue" data-color="blue" role="radio" aria-checked="false" aria-label="Blue"></button>
-            <button type="button" class="swatch pink" data-color="pink" role="radio" aria-checked="false" aria-label="Pink"></button>
-            <button type="button" class="swatch orange" data-color="orange" role="radio" aria-checked="false" aria-label="Orange"></button>
+            <button
+              type="button"
+              class="swatch yellow active"
+              data-color="yellow"
+              role="radio"
+              aria-checked="true"
+              aria-label="Yellow"
+            ></button>
+            <button
+              type="button"
+              class="swatch green"
+              data-color="green"
+              role="radio"
+              aria-checked="false"
+              aria-label="Green"
+            ></button>
+            <button
+              type="button"
+              class="swatch blue"
+              data-color="blue"
+              role="radio"
+              aria-checked="false"
+              aria-label="Blue"
+            ></button>
+            <button
+              type="button"
+              class="swatch pink"
+              data-color="pink"
+              role="radio"
+              aria-checked="false"
+              aria-label="Pink"
+            ></button>
+            <button
+              type="button"
+              class="swatch orange"
+              data-color="orange"
+              role="radio"
+              aria-checked="false"
+              aria-label="Orange"
+            ></button>
           </div>
           <span id="charCount" class="char-count">0 / 2000</span>
-          <button id="addBtn" class="btn primary" type="button">➕ Add Note</button>
-          <button id="cancelEditBtn" class="btn ghost" type="button" hidden>Cancel</button>
+          <button id="addBtn" class="btn primary" type="button">
+            ➕ Add Note
+          </button>
+          <button id="cancelEditBtn" class="btn ghost" type="button" hidden>
+            Cancel
+          </button>
         </div>
       </section>
 
       <!-- Search + count -->
       <section class="toolbar">
-        <input type="search" id="searchInput" class="search" placeholder="🔍 Search notes…" aria-label="Search notes" />
-        <span id="notesCount" class="count-badge" aria-live="polite">0 notes</span>
+        <input
+          type="search"
+          id="searchInput"
+          class="search"
+          placeholder="🔍 Search notes…"
+          aria-label="Search notes"
+        />
+        <span id="notesCount" class="count-badge" aria-live="polite"
+          >0 notes</span
+        >
         <span id="statusMsg" class="status-msg" role="status"></span>
       </section>
 
       <!-- Notes grid -->
       <div id="notesGrid" class="grid"></div>
 
-      <p id="emptyState" class="empty-state">📭 No notes yet — add your first one above!</p>
+      <p id="emptyState" class="empty-state">
+        📭 No notes yet — add your first one above!
+      </p>
     </main>
     <script src="main.js"></script>
   </body>

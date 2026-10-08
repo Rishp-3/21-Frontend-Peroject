@@ -122,7 +122,7 @@ function shake(el) {
       { transform: "translateX(-4px)" },
       { transform: "translateX(0)" },
     ],
-    { duration: 260 }
+    { duration: 260 },
   );
 }
 
@@ -206,7 +206,10 @@ function highlight(text, query) {
   let i = 0;
   while (true) {
     const idx = lower.indexOf(q, i);
-    if (idx === -1) { out += escapeHtml(text.slice(i)); break; }
+    if (idx === -1) {
+      out += escapeHtml(text.slice(i));
+      break;
+    }
     out += escapeHtml(text.slice(i, idx));
     out += "<mark>" + escapeHtml(text.slice(idx, idx + q.length)) + "</mark>";
     i = idx + q.length;
@@ -229,7 +232,7 @@ function render() {
     (n) =>
       !query ||
       n.title.toLowerCase().includes(query) ||
-      n.body.toLowerCase().includes(query)
+      n.body.toLowerCase().includes(query),
   );
 
   notesGrid.innerHTML = "";
@@ -248,7 +251,9 @@ function render() {
         </div>
       </div>`;
 
-    card.querySelector(".edit").addEventListener("click", () => startEdit(note));
+    card
+      .querySelector(".edit")
+      .addEventListener("click", () => startEdit(note));
     card.querySelector(".del").addEventListener("click", () => {
       if (confirm(`Delete "${note.title}"?`)) deleteNote(note.id, card);
     });

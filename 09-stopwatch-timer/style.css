@@ -5,7 +5,11 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: #0f172a;
   color: #e2e8f0;
   min-height: 100vh;
@@ -100,7 +104,9 @@ main {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.1s, filter 0.2s;
+  transition:
+    transform 0.1s,
+    filter 0.2s;
   color: #fff;
 }
 
@@ -276,4 +282,7 @@ tbody tr.worst-lap td {
 }
 
 /* Repo-wide a11y polish: visible keyboard focus indicator */
-:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }
+:focus-visible {
+  outline: 3px solid #7fd4ff;
+  outline-offset: 2px;
+}

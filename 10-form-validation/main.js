@@ -68,7 +68,8 @@ const validators = {
     // Strip common Indian prefixes so +91 98765 43210 validates too.
     digits = digits.replace(/^\+?91[- ]?/, "").replace(/^0(?=\d{10}$)/, "");
     if (!/^\d+$/.test(digits)) return "Phone must contain digits only.";
-    if (digits.length !== 10) return "Phone number must be exactly 10 digits (after country code).";
+    if (digits.length !== 10)
+      return "Phone number must be exactly 10 digits (after country code).";
     if (!PHONE_RE.test(digits)) return "Phone must start with digit 6–9.";
     return "";
   },
@@ -168,7 +169,8 @@ function updateStrength(value) {
 /* ------------------------------------------------------------------ */
 Object.keys(fields).forEach((name) => {
   const input = fields[name];
-  const evtType = input.type === "checkbox" || input.type === "date" ? "change" : "input";
+  const evtType =
+    input.type === "checkbox" || input.type === "date" ? "change" : "input";
 
   input.addEventListener(evtType, () => {
     if (name === "password") {
@@ -230,7 +232,6 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
-
 
 /* ------------------------------------------------------------------ */
 /*  Extra fixes: DOB max date + show/hide password toggle              */

@@ -1,65 +1,236 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>21 Frontend Projects — Rishabh Pal</title>
-  <meta name="description" content="A collection of 21 interactive frontend projects built with vanilla HTML, CSS and JavaScript." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; }
-    :root { --bg: #0f1524; --card: #1b2233; --text: #e8ecf7; --muted: #9aa7c4; --accent: #4f8cff; }
-    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-           background: var(--bg); color: var(--text); min-height: 100vh; padding: clamp(16px, 4vw, 48px); }
-    header { text-align: center; max-width: 720px; margin: 0 auto 32px; }
-    h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0 0 8px; }
-    header p { color: var(--muted); margin: 0; }
-    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
-            max-width: 1100px; margin: 0 auto; }
-    .card { display: block; background: var(--card); border: 1px solid #2a3450; border-radius: 14px;
-            padding: 18px; text-decoration: none; color: inherit; transition: transform .15s, border-color .15s; }
-    .card:hover, .card:focus-visible { transform: translateY(-3px); border-color: var(--accent); }
-    .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-    .num { font-size: .8rem; color: var(--accent); font-weight: 700; letter-spacing: .05em; }
-    .name { font-size: 1.05rem; font-weight: 700; margin: 4px 0; }
-    .desc { font-size: .85rem; color: var(--muted); margin: 0; }
-    footer { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 40px; }
-    footer a { color: var(--accent); }
-  </style>
-</head>
-<body>
-  <main>
-    <header>
-      <h1>🚀 21 Frontend Projects</h1>
-      <p>Vanilla HTML · CSS · JavaScript — no frameworks. Click any card to open the project.</p>
-    </header>
-    <nav class="grid" aria-label="Project list">
-      <a class="card" href="01-calculator/"><span class="num">01</span><div class="name">🧮 Calculator</div><p class="desc">Chained operators, keyboard support, safe float output</p></a>
-      <a class="card" href="02-to-do-list/"><span class="num">02</span><div class="name">📝 To-Do List</div><p class="desc">Tasks with localStorage persistence</p></a>
-      <a class="card" href="03-digital-clock/"><span class="num">03</span><div class="name">🕐 Digital Clock</div><p class="desc">12/24h formats and timezone selector</p></a>
-      <a class="card" href="04-number-guessing-game/"><span class="num">04</span><div class="name">🎯 Number Guessing</div><p class="desc">Hot/cold hints and win statistics</p></a>
-      <a class="card" href="05-counter-app/"><span class="num">05</span><div class="name">🔢 Counter App</div><p class="desc">Increment, decrement, highest &amp; totals</p></a>
-      <a class="card" href="06-random-quote-generator/"><span class="num">06</span><div class="name">💬 Random Quotes</div><p class="desc">Quotes from an API with error handling</p></a>
-      <a class="card" href="07-color-generator/"><span class="num">07</span><div class="name">🎨 Color Generator</div><p class="desc">HEX/RGB/HSL/CMYK with one-click copy</p></a>
-      <a class="card" href="08-weather-app/"><span class="num">08</span><div class="name">🌦️ Weather App</div><p class="desc">Current weather + 5-day forecast (own API key)</p></a>
-      <a class="card" href="09-stopwatch-timer/"><span class="num">09</span><div class="name">⏱️ Stopwatch</div><p class="desc">Laps with best/worst highlighting</p></a>
-      <a class="card" href="10-form-validation/"><span class="num">10</span><div class="name">📋 Form Validation</div><p class="desc">Real-time validation &amp; password strength</p></a>
-      <a class="card" href="11-image-slider/"><span class="num">11</span><div class="name">🖼️ Image Slider</div><p class="desc">Autoplay, swipe, drag, reduced-motion aware</p></a>
-      <a class="card" href="12-quiz-app/"><span class="num">12</span><div class="name">🧠 Quiz App</div><p class="desc">Timed quiz with shuffled questions</p></a>
-      <a class="card" href="13-password-generator/"><span class="num">13</span><div class="name">🔐 Password Generator</div><p class="desc">Crypto-random with strength meter</p></a>
-      <a class="card" href="14-notes-app/"><span class="num">14</span><div class="name">🗒️ Notes App</div><p class="desc">CRUD notes, search, color labels</p></a>
-      <a class="card" href="15-expense-tracker/"><span class="num">15</span><div class="name">💰 Expense Tracker</div><p class="desc">Multi-currency budget with breakdown bars</p></a>
-      <a class="card" href="16-movie-search-app/"><span class="num">16</span><div class="name">🎬 Movie Search</div><p class="desc">OMDb search with detail modal (own API key)</p></a>
-      <a class="card" href="17-chat-ui/"><span class="num">17</span><div class="name">💬 Chat UI</div><p class="desc">Messenger frontend with simulated replies</p></a>
-      <a class="card" href="18-music-player/"><span class="num">18</span><div class="name">🎵 Music Player</div><p class="desc">Web Audio synthesized tracks &amp; playlist</p></a>
-      <a class="card" href="19-ecommerce-product-page/"><span class="num">19</span><div class="name">🛒 Product Page</div><p class="desc">Variants, cart drawer, checkout, reviews</p></a>
-      <a class="card" href="20-typing-speed-test/"><span class="num">20</span><div class="name">⌨️ Typing Speed Test</div><p class="desc">WPM, CPM &amp; accuracy with personal bests</p></a>
-      <a class="card" href="21-rock-paper-scissors/"><span class="num">21</span><div class="name">✊ Rock Paper Scissors</div><p class="desc">Match play against an adaptive CPU</p></a>
-    </nav>
-  </main>
-  <footer>
-    Built with vanilla HTML/CSS/JS by <a href="https://github.com/Rishp-3">Rishabh Pal</a> ·
-    <a href="https://github.com/Rishp-3/21-Frontend-Peroject">Source on GitHub</a>
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>21 Frontend Projects — Rishabh Pal</title>
+    <meta
+      name="description"
+      content="A collection of 21 interactive frontend projects built with vanilla HTML, CSS and JavaScript."
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      :root {
+        --bg: #0f1524;
+        --card: #1b2233;
+        --text: #e8ecf7;
+        --muted: #9aa7c4;
+        --accent: #4f8cff;
+      }
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        padding: clamp(16px, 4vw, 48px);
+      }
+      header {
+        text-align: center;
+        max-width: 720px;
+        margin: 0 auto 32px;
+      }
+      h1 {
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+        margin: 0 0 8px;
+      }
+      header p {
+        color: var(--muted);
+        margin: 0;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .card {
+        display: block;
+        background: var(--card);
+        border: 1px solid #2a3450;
+        border-radius: 14px;
+        padding: 18px;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          transform 0.15s,
+          border-color 0.15s;
+      }
+      .card:hover,
+      .card:focus-visible {
+        transform: translateY(-3px);
+        border-color: var(--accent);
+      }
+      .card:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .num {
+        font-size: 0.8rem;
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      .name {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin: 4px 0;
+      }
+      .desc {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin: 0;
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-top: 40px;
+      }
+      footer a {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>🚀 21 Frontend Projects</h1>
+        <p>
+          Vanilla HTML · CSS · JavaScript — no frameworks. Click any card to
+          open the project.
+        </p>
+      </header>
+      <nav class="grid" aria-label="Project list">
+        <a class="card" href="01-calculator/"
+          ><span class="num">01</span>
+          <div class="name">🧮 Calculator</div>
+          <p class="desc">
+            Chained operators, keyboard support, safe float output
+          </p></a
+        >
+        <a class="card" href="02-to-do-list/"
+          ><span class="num">02</span>
+          <div class="name">📝 To-Do List</div>
+          <p class="desc">Tasks with localStorage persistence</p></a
+        >
+        <a class="card" href="03-digital-clock/"
+          ><span class="num">03</span>
+          <div class="name">🕐 Digital Clock</div>
+          <p class="desc">12/24h formats and timezone selector</p></a
+        >
+        <a class="card" href="04-number-guessing-game/"
+          ><span class="num">04</span>
+          <div class="name">🎯 Number Guessing</div>
+          <p class="desc">Hot/cold hints and win statistics</p></a
+        >
+        <a class="card" href="05-counter-app/"
+          ><span class="num">05</span>
+          <div class="name">🔢 Counter App</div>
+          <p class="desc">Increment, decrement, highest &amp; totals</p></a
+        >
+        <a class="card" href="06-random-quote-generator/"
+          ><span class="num">06</span>
+          <div class="name">💬 Random Quotes</div>
+          <p class="desc">Quotes from an API with error handling</p></a
+        >
+        <a class="card" href="07-color-generator/"
+          ><span class="num">07</span>
+          <div class="name">🎨 Color Generator</div>
+          <p class="desc">HEX/RGB/HSL/CMYK with one-click copy</p></a
+        >
+        <a class="card" href="08-weather-app/"
+          ><span class="num">08</span>
+          <div class="name">🌦️ Weather App</div>
+          <p class="desc">Current weather + 5-day forecast (own API key)</p></a
+        >
+        <a class="card" href="09-stopwatch-timer/"
+          ><span class="num">09</span>
+          <div class="name">⏱️ Stopwatch</div>
+          <p class="desc">Laps with best/worst highlighting</p></a
+        >
+        <a class="card" href="10-form-validation/"
+          ><span class="num">10</span>
+          <div class="name">📋 Form Validation</div>
+          <p class="desc">Real-time validation &amp; password strength</p></a
+        >
+        <a class="card" href="11-image-slider/"
+          ><span class="num">11</span>
+          <div class="name">🖼️ Image Slider</div>
+          <p class="desc">Autoplay, swipe, drag, reduced-motion aware</p></a
+        >
+        <a class="card" href="12-quiz-app/"
+          ><span class="num">12</span>
+          <div class="name">🧠 Quiz App</div>
+          <p class="desc">Timed quiz with shuffled questions</p></a
+        >
+        <a class="card" href="13-password-generator/"
+          ><span class="num">13</span>
+          <div class="name">🔐 Password Generator</div>
+          <p class="desc">Crypto-random with strength meter</p></a
+        >
+        <a class="card" href="14-notes-app/"
+          ><span class="num">14</span>
+          <div class="name">🗒️ Notes App</div>
+          <p class="desc">CRUD notes, search, color labels</p></a
+        >
+        <a class="card" href="15-expense-tracker/"
+          ><span class="num">15</span>
+          <div class="name">💰 Expense Tracker</div>
+          <p class="desc">Multi-currency budget with breakdown bars</p></a
+        >
+        <a class="card" href="16-movie-search-app/"
+          ><span class="num">16</span>
+          <div class="name">🎬 Movie Search</div>
+          <p class="desc">OMDb search with detail modal (own API key)</p></a
+        >
+        <a class="card" href="17-chat-ui/"
+          ><span class="num">17</span>
+          <div class="name">💬 Chat UI</div>
+          <p class="desc">Messenger frontend with simulated replies</p></a
+        >
+        <a class="card" href="18-music-player/"
+          ><span class="num">18</span>
+          <div class="name">🎵 Music Player</div>
+          <p class="desc">Web Audio synthesized tracks &amp; playlist</p></a
+        >
+        <a class="card" href="19-ecommerce-product-page/"
+          ><span class="num">19</span>
+          <div class="name">🛒 Product Page</div>
+          <p class="desc">Variants, cart drawer, checkout, reviews</p></a
+        >
+        <a class="card" href="20-typing-speed-test/"
+          ><span class="num">20</span>
+          <div class="name">⌨️ Typing Speed Test</div>
+          <p class="desc">WPM, CPM &amp; accuracy with personal bests</p></a
+        >
+        <a class="card" href="21-rock-paper-scissors/"
+          ><span class="num">21</span>
+          <div class="name">✊ Rock Paper Scissors</div>
+          <p class="desc">Match play against an adaptive CPU</p></a
+        >
+      </nav>
+    </main>
+    <footer>
+      Built with vanilla HTML/CSS/JS by
+      <a href="https://github.com/Rishp-3">Rishabh Pal</a> ·
+      <a href="https://github.com/Rishp-3/21-Frontend-Peroject"
+        >Source on GitHub</a
+      >
+    </footer>
+  </body>
 </html>

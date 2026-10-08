@@ -35,3 +35,4 @@ The application displays a random quote along with its author. Click the **Gener
 ├── style.css
 ├── main.js
 └── README.md
+```

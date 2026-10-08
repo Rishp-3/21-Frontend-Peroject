@@ -11,7 +11,12 @@ const QUESTIONS = [
   },
   {
     question: "What is the largest ocean on Earth?",
-    answers: ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"],
+    answers: [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Pacific Ocean",
+      "Arctic Ocean",
+    ],
     correct: 2,
   },
   {
@@ -41,7 +46,12 @@ const QUESTIONS = [
   },
   {
     question: "Who painted the Mona Lisa?",
-    answers: ["Vincent van Gogh", "Pablo Picasso", "Michelangelo", "Leonardo da Vinci"],
+    answers: [
+      "Vincent van Gogh",
+      "Pablo Picasso",
+      "Michelangelo",
+      "Leonardo da Vinci",
+    ],
     correct: 3,
   },
   {
@@ -102,7 +112,11 @@ function buildGame() {
   gameQuestions = shuffle(QUESTIONS).map((q) => {
     const correctText = q.answers[q.correct];
     const answers = shuffle(q.answers);
-    return { question: q.question, answers, correct: answers.indexOf(correctText) };
+    return {
+      question: q.question,
+      answers,
+      correct: answers.indexOf(correctText),
+    };
   });
 }
 let answered = false;
@@ -113,7 +127,9 @@ let countdownId = null;
 /*  Screen helpers                                                    */
 /* ------------------------------------------------------------------ */
 function show(screen) {
-  [startScreen, quizScreen, resultScreen].forEach((s) => s.classList.add("hidden"));
+  [startScreen, quizScreen, resultScreen].forEach((s) =>
+    s.classList.add("hidden"),
+  );
   screen.classList.remove("hidden");
 }
 
@@ -210,7 +226,8 @@ function selectAnswer(choice, btn) {
 
 function updateNextLabel() {
   // Last question -> button reads "Finish".
-  nextBtn.textContent = index >= gameQuestions.length - 1 ? "Finish" : "Next Question →";
+  nextBtn.textContent =
+    index >= gameQuestions.length - 1 ? "Finish" : "Next Question →";
 }
 
 function goNext() {

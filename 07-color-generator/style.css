@@ -5,7 +5,12 @@
 }
 
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   background-color: #f4f5fb;
   color: #111827;
   min-height: 100vh;
@@ -211,7 +216,9 @@ footer {
   place-items: center;
   cursor: pointer;
   color: #374151;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .copyBtn:hover,

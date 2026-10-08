@@ -5,7 +5,11 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   min-height: 100vh;
   display: flex;
@@ -64,7 +68,9 @@ body {
   border: 2px solid #cbd5e1;
   border-radius: 10px;
   font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   background: #f8fafc;
 }
 
@@ -105,7 +111,9 @@ body {
   width: 0;
   border-radius: 4px;
   background: #dc2626;
-  transition: width 0.25s ease, background-color 0.25s ease;
+  transition:
+    width 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .pw-rules {
@@ -167,7 +175,9 @@ body {
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
 }
 
 .submit-btn:hover {
@@ -230,11 +240,21 @@ body {
 
 /* Show/hide password button */
 .pw-toggle {
-  margin-top: 6px; padding: 6px 12px; font-size: .85rem;
-  background: #eef1f8; color: #24304a; border: 1px solid #c9d2e4;
-  border-radius: 8px; cursor: pointer;
+  margin-top: 6px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  background: #eef1f8;
+  color: #24304a;
+  border: 1px solid #c9d2e4;
+  border-radius: 8px;
+  cursor: pointer;
 }
-.pw-toggle:hover { background: #dde4f2; }
+.pw-toggle:hover {
+  background: #dde4f2;
+}
 
 /* Repo-wide a11y polish: visible keyboard focus indicator */
-:focus-visible { outline: 3px solid #7fd4ff; outline-offset: 2px; }
+:focus-visible {
+  outline: 3px solid #7fd4ff;
+  outline-offset: 2px;
+}

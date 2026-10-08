@@ -50,7 +50,8 @@ function setMessage(text, cls) {
 function addHistory(value, dir) {
   const li = document.createElement("li");
   li.textContent = value + (dir ? " (" + dir + ")" : "");
-  if (dir) li.classList.add(dir === "low" ? "low" : dir === "high" ? "high" : "win");
+  if (dir)
+    li.classList.add(dir === "low" ? "low" : dir === "high" ? "high" : "win");
   historyEl.appendChild(li);
 }
 
@@ -86,7 +87,10 @@ guessForm.addEventListener("submit", function (event) {
   if (value === secret) {
     gameOver = true;
     guessInput.disabled = true;
-    setMessage(`🎉 Correct! You won in ${attempts} ${attempts === 1 ? "attempt" : "attempts"}.`, "win");
+    setMessage(
+      `🎉 Correct! You won in ${attempts} ${attempts === 1 ? "attempt" : "attempts"}.`,
+      "win",
+    );
     addHistory(value, "win");
     saveWin(attempts);
   } else {
@@ -94,10 +98,17 @@ guessForm.addEventListener("submit", function (event) {
     // Hot/cold hint promised in the meta description, based on distance.
     // Also passes low/high classes so the .message.low/.high CSS actually applies.
     const dist = Math.abs(value - secret);
-    const heat = dist <= 2 ? "🔥 Very hot!" : dist <= 5 ? "♨️ Warm" : dist <= 15 ? "🌤️ Cool" : "🧊 Cold";
+    const heat =
+      dist <= 2
+        ? "🔥 Very hot!"
+        : dist <= 5
+          ? "♨️ Warm"
+          : dist <= 15
+            ? "🌤️ Cool"
+            : "🧊 Cold";
     setMessage(
       `${value} is TOO ${tooLow ? "LOW ⬆️" : "HIGH ⬇️"} — ${heat}`,
-      tooLow ? "low" : "high"
+      tooLow ? "low" : "high",
     );
     addHistory(value, tooLow ? "low" : "high");
   }

@@ -6,27 +6,27 @@ The project displays the current time along with the day, date, year, AM/PM indi
 
 ## 🚀 Features
 
-* 🕐 Displays digital time
-* 🌅 AM/PM display
-* 📅 Displays current day
-* 📆 Displays current date
-* 🗓️ Displays current year
-* 🌍 Timezone selection
+- 🕐 Displays digital time
+- 🌅 AM/PM display
+- 📅 Displays current day
+- 📆 Displays current date
+- 🗓️ Displays current year
+- 🌍 Timezone selection
+  - IST
+  - UTC
+  - PST
+  - CST
+  - JST
 
-  * IST
-  * UTC
-  * PST
-  * CST
-  * JST
-* 🔢 12-hour and 24-hour format options
-* 🖥️ Simple and clean interface
-* 🌐 Runs directly in a web browser
+- 🔢 12-hour and 24-hour format options
+- 🖥️ Simple and clean interface
+- 🌐 Runs directly in a web browser
 
 ## 🛠️ Technologies Used
 
-* **HTML5** — Structure of the clock
-* **CSS3** — Styling and layout
-* **JavaScript** — Time, date, timezone, and format functionality
+- **HTML5** — Structure of the clock
+- **CSS3** — Styling and layout
+- **JavaScript** — Time, date, timezone, and format functionality
 
 ## 📁 Project Structure
 
@@ -43,11 +43,11 @@ Digital-Clock/
 
 The application contains separate sections for displaying:
 
-* Current time
-* AM/PM
-* Day
-* Date
-* Year
+- Current time
+- AM/PM
+- Day
+- Date
+- Year
 
 It also provides two selection controls:
 
@@ -100,26 +100,26 @@ No additional installation or dependencies are required.
 
 This project is useful for practicing:
 
-* HTML structure
-* CSS styling
-* JavaScript Date object
-* Time formatting
-* DOM manipulation
-* Select elements
-* Event handling
-* Dynamic content updates
+- HTML structure
+- CSS styling
+- JavaScript Date object
+- Time formatting
+- DOM manipulation
+- Select elements
+- Event handling
+- Dynamic content updates
 
 ## 🔮 Future Improvements
 
 Possible improvements:
 
-* 🌙 Dark/Light mode
-* ⏱️ Stopwatch
-* ⏰ Alarm functionality
-* 🌍 More global timezones
-* 🌐 Automatic timezone detection
-* 🎨 Custom clock themes
-* 📱 Improved mobile responsiveness
+- 🌙 Dark/Light mode
+- ⏱️ Stopwatch
+- ⏰ Alarm functionality
+- 🌍 More global timezones
+- 🌐 Automatic timezone detection
+- 🎨 Custom clock themes
+- 📱 Improved mobile responsiveness
 
 ## 👨‍💻 Author
 

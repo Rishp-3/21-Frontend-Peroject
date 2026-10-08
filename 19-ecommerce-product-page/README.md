@@ -1,9 +1,11 @@
 # 19 - E-commerce Product Page
 
 ## Description
+
 A complete single-product storefront page (wireless headphones) with image gallery, color/style variants, live pricing, quantity picker, slide-out cart, and customer reviews — all persisted in `localStorage`. Product imagery is generated as inline SVG so there are **no external assets to break**.
 
 ## Features
+
 - 4-view gallery with clickable thumbnails that recolor per selected swatch
 - Color swatches + style chips (radiogroup semantics, ARIA checked states)
 - Price updates per style with strikethrough compare-at price
@@ -14,13 +16,16 @@ A complete single-product storefront page (wireless headphones) with image galle
 - Sticky navbar with live cart-count badge; responsive 2-col → 1-col layout
 
 ## Technologies Used
+
 HTML5, CSS3 (Grid, Flexbox, transitions), Vanilla JavaScript, localStorage, inline SVG
 
 ## How to Run
+
 ```bash
 cd "19-ecommerce-product-page"
 python3 -m http.server 8000   # or open index.html directly
 ```
 
 ## Main Functionality
+
 Choose color & style → set quantity → add to cart → open the drawer to review/remove items → checkout clears the cart with a success toast. Write a review with a star rating and it prepends to the list and updates the product's average score.

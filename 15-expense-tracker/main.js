@@ -60,11 +60,17 @@ dateInput.value = localTodayISO();
 /* ------------------------------------------------------------------ */
 /*  Income / expense toggle styling                                    */
 /* ------------------------------------------------------------------ */
-const typeRadios = Array.from(document.querySelectorAll('input[name="txType"]'));
+const typeRadios = Array.from(
+  document.querySelectorAll('input[name="txType"]'),
+);
 function refreshToggleUI() {
   const value = typeRadios.find((r) => r.checked).value;
-  document.querySelector(".income-opt").classList.toggle("selected", value === "income");
-  document.querySelector(".expense-opt").classList.toggle("selected", value === "expense");
+  document
+    .querySelector(".income-opt")
+    .classList.toggle("selected", value === "income");
+  document
+    .querySelector(".expense-opt")
+    .classList.toggle("selected", value === "expense");
 }
 typeRadios.forEach((r) => r.addEventListener("change", refreshToggleUI));
 refreshToggleUI();
@@ -74,7 +80,11 @@ refreshToggleUI();
 /* ------------------------------------------------------------------ */
 const CURRENCIES = { USD: "en-US", INR: "en-IN", EUR: "de-DE" };
 let currency = (() => {
-  try { return localStorage.getItem(CURRENCY_KEY) || "USD"; } catch { return "USD"; }
+  try {
+    return localStorage.getItem(CURRENCY_KEY) || "USD";
+  } catch {
+    return "USD";
+  }
 })();
 if (!CURRENCIES[currency]) currency = "USD";
 
@@ -90,7 +100,9 @@ const currencySelect = document.getElementById("currencySelect");
 currencySelect.value = currency;
 currencySelect.addEventListener("change", () => {
   currency = currencySelect.value;
-  try { localStorage.setItem(CURRENCY_KEY, currency); } catch {}
+  try {
+    localStorage.setItem(CURRENCY_KEY, currency);
+  } catch {}
   render();
 });
 
@@ -145,7 +157,9 @@ function startEdit(t) {
   amountInput.value = (t.amount / 100).toFixed(2);
   categorySelect.value = t.category;
   dateInput.value = t.date;
-  typeRadios.forEach((r) => { r.checked = r.value === t.type; });
+  typeRadios.forEach((r) => {
+    r.checked = r.value === t.type;
+  });
   refreshToggleUI();
   submitBtn.textContent = "Update Transaction";
   cancelEditBtn.hidden = false;
@@ -207,7 +221,9 @@ function visibleTransactions() {
 
   switch (filterSort.value) {
     case "oldest":
-      list.sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
+      list.sort(
+        (a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id),
+      );
       break;
     case "high":
       list.sort((a, b) => b.amount - a.amount);
@@ -216,7 +232,9 @@ function visibleTransactions() {
       list.sort((a, b) => a.amount - b.amount);
       break;
     default: // newest
-      list.sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+      list.sort(
+        (a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id),
+      );
   }
   return list;
 }
@@ -243,7 +261,9 @@ function renderBreakdown() {
   const totals = {};
   transactions
     .filter((t) => t.type === "expense")
-    .forEach((t) => { totals[t.category] = (totals[t.category] || 0) + t.amount; });
+    .forEach((t) => {
+      totals[t.category] = (totals[t.category] || 0) + t.amount;
+    });
 
   const entries = Object.entries(totals).sort((a, b) => b[1] - a[1]);
   const max = entries.length ? entries[0][1] : 0;
@@ -290,7 +310,9 @@ function render() {
         <button type="button" class="tx-edit" aria-label="Edit transaction">✏️</button>
         <button type="button" class="tx-del" aria-label="Delete transaction">🗑️</button>
       </span>`;
-    li.querySelector(".tx-del").addEventListener("click", () => deleteTransaction(t.id));
+    li.querySelector(".tx-del").addEventListener("click", () =>
+      deleteTransaction(t.id),
+    );
     li.querySelector(".tx-edit").addEventListener("click", () => startEdit(t));
     txList.appendChild(li);
   });

@@ -38,7 +38,9 @@ const history = []; // in-memory only — never persisted for security
 function secureRandomInt(max) {
   if (!(window.crypto && window.crypto.getRandomValues)) {
     // Never silently downgrade to Math.random — warn the user instead.
-    console.warn("crypto.getRandomValues unavailable — falling back to weak randomness.");
+    console.warn(
+      "crypto.getRandomValues unavailable — falling back to weak randomness.",
+    );
     showCopied("⚠ Insecure random source in this browser.");
     return Math.floor(Math.random() * max);
   }
@@ -72,7 +74,9 @@ function generatePassword() {
   }
 
   // Guarantee at least one character from every selected set
-  const chars = sets.map((key) => CHARSETS[key][secureRandomInt(CHARSETS[key].length)]);
+  const chars = sets.map(
+    (key) => CHARSETS[key][secureRandomInt(CHARSETS[key].length)],
+  );
 
   // Fill the rest from the combined pool
   const pool = sets.map((key) => CHARSETS[key]).join("");
@@ -115,13 +119,21 @@ function updateStrength(pw) {
 
   let pct, label, color;
   if (entropy < 40) {
-    pct = 25; label = "Weak"; color = "#dc2626";
+    pct = 25;
+    label = "Weak";
+    color = "#dc2626";
   } else if (entropy < 60) {
-    pct = 50; label = "Fair"; color = "#f59e0b";
+    pct = 50;
+    label = "Fair";
+    color = "#f59e0b";
   } else if (entropy < 90) {
-    pct = 75; label = "Strong"; color = "#84cc16";
+    pct = 75;
+    label = "Strong";
+    color = "#84cc16";
   } else {
-    pct = 100; label = "Very Strong"; color = "#22c55e";
+    pct = 100;
+    label = "Very Strong";
+    color = "#22c55e";
   }
 
   strengthFill.style.width = `${pct}%`;
@@ -189,7 +201,11 @@ async function copyToClipboard(text) {
     }
     document.body.removeChild(ta);
   }
-  showCopied(ok ? "✅ Copied to clipboard!" : "⚠ Copy failed — select and copy manually.");
+  showCopied(
+    ok
+      ? "✅ Copied to clipboard!"
+      : "⚠ Copy failed — select and copy manually.",
+  );
 }
 
 function showCopied(msg) {
@@ -208,7 +224,9 @@ lengthRange.addEventListener("input", () => {
 // Regenerate when the slider is released (change, not input -> no history flood).
 lengthRange.addEventListener("change", generatePassword);
 
-Object.values(optEls).forEach((cb) => cb.addEventListener("change", generatePassword));
+Object.values(optEls).forEach((cb) =>
+  cb.addEventListener("change", generatePassword),
+);
 // Only Generate-button clicks record history.
 generateBtn.addEventListener("click", () => {
   generatePassword.toHistory = true;

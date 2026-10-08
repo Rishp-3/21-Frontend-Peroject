@@ -28,22 +28,32 @@ function hexToRgb(hex) {
   };
 }
 function rgbToHsl({ r, g, b }) {
-  r /= 255; g /= 255; b /= 255;
-  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  const max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
   const l = (max + min) / 2;
-  let h = 0, s = 0;
+  let h = 0,
+    s = 0;
   if (max !== min) {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-    if (max === r) h = ((g - b) / d + (g < b ? 6 : 0));
+    if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
     else if (max === g) h = (b - r) / d + 2;
     else h = (r - g) / d + 4;
     h /= 6;
   }
-  return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+  return {
+    h: Math.round(h * 360),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100),
+  };
 }
 function rgbToCmyk({ r, g, b }) {
-  const rr = r / 255, gg = g / 255, bb = b / 255;
+  const rr = r / 255,
+    gg = g / 255,
+    bb = b / 255;
   const k = 1 - Math.max(rr, gg, bb);
   if (k === 1) return { c: 0, m: 0, y: 0, k: 100 };
   return {
@@ -57,17 +67,27 @@ function rgbToCmyk({ r, g, b }) {
 function colorName(hex, hsl) {
   if (hsl.l >= 97) return "White";
   if (hsl.l <= 4) return "Black";
-  if (hsl.s <= 8) return hsl.l > 66 ? "Light Gray" : hsl.l > 33 ? "Gray" : "Dark Gray";
+  if (hsl.s <= 8)
+    return hsl.l > 66 ? "Light Gray" : hsl.l > 33 ? "Gray" : "Dark Gray";
   const h = hsl.h;
-  const light = hsl.l > 70, dark = hsl.l < 28;
+  const light = hsl.l > 70,
+    dark = hsl.l < 28;
   const band =
-    h < 15 || h >= 345 ? "Red" :
-    h < 40 ? "Orange" :
-    h < 65 ? "Yellow" :
-    h < 150 ? "Green" :
-    h < 190 ? "Cyan" :
-    h < 250 ? "Blue" :
-    h < 290 ? "Purple" : "Pink";
+    h < 15 || h >= 345
+      ? "Red"
+      : h < 40
+        ? "Orange"
+        : h < 65
+          ? "Yellow"
+          : h < 150
+            ? "Green"
+            : h < 190
+              ? "Cyan"
+              : h < 250
+                ? "Blue"
+                : h < 290
+                  ? "Purple"
+                  : "Pink";
   return (dark ? "Dark " : light ? "Light " : "") + band;
 }
 
@@ -113,7 +133,9 @@ async function copyText(text) {
       await navigator.clipboard.writeText(text);
       return true;
     }
-  } catch (err) { /* fall through to legacy path */ }
+  } catch (err) {
+    /* fall through to legacy path */
+  }
   // Fallback for non-secure contexts / older browsers
   const ta = document.createElement("textarea");
   ta.value = text;
@@ -122,7 +144,11 @@ async function copyText(text) {
   document.body.appendChild(ta);
   ta.select();
   let ok = false;
-  try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+  try {
+    ok = document.execCommand("copy");
+  } catch (err) {
+    ok = false;
+  }
   document.body.removeChild(ta);
   return ok;
 }

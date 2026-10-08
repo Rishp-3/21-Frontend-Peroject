@@ -3,7 +3,8 @@
 // https://home.openweathermap.org/api_keys . Put your new key in config.js
 // (gitignored; copy config.example.js to config.js). The app shows a clear
 // message if no key is configured.
-const API_KEY = (typeof WEATHER_CONFIG !== "undefined" && WEATHER_CONFIG.API_KEY) || "";
+const API_KEY =
+  (typeof WEATHER_CONFIG !== "undefined" && WEATHER_CONFIG.API_KEY) || "";
 const cityInp = document.querySelector(".cityInp");
 const submitBtn = document.querySelector(".submit");
 const city = document.querySelector(".city");
@@ -76,7 +77,9 @@ async function get2() {
 }
 async function get() {
   if (!API_KEY) {
-    showError("No API key configured. Copy config.example.js to config.js and paste your OpenWeather key there.");
+    showError(
+      "No API key configured. Copy config.example.js to config.js and paste your OpenWeather key there.",
+    );
     return;
   }
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(cityV)}&appid=${API_KEY}&units=metric`;
@@ -108,28 +111,41 @@ function setAll() {
   const iconCode = data.weather[0].icon;
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
   document.querySelector("#weatherIcon").src = iconUrl;
-  document.querySelector(".feels").innerText = `${Math.round(data.main.feels_like)}\u00B0C`;
+  document.querySelector(".feels").innerText =
+    `${Math.round(data.main.feels_like)}\u00B0C`;
   humidity.innerText = `${data.main.humidity}%`;
   windSpeed.innerText = `${data.wind.speed} m/s`;
   pressure.innerText = `${data.main.pressure} hPa`;
 
   // Visibility card was never filled before
   const visEl = document.querySelector(".visibility");
-  if (visEl) visEl.innerText = `${((data.visibility || 10000) / 1000).toFixed(1)} km`;
+  if (visEl)
+    visEl.innerText = `${((data.visibility || 10000) / 1000).toFixed(1)} km`;
 
   // dayTime: use the CITY's local hour (UTC offset from API), not browser time.
   if (dayTime) {
-    const cityHour = new Date((Date.now() / 1000 + (data.timezone || 0)) * 1000)
-      .getUTCHours();
-    dayTime.innerText = cityHour < 12 ? "Morning" : cityHour < 17 ? "Afternoon" : cityHour < 20 ? "Evening" : "Night";
+    const cityHour = new Date(
+      (Date.now() / 1000 + (data.timezone || 0)) * 1000,
+    ).getUTCHours();
+    dayTime.innerText =
+      cityHour < 12
+        ? "Morning"
+        : cityHour < 17
+          ? "Afternoon"
+          : cityHour < 20
+            ? "Evening"
+            : "Night";
   }
-
 }
 
 // Format a UTC timestamp into HH:MM in the CITY's timezone (offset seconds).
 function cityTime(dtSeconds, tzOffset) {
   const d = new Date((dtSeconds + tzOffset) * 1000);
-  return String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
+  return (
+    String(d.getUTCHours()).padStart(2, "0") +
+    ":" +
+    String(d.getUTCMinutes()).padStart(2, "0")
+  );
 }
 
 function setAll2() {
@@ -153,19 +169,24 @@ function setAll2() {
   for (const it of data2.list) {
     const dayKey = new Date((it.dt + tz) * 1000).toISOString().slice(0, 10);
     const hour = new Date((it.dt + tz) * 1000).getUTCHours();
-    if (!byDay[dayKey] || Math.abs(hour - 12) < Math.abs(byDay[dayKey].hour - 12)) {
+    if (
+      !byDay[dayKey] ||
+      Math.abs(hour - 12) < Math.abs(byDay[dayKey].hour - 12)
+    ) {
       byDay[dayKey] = { it, hour };
     }
   }
-  Object.keys(byDay).sort().forEach((dayKey) => {
-    const it = byDay[dayKey].it;
-    const weekday = days[new Date((it.dt + tz) * 1000).getUTCDay()];
-    const card = document.createElement("div");
-    card.className = "forecast-card";
-    card.innerHTML = `<span class="fc-day">${weekday}</span>
+  Object.keys(byDay)
+    .sort()
+    .forEach((dayKey) => {
+      const it = byDay[dayKey].it;
+      const weekday = days[new Date((it.dt + tz) * 1000).getUTCDay()];
+      const card = document.createElement("div");
+      card.className = "forecast-card";
+      card.innerHTML = `<span class="fc-day">${weekday}</span>
       <img src="https://openweathermap.org/img/wn/${it.weather[0].icon}@2x.png" alt="${it.weather[0].description}" width="50" height="50">
       <p>${it.weather[0].description}</p>
       <strong>${Math.round(it.main.temp)}\u00B0C</strong>`;
-    wfData.appendChild(card);
-  });
+      wfData.appendChild(card);
+    });
 }

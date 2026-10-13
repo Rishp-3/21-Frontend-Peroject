@@ -30,30 +30,33 @@
   </picture>
 </p>
 
-|  #  | Project                                             | What it does                                                          |                                       Live                                       |
-| :-: | :-------------------------------------------------- | :-------------------------------------------------------------------- | :------------------------------------------------------------------------------: |
-| 01  | [Calculator](./calculator)                          | Arithmetic calculator with keyboard support & chained operators       |       [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/calculator/)       |
-| 02  | [To-Do List](./to-do-list)                          | Task manager with localStorage persistence (XSS-safe)                 |       [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/to-do-list/)       |
-| 03  | [Digital Clock](./digital-clock)                    | Real-time clock with 12/24h and timezone selector (Intl)              |     [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/digital-clock/)      |
-| 04  | [Number Guessing Game](./number-guessing-game)      | Guess 1–100 with hot/cold hints and stats                             |  [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/number-guessing-game/)  |
-| 05  | [Counter App](./counter-app)                        | Increment/decrement/reset with highest & total-clicks tracking        |      [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/counter-app/)       |
-| 06  | [Random Quote Generator](./random-quote-generator)  | Quotes from DummyJSON API with loading/error states                   | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/random-quote-generator/) |
-| 07  | [Color Generator](./color-generator)                | Random colors, HEX/RGB/HSL/CMYK, copy buttons, recents                |    [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/color-generator/)     |
-| 08  | [Weather App \*](./weather-app)                     | Current weather + 5-day forecast (OpenWeather, bring your own key)    |      [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/weather-app/)       |
-| 09  | [Stopwatch](./stopwatch-timer)                      | Stopwatch with lap tracking and best/worst highlighting               |    [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/stopwatch-timer/)     |
-| 10  | [Form Validation](./form-validation)                | Client-side validation, Unicode names, password strength & toggle     |    [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/form-validation/)     |
-| 11  | [Image Slider](./image-slider)                      | Carousel with autoplay, swipe, drag, reduced-motion support           |      [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/image-slider/)      |
-| 12  | [Quiz App](./quiz-app)                              | Timed quiz, shuffled questions/options, best score saved              |        [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/quiz-app/)        |
-| 13  | [Password Generator](./password-generator)          | Crypto-random passwords, strength meter, history                      |   [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/password-generator/)   |
-| 14  | [Notes App](./notes-app)                            | CRUD notes with search highlighting, color labels, localStorage       |       [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/notes-app/)        |
-| 15  | [Expense Tracker](./expense-tracker)                | Income/expense with categories, multi-currency, edit, breakdown bars  |    [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/expense-tracker/)     |
-| 16  | [Movie Search \*](./movie-search-app)               | OMDb search with debounce, race-safe requests, detail modal           |    [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/movie-search-app/)    |
-| 17  | [Chat UI](./chat-ui)                                | Frontend-only messenger: conversations, typing indicator, persistence |        [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/chat-ui/)         |
-| 18  | [Music Player](./music-player)                      | Tracks synthesized with Web Audio, playlist, shuffle/repeat           |      [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/music-player/)      |
-| 19  | [E-commerce Product Page](./ecommerce-product-page) | Variants, gallery, cart drawer, checkout summary, reviews             | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/ecommerce-product-page/) |
-| 20  | [Typing Speed Test](./typing-speed-test)            | WPM/CPM/accuracy with keystroke tracking, per-duration bests          |   [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/typing-speed-test/)    |
-| 21  | [Rock Paper Scissors](./rock-paper-scissors)        | Match play vs adaptive CPU, streaks, lifetime wins                    |  [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/rock-paper-scissors/)   |
+## 📚 Projects
 
+| # | Project | What it does | Live |
+| :-: | :-- | :-- | :-: |
+| 01 | [Calculator](./01-calculator) | Arithmetic calculator with keyboard support & chained operators | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/01-calculator/) |
+| 02 | [To-Do List](./02-to-do-list) | Task manager with localStorage persistence (XSS-safe) | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/02-to-do-list/) |
+| 03 | [Digital Clock](./03-digital-clock) | Real-time clock with 12/24h and timezone selector (Intl) | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/03-digital-clock/) |
+| 04 | [Number Guessing Game](./04-number-guessing-game) | Guess 1–100 with hot/cold hints and stats | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/04-number-guessing-game/) |
+| 05 | [Counter App](./05-counter-app) | Increment/decrement/reset with highest & total-clicks tracking | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/05-counter-app/) |
+| 06 | [Random Quote Generator](./06-random-quote-generator) | Quotes from DummyJSON API with loading/error states | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/06-random-quote-generator/) |
+| 07 | [Color Generator](./07-color-generator) | Random colors, HEX/RGB/HSL/CMYK, copy buttons, recents | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/07-color-generator/) |
+| 08 | [Weather App *](./08-weather-app) | Current weather + 5-day forecast (OpenWeather, bring your own key) | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/08-weather-app/) |
+| 09 | [Stopwatch](./09-stopwatch-timer) | Stopwatch with lap tracking and best/worst highlighting | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/09-stopwatch-timer/) |
+| 10 | [Form Validation](./10-form-validation) | Client-side validation, Unicode names, password strength & toggle | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/10-form-validation/) |
+| 11 | [Image Slider](./11-image-slider) | Carousel with autoplay, swipe, drag, reduced-motion support | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/11-image-slider/) |
+| 12 | [Quiz App](./12-quiz-app) | Timed quiz, shuffled questions/options, best score saved | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/12-quiz-app/) |
+| 13 | [Password Generator](./13-password-generator) | Crypto-random passwords, strength meter, history | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/13-password-generator/) |
+| 14 | [Notes App](./14-notes-app) | CRUD notes with search highlighting, color labels, localStorage | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/14-notes-app/) |
+| 15 | [Expense Tracker](./15-expense-tracker) | Income/expense with categories, multi-currency, edit, breakdown bars | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/15-expense-tracker/) |
+| 16 | [Movie Search *](./16-movie-search-app) | OMDb search with debounce, race-safe requests, detail modal | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/16-movie-search-app/) |
+| 17 | [Chat UI](./17-chat-ui) | Frontend-only messenger: conversations, typing indicator, persistence | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/17-chat-ui/) |
+| 18 | [Music Player](./18-music-player) | Tracks synthesized with Web Audio, playlist, shuffle/repeat | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/18-music-player/) |
+| 19 | [E-commerce Product Page](./19-ecommerce-product-page) | Variants, gallery, cart drawer, checkout summary, reviews | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/19-ecommerce-product-page/) |
+| 20 | [Typing Speed Test](./20-typing-speed-test) | WPM/CPM/accuracy with keystroke tracking, per-duration bests | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/20-typing-speed-test/) |
+| 21 | [Rock Paper Scissors](./21-rock-paper-scissors) | Match play vs adaptive CPU, streaks, lifetime wins | [▶ Demo](https://Rishp-3.github.io/21-Frontend-Peroject/21-rock-paper-scissors/) |
+
+> **Note:** Projects marked with `*` require an API key to use their API-powered features.
 \* Projects 08 and 16 need **your own free API key** — see [API keys](#-api-keys).
 
 ---

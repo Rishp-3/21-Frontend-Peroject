@@ -163,5 +163,4 @@ Two API keys were previously hardcoded and are still visible in this repository'
 [MIT](./LICENSE)
 
 ---
-
 <p align="center"><b>🚀 Happy coding! &nbsp;Build → Practice → Improve → Repeat.</b></p>
